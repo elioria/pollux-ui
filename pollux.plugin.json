@@ -129,7 +129,8 @@
       "mode": "create",
       "postconditions": [
         ".pollux/workspace.json provenance exists",
-        "install and verification commands reported"
+        "install and verification commands reported",
+        "database infra provisioned automatically: docker-compose.yml with pgvector/pgvector:pg17, initdb vector extension, DATABASE_URL in .env.example (unless explicitly declined)"
       ],
       "preconditions": [
         "explicit user request naming skeleton and destination",
@@ -380,10 +381,10 @@
     }
   ],
   "source": {
-    "builtAt": "2026-08-12T10:19:14.583Z",
+    "builtAt": "2026-08-12T10:33:44.276Z",
     "dirty": true,
     "repository": "https://github.com/elioria/start-ui-web",
-    "revision": "46d2294530ae595871864f9a1ba252bdc9350ddb"
+    "revision": "ab5de9728d70cd017302cf840aac49213ee73b5e"
   },
-  "version": "0.3.0"
+  "version": "0.3.1"
 }

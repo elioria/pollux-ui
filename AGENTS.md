@@ -105,6 +105,8 @@ O PostgreSQL de desenvolvimento roda em Docker. **Imagem padrão:
 sempre que o usuário pedir um banco para este repo, para um workspace
 standalone ou para o backend Go, salvo pedido explícito de outra imagem.
 
+Este provisionamento é AUTOMÁTICO ao criar um app/workspace pelo plugin
+(skill `pollux-create-workspace`) — não espere o usuário pedir o banco.
 Quando solicitado a criar infraestrutura de banco, gere um
 `docker-compose.yml` seguindo este modelo (ajuste nomes/portas ao projeto;
 neste checkout o dev usa a porta host 5440):

@@ -40,6 +40,49 @@ files by hand.
      with manual copies.
 4. Confirm provenance: `<dir>/.pollux/workspace.json` exists and records the
    skeleton, target adapter, and versions.
+5. **Provision the database (AUTOMATIC — do not wait to be asked).** Every
+   new app gets Docker infra for the PostgreSQL that will back its Pollux
+   backend, default image `pgvector/pgvector:pg17`. Write into the
+   workspace (these are handwritten host files, never adapter-owned):
+   - `docker-compose.yml`:
+
+     ```yaml
+     services:
+       db:
+         image: pgvector/pgvector:pg17
+         restart: unless-stopped
+         environment:
+           POSTGRES_USER: ${POSTGRES_USER:-pollux}
+           POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-pollux}
+           POSTGRES_DB: ${POSTGRES_DB:-pollux}
+         ports:
+           - '${POSTGRES_PORT:-5440}:5432'
+         volumes:
+           - db_data:/var/lib/postgresql/data
+           - ./docker/initdb:/docker-entrypoint-initdb.d:ro
+         healthcheck:
+           test: ['CMD-SHELL', 'pg_isready -U $${POSTGRES_USER:-pollux} -d $${POSTGRES_DB:-pollux}']
+           interval: 5s
+           timeout: 5s
+           retries: 10
+
+     volumes:
+       db_data:
+     ```
+
+   - `docker/initdb/01-extensions.sql` containing
+     `CREATE EXTENSION IF NOT EXISTS vector;`
+   - Append to `.env.example`:
+     `DATABASE_URL=postgres://pollux:pollux@localhost:5440/pollux`
+     (commented note: consumed by the Pollux backend, not by the frontend
+     workspace — `POLLUX_API_URL` stays the app's only upstream).
+
+   Rules: credentials only as `${VAR:-default}` (never a real secret);
+   named volume mandatory; keep the healthcheck (dependents use
+   `depends_on: { db: { condition: service_healthy } }`); if the user names
+   a different port/image, honor it but state that `pgvector/pgvector:pg17`
+   is the default. Skip this step ONLY if the user explicitly declines a
+   database or the workspace directory already carries a compose file.
 
 ## Output contract
 
@@ -50,9 +93,12 @@ files by hand.
 4. **Verify** — the target verification command, typically
    `node scripts/pollux/test/workspace-matrix.mjs --target <nextjs|remix|astro|tanstack-start>`
    from the source repo, or the skeleton's own `test`/`build` commands.
-5. **Status** — repeat that the target is experimental until its CI matrix is
+5. **Database** — compose file path, image (`pgvector/pgvector:pg17`),
+   host port, `docker compose up -d db` command, and the `DATABASE_URL`
+   added to `.env.example` (or the reason the step was skipped).
+6. **Status** — repeat that the target is experimental until its CI matrix is
    green.
-6. **Next** — offer both follow-ups: generate an EXISTING entity
+7. **Next** — offer both follow-ups: generate an EXISTING entity
    (pollux-generate-crud) or author a NEW one from a brief description
    (pollux-author-entity — do not tell the user to hand-write
    json-files metadata).

@@ -27,5 +27,5 @@
   "name": "pollux-ui",
   "repository": "https://github.com/elioria/start-ui-web",
   "skills": "./skills/",
-  "version": "0.3.0"
+  "version": "0.3.1"
 }

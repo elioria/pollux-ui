@@ -94,6 +94,12 @@ Montserrat/Inter design tokens) with **zero** entities, plus
 Creation is staged and atomic — a non-empty destination is refused, nothing
 is half-written. Same flow for `nextjs`, `remix`, `astro`.
 
+The skill also provisions the database AUTOMATICALLY: `docker-compose.yml`
+with the default image `pgvector/pgvector:pg17` (healthcheck, named
+volume), `docker/initdb/01-extensions.sql` enabling the `vector`
+extension, and a `DATABASE_URL` entry in `.env.example`. Start it with
+`docker compose up -d db`. Decline it by saying so ("sem banco").
+
 ## 4b. Author a NEW entity from a brief idea (`pollux-author-entity`)
 
 No metadata file yet? Don't write one by hand — describe the entity:
