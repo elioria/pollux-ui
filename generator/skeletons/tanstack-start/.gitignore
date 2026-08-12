@@ -1,0 +1,14 @@
+node_modules/
+
+# TanStack Start / Vite / Nitro
+/.tanstack/
+/.nitro/
+/.output/
+/dist/
+
+# Misc
+.DS_Store
+*.local
+.env
+.env.*
+!.env.example

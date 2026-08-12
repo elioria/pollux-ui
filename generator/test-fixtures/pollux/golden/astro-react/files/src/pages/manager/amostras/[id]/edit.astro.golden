@@ -1,0 +1,34 @@
+---
+// @pollux-generated {"target":"astro-react","entity":"amostra","generatorVersion":"1","modelVersion":"1"} — do not edit; regenerate with `pollux generate`
+import Layout from '../../../../layouts/Layout.astro';
+import { AmostraEditIsland } from '../../../../generated/pollux/amostra/island';
+import { amostraSpec } from '../../../../generated/pollux/amostra/spec';
+
+// The id is a normalized route segment; anything unsafe 404s server-side
+// before any client code runs.
+const id = Astro.params.id ?? '';
+if (!/^[A-Za-z0-9._-]{1,128}$/.test(id)) {
+  return new Response(null, { status: 404 });
+}
+---
+
+<Layout title={amostraSpec.titles.update}>
+  <section class="mx-auto max-w-2xl space-y-4">
+    <noscript>
+      <p
+        class="rounded-md border border-border bg-card p-3 text-sm text-muted-foreground"
+      >
+        Este formulário requer JavaScript para editar registros.
+      </p>
+    </noscript>
+    <AmostraEditIsland client:load id={id} />
+    <p class="text-sm">
+      <a
+        href="/manager/amostras"
+        class="text-muted-foreground underline-offset-2 hover:text-foreground hover:underline"
+      >
+        ← Voltar para a lista
+      </a>
+    </p>
+  </section>
+</Layout>

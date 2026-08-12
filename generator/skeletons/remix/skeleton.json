@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "version": "1.1.0",
+  "name": "remix",
+  "displayName": "Remix (React Router 7)",
+  "framework": "remix-react-router",
+  "language": "typescript",
+  "status": "boilerplate",
+  "root": ".",
+  "packageManager": "pnpm@10.24.0",
+  "runtime": {
+    "node": ">=20 <25"
+  },
+  "entrypoints": {
+    "layout": "app/root.tsx",
+    "globalStyles": "app/app.css",
+    "home": "app/routes/home.tsx",
+    "routeConfig": "app/routes.ts"
+  },
+  "designSystem": {
+    "tokens": "app/styles/tokens.css",
+    "display": "Montserrat",
+    "body": "Inter",
+    "tailwind": 4
+  },
+  "commands": {
+    "dev": "pnpm dev",
+    "build": "pnpm build",
+    "start": "pnpm start",
+    "typecheck": "pnpm typecheck",
+    "test": "pnpm test"
+  },
+  "generatorSupport": {
+    "pollux": false,
+    "experimental": true,
+    "targetAdapter": {
+      "id": "react-router",
+      "version": "0.1.0",
+      "capabilityLevel": "standalone-crud",
+      "modelVersion": "1"
+    },
+    "notes": "EXPERIMENTAL Pollux target (SPEC-005): standalone CRUD over the v2 API via the 'react-router' adapter (the skeleton keeps its historical 'remix' name as a backward-compatible alias). Loader/action mutations through the same-origin proxy; PKCE/BFF auth is deferred — the proxy forwards the interim server-only POLLUX_DEV_BEARER credential. Canonical verification: react-router typegen before tsc."
+  }
+}

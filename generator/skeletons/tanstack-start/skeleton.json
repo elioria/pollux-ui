@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.0",
+  "name": "tanstack-start",
+  "displayName": "TanStack Start (React + Vite)",
+  "framework": "react-tanstack-start",
+  "language": "typescript",
+  "status": "boilerplate",
+  "root": ".",
+  "packageManager": "pnpm@10.24.0",
+  "runtime": {
+    "node": ">=20 <25"
+  },
+  "entrypoints": {
+    "layout": "src/routes/__root.tsx",
+    "globalStyles": "src/styles/app.css",
+    "home": "src/routes/index.tsx",
+    "routeTree": "src/routeTree.gen.ts"
+  },
+  "designSystem": {
+    "tokens": "src/styles/tokens.css",
+    "display": "Montserrat",
+    "body": "Inter",
+    "tailwind": 4
+  },
+  "commands": {
+    "dev": "pnpm dev",
+    "build": "pnpm build",
+    "start": "pnpm start",
+    "typecheck": "pnpm typecheck",
+    "test": "pnpm test"
+  },
+  "generatorSupport": {
+    "pollux": false,
+    "experimental": true,
+    "targetAdapter": {
+      "id": "tanstack-start",
+      "version": "0.1.0",
+      "capabilityLevel": "standalone-crud",
+      "modelVersion": "1"
+    },
+    "notes": "EXPERIMENTAL Pollux target (SPEC-008): standalone CRUD over the v2 API via the 'tanstack-start' adapter. File-based routing means generated pages register themselves through the framework's route tree (tsr generate / vite plugin) — only the sidebar uses a generated nav fragment glob. PKCE/BFF auth via the shared bff-core; the proxy forwards the interim server-only POLLUX_DEV_BEARER credential when no access cookie exists. Canonical verification: tsr generate before tsc."
+  }
+}

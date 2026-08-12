@@ -1,0 +1,27 @@
+---
+// @pollux-generated {"target":"astro-react","entity":"amostra","generatorVersion":"1","modelVersion":"1"} — do not edit; regenerate with `pollux generate`
+import Layout from '../../../layouts/Layout.astro';
+import { AmostraCreateIsland } from '../../../generated/pollux/amostra/island';
+import { amostraSpec } from '../../../generated/pollux/amostra/spec';
+---
+
+<Layout title={amostraSpec.titles.create}>
+  <section class="mx-auto max-w-2xl space-y-4">
+    <noscript>
+      <p
+        class="rounded-md border border-border bg-card p-3 text-sm text-muted-foreground"
+      >
+        Este formulário requer JavaScript para criar registros.
+      </p>
+    </noscript>
+    <AmostraCreateIsland client:load />
+    <p class="text-sm">
+      <a
+        href="/manager/amostras"
+        class="text-muted-foreground underline-offset-2 hover:text-foreground hover:underline"
+      >
+        ← Voltar para a lista
+      </a>
+    </p>
+  </section>
+</Layout>

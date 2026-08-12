@@ -381,10 +381,10 @@
     }
   ],
   "source": {
-    "builtAt": "2026-08-12T10:33:44.276Z",
+    "builtAt": "2026-08-12T10:39:35.414Z",
     "dirty": true,
     "repository": "https://github.com/elioria/start-ui-web",
-    "revision": "ab5de9728d70cd017302cf840aac49213ee73b5e"
+    "revision": "59c7e4e31a78c7d4be71988429106a717b9535fa"
   },
-  "version": "0.3.1"
+  "version": "0.4.0"
 }

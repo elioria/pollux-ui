@@ -1,0 +1,44 @@
+/* @pollux-generated {"target":"react-router","entity":"amostra","generatorVersion":"1","modelVersion":"1"} — do not edit; regenerate with `pollux generate` */
+// SPEC-005 — fetcher -> promise bridge for the shared UI mutation contract.
+//
+// The shared EntityForm/DeleteConfirm components expect an injected
+// `onSubmit`/`onConfirm` that resolves `null` on success or the safe
+// ApiErrorShape envelope on failure. React Router mutations run through route
+// actions via fetchers (no full-document reload, pending state on the
+// fetcher); this hook adapts one to the other. The caller owns the
+// idempotency key: one key per logical submission, reused across retries.
+import { useCallback, useEffect, useRef } from 'react';
+import { useFetcher } from 'react-router';
+
+import type { ApiErrorShape, ApiResult } from './runtime/api-types';
+
+export type PolluxMutationPayload = Record<string, unknown>;
+
+export function usePolluxMutation() {
+  const fetcher = useFetcher<ApiResult<unknown>>();
+  const resolveRef = useRef<((error: ApiErrorShape | null) => void) | null>(
+    null
+  );
+
+  useEffect(() => {
+    if (fetcher.state !== 'idle' || fetcher.data === undefined) return;
+    const resolve = resolveRef.current;
+    if (!resolve) return;
+    resolveRef.current = null;
+    resolve(fetcher.data.ok ? null : fetcher.data.error);
+  }, [fetcher.state, fetcher.data]);
+
+  const mutate = useCallback(
+    (payload: PolluxMutationPayload) =>
+      new Promise<ApiErrorShape | null>((resolve) => {
+        resolveRef.current = resolve;
+        void fetcher.submit(payload as never, {
+          method: 'post',
+          encType: 'application/json',
+        });
+      }),
+    [fetcher]
+  );
+
+  return { mutate, busy: fetcher.state !== 'idle' };
+}

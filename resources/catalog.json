@@ -410,7 +410,7 @@
         "_templates/pollux/partials",
         "_templates/pollux/serverpage"
       ],
-      "sourceRevision": "ab5de9728d70cd017302cf840aac49213ee73b5e",
+      "sourceRevision": "59c7e4e31a78c7d4be71988429106a717b9535fa",
       "supportStatus": "supported",
       "verification": ["./pollux check", "./pollux test --suite=unit"]
     },
@@ -689,7 +689,7 @@
         "_templates/pollux/go-entity",
         "_templates/pollux/go-service"
       ],
-      "sourceRevision": "ab5de9728d70cd017302cf840aac49213ee73b5e",
+      "sourceRevision": "59c7e4e31a78c7d4be71988429106a717b9535fa",
       "supportStatus": "supported",
       "verification": [
         "./pollux test --suite=go",
@@ -782,7 +782,7 @@
       "packagePath": "./resources/templates/standalone-shared",
       "sha256": "69bcd9cb06e3e9d244b862bdf33d8aeca24052f649c39d2d077fc6ad5ed04376",
       "sourcePaths": ["_templates/pollux-targets/shared"],
-      "sourceRevision": "ab5de9728d70cd017302cf840aac49213ee73b5e",
+      "sourceRevision": "59c7e4e31a78c7d4be71988429106a717b9535fa",
       "supportStatus": "experimental",
       "verification": ["./pollux test --suite=targets"]
     },
@@ -854,7 +854,7 @@
       "packagePath": "./resources/templates/target/nextjs",
       "sha256": "5dbb10ae43146b8d165628ab32d4496837e97c9fe9dc26cfaf767289f3373fb4",
       "sourcePaths": ["_templates/pollux-targets/nextjs"],
-      "sourceRevision": "ab5de9728d70cd017302cf840aac49213ee73b5e",
+      "sourceRevision": "59c7e4e31a78c7d4be71988429106a717b9535fa",
       "supportStatus": "experimental",
       "verification": [
         "node scripts/pollux/test/workspace-matrix.mjs --target nextjs"
@@ -918,7 +918,7 @@
       "packagePath": "./resources/templates/target/react-router",
       "sha256": "62260e30895c7f11222c8548e68ffc3ff01eb9012a00428953ee8157e126ee73",
       "sourcePaths": ["_templates/pollux-targets/react-router"],
-      "sourceRevision": "ab5de9728d70cd017302cf840aac49213ee73b5e",
+      "sourceRevision": "59c7e4e31a78c7d4be71988429106a717b9535fa",
       "supportStatus": "experimental",
       "verification": [
         "node scripts/pollux/test/workspace-matrix.mjs --target remix"
@@ -988,7 +988,7 @@
       "packagePath": "./resources/templates/target/tanstack-start",
       "sha256": "72f9ab537d310b0fea092c97ab3816b2a31fff3756c05998f4967606d1896758",
       "sourcePaths": ["_templates/pollux-targets/tanstack-start"],
-      "sourceRevision": "ab5de9728d70cd017302cf840aac49213ee73b5e",
+      "sourceRevision": "59c7e4e31a78c7d4be71988429106a717b9535fa",
       "supportStatus": "experimental",
       "verification": [
         "node scripts/pollux/test/workspace-matrix.mjs --target tanstack-start"
@@ -1052,7 +1052,7 @@
       "packagePath": "./resources/templates/target/astro-react",
       "sha256": "0760489527e705a438b66af119af68ae8530aa0add85b64b53c5e0888b8d8a46",
       "sourcePaths": ["_templates/pollux-targets/astro-react"],
-      "sourceRevision": "ab5de9728d70cd017302cf840aac49213ee73b5e",
+      "sourceRevision": "59c7e4e31a78c7d4be71988429106a717b9535fa",
       "supportStatus": "experimental",
       "verification": [
         "node scripts/pollux/test/workspace-matrix.mjs --target astro"
@@ -1153,7 +1153,7 @@
         "src/routes/__root.tsx",
         "src/styles/app.css"
       ],
-      "sourceRevision": "ab5de9728d70cd017302cf840aac49213ee73b5e",
+      "sourceRevision": "59c7e4e31a78c7d4be71988429106a717b9535fa",
       "supportStatus": "supported",
       "verification": ["pnpm build", "./pollux validate-skeletons"]
     },
@@ -1223,7 +1223,7 @@
         "skeletons/nextjs/components",
         "skeletons/nextjs/skeleton.json"
       ],
-      "sourceRevision": "ab5de9728d70cd017302cf840aac49213ee73b5e",
+      "sourceRevision": "59c7e4e31a78c7d4be71988429106a717b9535fa",
       "supportStatus": "experimental",
       "verification": [
         "./pollux validate-skeletons",
@@ -1280,7 +1280,7 @@
         "skeletons/remix/app/routes.ts",
         "skeletons/remix/skeleton.json"
       ],
-      "sourceRevision": "ab5de9728d70cd017302cf840aac49213ee73b5e",
+      "sourceRevision": "59c7e4e31a78c7d4be71988429106a717b9535fa",
       "supportStatus": "experimental",
       "verification": [
         "./pollux validate-skeletons",
@@ -1329,7 +1329,7 @@
         "skeletons/astro/src/layouts",
         "skeletons/astro/src/styles"
       ],
-      "sourceRevision": "ab5de9728d70cd017302cf840aac49213ee73b5e",
+      "sourceRevision": "59c7e4e31a78c7d4be71988429106a717b9535fa",
       "supportStatus": "experimental",
       "verification": [
         "./pollux validate-skeletons",
@@ -1379,7 +1379,7 @@
         "skeletons/tanstack-start/src/routes/index.tsx",
         "skeletons/tanstack-start/src/styles/app.css"
       ],
-      "sourceRevision": "ab5de9728d70cd017302cf840aac49213ee73b5e",
+      "sourceRevision": "59c7e4e31a78c7d4be71988429106a717b9535fa",
       "supportStatus": "experimental",
       "verification": [
         "./pollux validate-skeletons",
@@ -1412,7 +1412,7 @@
       "packagePath": "./resources/design-system/design-tokens.css",
       "sha256": "0d5754b5bcafc9b5ec8bbde157ef2d92bf3bfbdbd35c1a259c4080a53a06025a",
       "sourcePaths": ["skeletons/_shared/design-tokens.css"],
-      "sourceRevision": "ab5de9728d70cd017302cf840aac49213ee73b5e",
+      "sourceRevision": "59c7e4e31a78c7d4be71988429106a717b9535fa",
       "supportStatus": "supported",
       "verification": ["./pollux validate-skeletons"]
     },
@@ -1440,7 +1440,7 @@
       "packagePath": null,
       "sha256": "4032d8ca56155f435c0d22499829bed7271a1b46295ee060570842701f7037ab",
       "sourcePaths": ["pollux", "scripts/pollux/cli.mjs"],
-      "sourceRevision": "ab5de9728d70cd017302cf840aac49213ee73b5e",
+      "sourceRevision": "59c7e4e31a78c7d4be71988429106a717b9535fa",
       "supportStatus": "supported",
       "verification": ["./pollux test --suite=unit"]
     },
@@ -1476,7 +1476,7 @@
       "packagePath": "./resources/references/CLAUDE.md",
       "sha256": "97ea87d00e61ce7becec1d880f8dae139cd88bd1704e4a23ffbf891706c82cd7",
       "sourcePaths": ["CLAUDE.md"],
-      "sourceRevision": "ab5de9728d70cd017302cf840aac49213ee73b5e",
+      "sourceRevision": "59c7e4e31a78c7d4be71988429106a717b9535fa",
       "supportStatus": "supported",
       "verification": []
     },
@@ -1512,7 +1512,7 @@
       "packagePath": "./resources/references/POLLUX-GEN-KB.md",
       "sha256": "a8237698427a9a2692e95950c1856c964a8bb666386cda9c45213b68d7f1fd51",
       "sourcePaths": ["POLLUX-GEN-KB.md"],
-      "sourceRevision": "ab5de9728d70cd017302cf840aac49213ee73b5e",
+      "sourceRevision": "59c7e4e31a78c7d4be71988429106a717b9535fa",
       "supportStatus": "supported",
       "verification": []
     },
@@ -1536,7 +1536,7 @@
       "packagePath": "./resources/references/templates-README.md",
       "sha256": "dffb4a899a80bfdb45787ca63dfb370d9c27d85f708a7a91d8bad6af76794171",
       "sourcePaths": ["_templates/README.md"],
-      "sourceRevision": "ab5de9728d70cd017302cf840aac49213ee73b5e",
+      "sourceRevision": "59c7e4e31a78c7d4be71988429106a717b9535fa",
       "supportStatus": "reference-only",
       "verification": []
     },
@@ -1566,7 +1566,7 @@
       "packagePath": "./resources/references/skeletons",
       "sha256": "0270caa0fae695585465c39111a041589e43bab8b75499d82eb410614ddd013e",
       "sourcePaths": ["skeletons/README.md", "skeletons/registry.json"],
-      "sourceRevision": "ab5de9728d70cd017302cf840aac49213ee73b5e",
+      "sourceRevision": "59c7e4e31a78c7d4be71988429106a717b9535fa",
       "supportStatus": "experimental",
       "verification": ["./pollux validate-skeletons"]
     },
@@ -1625,12 +1625,12 @@
         "docs/operations/pollux-runbook.md",
         "docs/operations/pollux-skeletons-runbook.md"
       ],
-      "sourceRevision": "ab5de9728d70cd017302cf840aac49213ee73b5e",
+      "sourceRevision": "59c7e4e31a78c7d4be71988429106a717b9535fa",
       "supportStatus": "reference-only",
       "verification": []
     }
   ],
   "schemaVersion": 1,
-  "sourceRevision": "ab5de9728d70cd017302cf840aac49213ee73b5e",
+  "sourceRevision": "59c7e4e31a78c7d4be71988429106a717b9535fa",
   "version": "0.1.0"
 }

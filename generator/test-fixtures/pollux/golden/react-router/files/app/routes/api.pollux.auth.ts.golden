@@ -1,0 +1,36 @@
+/* @pollux-generated {"target":"react-router","entity":"amostra","generatorVersion":"1","modelVersion":"1"} — do not edit; regenerate with `pollux generate` */
+// SPEC-005 fixed BFF auth endpoints (resource route registered by the
+// handwritten app/routes.ts at `api/pollux/auth/:action`). Thin wrapper:
+// the whole SPEC-003 "Authentication topology" flow lives in the
+// framework-neutral core (app/lib/pollux/bff-core.server.ts):
+//
+//   GET  /api/pollux/auth/login?returnTo=<local-path>   sealed PKCE state
+//        cookie + redirect to ${POLLUX_AUTH_URL}/api/pollux/authorize;
+//   GET  /api/pollux/auth/callback   state verification + server-to-server
+//        code exchange (POLLUX_AUTH_CLIENT_SECRET stays server-side) + the
+//        HttpOnly access/refresh/session cookies and readable CSRF cookie;
+//   POST /api/pollux/auth/refresh    Origin+CSRF bound single rotation;
+//   POST /api/pollux/auth/logout     upstream family revocation + cookie
+//        clearing + local redirect.
+//
+// When POLLUX_AUTH_* / POLLUX_SESSION_SECRET are not configured every
+// endpoint answers 503 and the workspace stays in the explicit DEV-ONLY
+// POLLUX_DEV_BEARER mode (see the API proxy).
+import type { ActionFunctionArgs, LoaderFunctionArgs } from 'react-router';
+
+import { handleAuthAction, resolveBffEnv } from '../lib/pollux/bff-core.server';
+
+const dispatch = (request: Request, action: string) =>
+  handleAuthAction(
+    action,
+    request,
+    resolveBffEnv((key) => process.env[key])
+  );
+
+export function loader({ request, params }: LoaderFunctionArgs) {
+  return dispatch(request, params.action ?? '');
+}
+
+export function action({ request, params }: ActionFunctionArgs) {
+  return dispatch(request, params.action ?? '');
+}

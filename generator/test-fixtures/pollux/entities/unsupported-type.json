@@ -1,0 +1,41 @@
+{
+  "success": true,
+  "data": {
+    "name": "tiporuim",
+    "dbName": "tiporuim",
+    "gridTitle": "Tipo Ruim",
+    "attributes": [
+      {
+        "name": "id",
+        "dataType": "uuid",
+        "isPrimaryKey": true,
+        "isNullable": false,
+        "defaultValue": "NULL",
+        "position": 1,
+        "grdIsinGrid": false,
+        "fnrIsinFormAdd": false,
+        "fedIsinFormUpd": false
+      },
+      {
+        "name": "carga",
+        "dataType": "jsonb",
+        "isPrimaryKey": false,
+        "isNullable": true,
+        "defaultValue": "NULL",
+        "position": 2,
+        "grdIsinGrid": true,
+        "grdLabel": "Carga",
+        "fnrIsinFormAdd": true,
+        "fnrLabel": "Carga",
+        "fnrMandatory": "não",
+        "fnrReadonly": "não",
+        "fedIsinFormUpd": true,
+        "fedLabel": "Carga",
+        "fedMandatory": "não",
+        "fedReadonly": "nunca"
+      }
+    ]
+  },
+  "message": "Fixture entity 'tiporuim' — unknown dataType jsonb",
+  "timestamp": "2026-01-01T00:00:00.000Z"
+}

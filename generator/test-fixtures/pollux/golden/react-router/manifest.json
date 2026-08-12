@@ -1,0 +1,28 @@
+{
+  "target": "react-router",
+  "adapterVersion": "0.1.0",
+  "entity": "amostra",
+  "modelVersion": "1",
+  "files": {
+    "app/components/pollux/capability-gate.tsx": "18e7810ec4d1eae43355c52af957d797e1969c2a1efb0d8456a7c4c39bfcb3b7",
+    "app/components/pollux/data-table.tsx": "e5001fcd67dd46cbc1e1ca31c4873e8983251e9d422f0a959a7b6109f8a43ed7",
+    "app/components/pollux/delete-confirm.tsx": "23c88403c3e63718f52cf8ccb06027cdc00766c0808777e914bb0e26b124cde2",
+    "app/components/pollux/entity-form.tsx": "a541bd10fec18811eb68e8dfc53cc3c587fb434b714f24dba58155ff92e606e6",
+    "app/components/pollux/states.tsx": "58144d5344a6f3a9e65d7253fd2ce4058990a73d9130bdef5e81c66ae2196eb8",
+    "app/generated/pollux/amostra/spec.ts": "1a11642a1180207a842af28e4f559f98c8638efb31c29aee0c5090ed00f7150a",
+    "app/generated/pollux/nav/amostra.ts": "4e6c20769259c46d0db5d9ac6fc24f2d05d0fd3eae823cec48d6bc802879ef13",
+    "app/generated/pollux/registry/amostra.ts": "86fa5528bbda6f117f06ceda90f52bf81c79282767484c28b28ba2fb7bd5f5fa",
+    "app/lib/pollux/bff-core.server.ts": "85d9b3bbef8bed03d1e8bb4e49f1d51a79344fdd621b5de10ed91016b4182e97",
+    "app/lib/pollux/runtime/api-types.ts": "58d3fae2e5f01a6dd17a6aaf256d8c5f441456fd430dff67794769e4e81fd2e7",
+    "app/lib/pollux/runtime/client.ts": "77a00a00f5f389e5efb46890b8d39e34ac4506e26702f266d1886636ce8b0691",
+    "app/lib/pollux/runtime/codecs.ts": "09aa177650ec8145fff7a4008e4b707f0448821ca91ddacead3301a2681f9fbf",
+    "app/lib/pollux/runtime/errors-pt.ts": "1ce983e17878e75ab4ee848813b773678f3d745fed5bb03df13c22a45f813da7",
+    "app/lib/pollux/runtime/query.ts": "cb6db0e52f2a1faf48e084d1074e40fc50eba28aca629221314698edb8b6bdfc",
+    "app/lib/pollux/use-pollux-mutation.ts": "ce25436654dd3d3b8b2ebea61b684532ebe2e629a0519f21c2a2b84b8f8a1910",
+    "app/routes/api.pollux.$.ts": "3cc82625e73d3d0647d4a4e536ad6f12b1a01e41c7ebf4f9d725627e9d09d476",
+    "app/routes/api.pollux.auth.ts": "24be528846a060dd42624431d0b834dbc1c99f57484978bd0350e51f7fe830be",
+    "app/routes/pollux/amostras/edit.tsx": "e493f504fafc30ff46b4b982bb657a2af34af503756b3cfdc72b6e9438dd7152",
+    "app/routes/pollux/amostras/index.tsx": "57422f72f50cc2fd2103675cfe113e2ce0b22d0c2852734f2f99fdedbd385340",
+    "app/routes/pollux/amostras/new.tsx": "0bb9211f8bfe434d174d2b1f46a4497ab3dd0fdb4a3b231355d1e988a94f5566"
+  }
+}

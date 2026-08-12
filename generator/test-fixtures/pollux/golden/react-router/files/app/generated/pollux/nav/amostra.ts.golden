@@ -1,0 +1,7 @@
+/* @pollux-generated {"target":"react-router","entity":"amostra","generatorVersion":"1","modelVersion":"1"} — do not edit; regenerate with `pollux generate` */
+// Sidebar registry fragment — consumed by the handwritten app/root.tsx
+// via import.meta.glob('./generated/pollux/nav/*.ts').
+export const navEntry = {
+  to: "/manager/amostras",
+  label: "Amostras de Verificação",
+} as const;

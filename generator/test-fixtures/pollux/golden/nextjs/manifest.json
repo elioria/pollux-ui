@@ -1,0 +1,113 @@
+{
+  "target": "nextjs",
+  "adapterVersion": "0.1.0",
+  "generatorVersion": "1",
+  "modelVersion": "1",
+  "entity": "amostra",
+  "files": [
+    {
+      "path": "app/(pollux)/manager/amostras/[id]/edit/page.tsx",
+      "sha256": "1bc5b9019b6712b633be195f398ef0c9a7371d0a93cee2eabb53afca8ef514d8"
+    },
+    {
+      "path": "app/(pollux)/manager/amostras/error.tsx",
+      "sha256": "bb18c1e7fa7f3f59ae4f09eb51ff3b2eece922417840dae8f9baec8a24a032e0"
+    },
+    {
+      "path": "app/(pollux)/manager/amostras/loading.tsx",
+      "sha256": "cb243055f54b417c1a5d2fa95235e6d69bee8e15dd69bd93ea9155067266d339"
+    },
+    {
+      "path": "app/(pollux)/manager/amostras/new/page.tsx",
+      "sha256": "23ebe0dda5cfaddfc6731e36d71638e316c5124059c3f75db0e74a496acde465"
+    },
+    {
+      "path": "app/(pollux)/manager/amostras/not-found.tsx",
+      "sha256": "39da2f921035e32c358053ce109cda5c89283ee5026cbd896ac1bb76cf5a9b19"
+    },
+    {
+      "path": "app/(pollux)/manager/amostras/page.tsx",
+      "sha256": "f472a108b32f670fa3ded7df68ac2b85d7ecfd8a10c18156e198fd01cb9cd674"
+    },
+    {
+      "path": "app/api/pollux/[...path]/route.ts",
+      "sha256": "04b466aa5c90c3b516613f30e84c11260260f2add7b363d0209f069da70f5e83"
+    },
+    {
+      "path": "app/api/pollux/auth/[[...path]]/route.ts",
+      "sha256": "9aa5e312b44dbd16ef17641f66f167645a835080607014d7698950cef7e27f3a"
+    },
+    {
+      "path": "components/pollux/capability-gate.tsx",
+      "sha256": "b304789a9d29355e3c95df77c049bacf2176da2c97523ceabb362ba070aca606"
+    },
+    {
+      "path": "components/pollux/data-table.tsx",
+      "sha256": "705c437d4e19f6c5e4d81bb93bd276116f1daab4d809c5f28579f9d6bb4ef854"
+    },
+    {
+      "path": "components/pollux/delete-confirm.tsx",
+      "sha256": "84455ceb61fb76c0218310a26de84f34dc672a9b5e4b122ae236f25e8cd1d33d"
+    },
+    {
+      "path": "components/pollux/entity-form.tsx",
+      "sha256": "2fa21569dbe53d64cc130f7881d142c5354dbe68242e0dacc12680ab383057e0"
+    },
+    {
+      "path": "components/pollux/next/entity-create-form.tsx",
+      "sha256": "70b6d075395ea75b5a851333f30c823e4f9011138f45f03ea7dbf161cb6d4727"
+    },
+    {
+      "path": "components/pollux/next/entity-edit-form.tsx",
+      "sha256": "48cc1a0c6db617f5322874d0d12d223d0daaa5554dce9f0a6960a54300d85db7"
+    },
+    {
+      "path": "components/pollux/next/entity-table.tsx",
+      "sha256": "cd026ea265fd407a4fd94bce2d2846f7ee57f6db1676e55250aeb0d10694be24"
+    },
+    {
+      "path": "components/pollux/states.tsx",
+      "sha256": "86473700d51a4d72743bd1a1b9dee528ca2e4502ec44b3f4a2b3fa6dc01455bd"
+    },
+    {
+      "path": "lib/pollux/entities/amostra/spec.ts",
+      "sha256": "0ba2dea7f00e6a3df463aeed1ae3d315ca2a7b0a0a16c81fde2a6000c60f7b34"
+    },
+    {
+      "path": "lib/pollux/registry/amostra.json",
+      "sha256": "346c22f744ca2faefe65a75af2c990ed971f8eb44b5945ac2dee321130f37c5b"
+    },
+    {
+      "path": "lib/pollux/runtime/api-types.ts",
+      "sha256": "4813c66a0fa9929b0d77ca7a759ad8e51951b85e54487c84837d556ae0987d32"
+    },
+    {
+      "path": "lib/pollux/runtime/client.ts",
+      "sha256": "30aa60e4634433390181442f9b779ef949adf7030028aa30c47bf35cbe2dee82"
+    },
+    {
+      "path": "lib/pollux/runtime/codecs.ts",
+      "sha256": "f65187319f62fc0f0579d51260781343f404557bb8d945e393b22257e3b892d2"
+    },
+    {
+      "path": "lib/pollux/runtime/errors-pt.ts",
+      "sha256": "3a7cdcc2d27a70c83e664026c178a06f1f493673b0f8c07d1f189f91630377f8"
+    },
+    {
+      "path": "lib/pollux/runtime/query.ts",
+      "sha256": "8f868c64022405108ebff09200c857d6adf9da32f00a73a89c8c5cac74628f2a"
+    },
+    {
+      "path": "lib/pollux/server/bff-core.ts",
+      "sha256": "23d9559e8cf3d4abbfe24fbdfc9237c54438932ea9a4fa3b8aa2d8648227cf04"
+    },
+    {
+      "path": "lib/pollux/server/data.ts",
+      "sha256": "014716dafbb850129a36aa4aa8fe7fc411845541eefc70eb3c0c9739e58d2788"
+    },
+    {
+      "path": "lib/pollux/server/env.ts",
+      "sha256": "29fa6128eb5d1b7025276092296440462c1899771d15baf65057aa697cc42403"
+    }
+  ]
+}

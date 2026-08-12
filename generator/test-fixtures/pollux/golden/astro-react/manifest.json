@@ -1,0 +1,28 @@
+{
+  "target": "astro-react",
+  "adapterVersion": "0.1.0",
+  "entity": "amostra",
+  "modelVersion": "1",
+  "files": {
+    "src/components/pollux/capability-gate.tsx": "27446287be0bac853071ba4485428eb800dd0eb0a99e63f50eeca1320581cffc",
+    "src/components/pollux/data-table.tsx": "b07846b93a8e20f3bf043206c513c34ca475a3150244373b67c45b738d58b68a",
+    "src/components/pollux/delete-confirm.tsx": "86e2af215518b285b629527feb3d928d3f2b95a118418cd59ba13e10bb522302",
+    "src/components/pollux/entity-form.tsx": "73e42e44d9de20087b4b08ed67447c086d8a15dcd49dda93a844247456064ba1",
+    "src/components/pollux/states.tsx": "2dd3a5f5e36573275a6d4fe87293a80a6f9907d704b08f56786ecd289d95533f",
+    "src/generated/pollux/amostra/island.tsx": "3affd22421001f78e85c267d9ea229167dcbcaa5abf66383b5892933e3b9e7b3",
+    "src/generated/pollux/amostra/spec.ts": "35a829904fabdc5538f893ded41d8ea704db6f2e96f8ddc3bbdfa73a4c25d6fa",
+    "src/generated/pollux/nav/amostra.ts": "35e68953b3f89711b743d1e4d230d13472afeab57868437387cb71baa71a6b97",
+    "src/generated/pollux/registry/amostra.ts": "5228f4a7a7f1ce75edf85be323166fe4256414055d7864a0c155362c7c7c3fc6",
+    "src/lib/pollux/runtime/api-types.ts": "58e565835a8a9558280ac5f256f0c38b856489a32f81f950bd9450fd4713623c",
+    "src/lib/pollux/runtime/client.ts": "a694fd9f6e78a8451d6f2453e60484ae46d3ff44b802e3e1038732d2b3b5f0eb",
+    "src/lib/pollux/runtime/codecs.ts": "3abff2758de72a77072403adedbee03ac4fdcb6cb65e9ffb47ede7207a24e321",
+    "src/lib/pollux/runtime/errors-pt.ts": "719d6c6245a49e4c410aa1983a94ffda2a94cfdc08ab6b124e2ffb46043ecf01",
+    "src/lib/pollux/runtime/query.ts": "c4d130c8e3e18ce69bd7523d0bb88ff5ea3e22bb8b4a4a5829ab38aa6c276848",
+    "src/lib/pollux/server/bff-core.ts": "213fd5ecf3fd8be33ff08c2206ac6a9eafae14139a0b03310b9b4f1311e9ede5",
+    "src/pages/api/pollux/[...path].ts": "9e3c06d104ede84d7047b4c10a4a6cb775579fab6fa6de17180b5a83e0923101",
+    "src/pages/api/pollux/auth/[action].ts": "2343c0590a7b28baac2797743192905572c58a4f10cab762447b83d69bb835dc",
+    "src/pages/manager/amostras/[id]/edit.astro": "bbf554a9588e309e8a538aa1ea631d18d8c00d494027304b2ac58dc9bdb1476c",
+    "src/pages/manager/amostras/index.astro": "9696903c1f29d4d37a3627036d5fba4ad0f7170cf81dee4def6ab3317cb8f58b",
+    "src/pages/manager/amostras/new.astro": "4a2ea9c89edd0cd095f57db29438fc8d444876f0e83672d0a10af1aec3f64526"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "success": true,
+  "data": {
+    "name": "semchave",
+    "dbName": "semchave",
+    "gridTitle": "Sem Chave",
+    "attributes": [
+      {
+        "name": "nome",
+        "dataType": "char",
+        "isPrimaryKey": false,
+        "isNullable": true,
+        "defaultValue": "NULL",
+        "position": 1,
+        "grdIsinGrid": true,
+        "grdLabel": "Nome",
+        "fnrIsinFormAdd": true,
+        "fnrLabel": "Nome",
+        "fnrMandatory": "não",
+        "fnrReadonly": "não",
+        "fedIsinFormUpd": true,
+        "fedLabel": "Nome",
+        "fedMandatory": "não",
+        "fedReadonly": "nunca"
+      }
+    ]
+  },
+  "message": "Fixture entity 'semchave' — no primary key",
+  "timestamp": "2026-01-01T00:00:00.000Z"
+}

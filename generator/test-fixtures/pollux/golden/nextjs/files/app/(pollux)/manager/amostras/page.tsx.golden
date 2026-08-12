@@ -1,0 +1,58 @@
+/* @pollux-generated {"target":"nextjs","entity":"amostra","generatorVersion":"1","modelVersion":"1"} — do not edit; regenerate with `pollux generate` */
+import { EntityTable } from '@/components/pollux/next/entity-table';
+import {
+  ErrorState,
+  ForbiddenState,
+  UnauthenticatedState,
+} from '@/components/pollux/states';
+import { amostraListHref, amostraSpec } from '@/lib/pollux/entities/amostra/spec';
+import { parseListQuery } from '@/lib/pollux/runtime/query';
+import { serverList } from '@/lib/pollux/server/data';
+
+// URL search params are the source of truth; render per request.
+export const dynamic = 'force-dynamic';
+
+export const metadata = { title: "Amostras de Verificação" };
+
+type SearchParams = Promise<Record<string, string | string[] | undefined>>;
+
+export default async function Page({
+  searchParams,
+}: {
+  searchParams: SearchParams;
+}) {
+  const raw = await searchParams;
+  const params = new URLSearchParams();
+  for (const [key, value] of Object.entries(raw)) {
+    if (typeof value === 'string') params.set(key, value);
+    else if (Array.isArray(value) && typeof value[0] === 'string') {
+      params.set(key, value[0]);
+    }
+  }
+  const query = parseListQuery(params, amostraSpec);
+  const result = await serverList(amostraSpec, query);
+
+  return (
+    <section className="flex flex-col gap-4">
+      <h1 className="font-display text-xl font-bold text-foreground">
+        {amostraSpec.titles.list}
+      </h1>
+      {result.ok ? (
+        <EntityTable
+          spec={amostraSpec}
+          listHref={amostraListHref}
+          rows={result.data.rows}
+          totalRows={result.data.totalRows}
+          capabilities={result.data.capabilities}
+          query={query}
+        />
+      ) : result.error.code === 'UNAUTHENTICATED' ? (
+        <UnauthenticatedState />
+      ) : result.error.code === 'FORBIDDEN' ? (
+        <ForbiddenState />
+      ) : (
+        <ErrorState error={result.error} />
+      )}
+    </section>
+  );
+}

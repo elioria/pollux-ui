@@ -1,0 +1,208 @@
+/* @pollux-generated {"target":"react-router","entity":"amostra","generatorVersion":"1","modelVersion":"1"} — do not edit; regenerate with `pollux generate` */
+// EntitySpec projection for 'amostra' (PolluxEntityModel v1).
+// Labels/titles preserve the source metadata text (Portuguese).
+import type { EntitySpec, WireRecord } from '../../../lib/pollux/runtime/api-types';
+
+// Intersection with WireRecord keeps the row assignable to the shared
+// client/form contracts while exposing typed field access.
+export type AmostraRow = WireRecord & {
+  id: string;
+  titulo: string;
+  descricao: string | null;
+  ativo: boolean | null;
+  quantidadeMaxima: number | null;
+  preco: string | null;
+  dataInicio: string | null;
+  horaInicio: string | null;
+  criadoEm: string | null;
+};
+
+export const amostraSpec: EntitySpec = {
+  "id": "amostra",
+  "titles": {
+    "list": "Amostras de Verificação",
+    "create": "Nova Amostra",
+    "update": "Editar Amostra"
+  },
+  "fields": [
+    {
+      "codeName": "id",
+      "label": "id",
+      "scalarType": "uuid",
+      "nullable": false,
+      "primaryKey": true,
+      "mutability": "none",
+      "requiredOnCreate": false,
+      "requiredOnUpdate": false,
+      "maxLength": null,
+      "visibility": {
+        "list": false,
+        "create": false,
+        "update": false
+      }
+    },
+    {
+      "codeName": "titulo",
+      "label": "Título",
+      "scalarType": "string",
+      "nullable": false,
+      "primaryKey": false,
+      "mutability": "createAndUpdate",
+      "requiredOnCreate": true,
+      "requiredOnUpdate": true,
+      "maxLength": 120,
+      "visibility": {
+        "list": true,
+        "create": true,
+        "update": true
+      }
+    },
+    {
+      "codeName": "descricao",
+      "label": "Descrição",
+      "scalarType": "text",
+      "nullable": true,
+      "primaryKey": false,
+      "mutability": "createOnly",
+      "requiredOnCreate": false,
+      "requiredOnUpdate": false,
+      "maxLength": null,
+      "visibility": {
+        "list": true,
+        "create": true,
+        "update": false
+      }
+    },
+    {
+      "codeName": "ativo",
+      "label": "Ativo",
+      "scalarType": "boolean",
+      "nullable": true,
+      "primaryKey": false,
+      "mutability": "createAndUpdate",
+      "requiredOnCreate": false,
+      "requiredOnUpdate": false,
+      "maxLength": null,
+      "visibility": {
+        "list": true,
+        "create": true,
+        "update": true
+      }
+    },
+    {
+      "codeName": "quantidadeMaxima",
+      "label": "Quantidade Máxima",
+      "scalarType": "integer",
+      "nullable": true,
+      "primaryKey": false,
+      "mutability": "createAndUpdate",
+      "requiredOnCreate": false,
+      "requiredOnUpdate": false,
+      "maxLength": null,
+      "visibility": {
+        "list": true,
+        "create": true,
+        "update": true
+      }
+    },
+    {
+      "codeName": "preco",
+      "label": "Preço",
+      "scalarType": "numeric",
+      "nullable": true,
+      "primaryKey": false,
+      "mutability": "createAndUpdate",
+      "requiredOnCreate": false,
+      "requiredOnUpdate": false,
+      "maxLength": null,
+      "visibility": {
+        "list": true,
+        "create": true,
+        "update": true
+      }
+    },
+    {
+      "codeName": "dataInicio",
+      "label": "Data de Início",
+      "scalarType": "date",
+      "nullable": true,
+      "primaryKey": false,
+      "mutability": "createAndUpdate",
+      "requiredOnCreate": false,
+      "requiredOnUpdate": false,
+      "maxLength": null,
+      "visibility": {
+        "list": true,
+        "create": true,
+        "update": true
+      }
+    },
+    {
+      "codeName": "horaInicio",
+      "label": "Hora de Início",
+      "scalarType": "time",
+      "nullable": true,
+      "primaryKey": false,
+      "mutability": "createAndUpdate",
+      "requiredOnCreate": false,
+      "requiredOnUpdate": false,
+      "maxLength": null,
+      "visibility": {
+        "list": true,
+        "create": true,
+        "update": true
+      }
+    },
+    {
+      "codeName": "criadoEm",
+      "label": "Criado em",
+      "scalarType": "timestamp",
+      "nullable": true,
+      "primaryKey": false,
+      "mutability": "none",
+      "requiredOnCreate": false,
+      "requiredOnUpdate": false,
+      "maxLength": null,
+      "visibility": {
+        "list": true,
+        "create": false,
+        "update": false
+      }
+    }
+  ],
+  "sortableFields": [
+    "titulo",
+    "ativo",
+    "quantidadeMaxima",
+    "preco",
+    "dataInicio",
+    "criadoEm"
+  ],
+  "filterableFields": [
+    "titulo",
+    "descricao",
+    "ativo",
+    "quantidadeMaxima",
+    "preco",
+    "dataInicio",
+    "horaInicio",
+    "criadoEm"
+  ],
+  "pageSizes": [
+    5,
+    10,
+    25,
+    50
+  ],
+  "defaultPageSize": 5,
+  "defaultSort": [
+    {
+      "id": "titulo",
+      "desc": false
+    },
+    {
+      "id": "criadoEm",
+      "desc": true
+    }
+  ]
+};

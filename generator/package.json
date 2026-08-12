@@ -1,0 +1,15 @@
+{
+  "name": "pollux-generator",
+  "private": true,
+  "type": "module",
+  "description": "Standalone snapshot of the Pollux generator CLI (workspace creation + CRUD generation for the nextjs/remix/astro/tanstack-start targets).",
+  "scripts": {
+    "pollux": "node scripts/pollux/cli.mjs"
+  },
+  "dependencies": {
+    "zod": "4.3.6"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

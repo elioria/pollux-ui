@@ -9,6 +9,15 @@ Verification is layered. Each layer is reported separately; a green layer
 never substitutes for another one. A green generator build alone cannot prove
 model discovery, and a model trigger eval alone cannot prove safe output.
 
+
+## Generator resolution
+
+Commands below run from the generator root — resolve it in this order:
+1. a start-ui-web checkout the user is working in (full surface);
+2. the plugin's bundled snapshot at `${CLAUDE_PLUGIN_ROOT}/generator`
+   (standalone surface only — run `pnpm install` there once). From an empty
+   folder this is the default; state which root you are using.
+
 ## Layers
 
 ### 1. Plugin package (neutral)

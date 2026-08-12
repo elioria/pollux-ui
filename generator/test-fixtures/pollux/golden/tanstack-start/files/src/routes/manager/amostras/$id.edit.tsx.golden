@@ -1,0 +1,103 @@
+/* @pollux-generated {"target":"tanstack-start","entity":"amostra","generatorVersion":"1","modelVersion":"1"} — do not edit; regenerate with `pollux generate` */
+// Rota de edição gerada — entidade 'amostra'
+// (/manager/amostras/$id/edit).
+//
+// O loader busca o registro + capacidades pelo proxy same-origin; a mutação
+// chama o cliente compartilhado direto no navegador. Em conflito
+// (CONFLICT/STALE_WRITE) o formulário compartilhado preserva a entrada do
+// usuário e exibe o envelope seguro.
+import { createFileRoute } from '@tanstack/react-router';
+import { useRef } from 'react';
+
+import { EntityForm } from '../../../components/pollux/entity-form';
+import {
+  ErrorState,
+  ForbiddenState,
+  UnauthenticatedState,
+} from '../../../components/pollux/states';
+import { amostraSpec, type AmostraRow } from '../../../generated/pollux/amostra/spec';
+import { polluxBaseUrl } from '../../../lib/pollux/base-url';
+import { usePolluxMutation } from '../../../lib/pollux/use-pollux-mutation';
+import type { WireRecord } from '../../../lib/pollux/runtime/api-types';
+import { createEntityClient, newIdempotencyKey } from '../../../lib/pollux/runtime/client';
+import { errorMessages, uiLabels } from '../../../lib/pollux/runtime/errors-pt';
+
+const entityClient = () =>
+  createEntityClient<AmostraRow>(amostraSpec, {
+    baseUrl: polluxBaseUrl(),
+    entity: 'amostra',
+  });
+
+export const Route = createFileRoute('/manager/amostras/$id/edit')({
+  loader: async ({ params, abortController }) => {
+    const client = entityClient();
+    const [record, capabilities] = await Promise.all([
+      client.get(params.id, { signal: abortController.signal }),
+      client.capabilities({ signal: abortController.signal }),
+    ]);
+    return { record, capabilities };
+  },
+  head: () => ({ meta: [{ title: "Editar Amostra" }] }),
+  component: AmostraEditPage,
+  errorComponent: PageErrorBoundary,
+});
+
+function AmostraEditPage() {
+  const { record, capabilities } = Route.useLoaderData();
+  const { id } = Route.useParams();
+  const navigate = Route.useNavigate();
+  const { mutate } = usePolluxMutation();
+  const idempotencyKeyRef = useRef<string | null>(null);
+
+  if (!record.ok) {
+    if (record.error.code === 'UNAUTHENTICATED') return <UnauthenticatedState />;
+    if (record.error.code === 'FORBIDDEN') return <ForbiddenState />;
+    return <ErrorState error={record.error} />;
+  }
+  if (capabilities.ok && !capabilities.data.update) return <ForbiddenState />;
+
+  const goToList = () => void navigate({ to: '/manager/amostras' });
+
+  const onSubmit = async (values: WireRecord) => {
+    idempotencyKeyRef.current ??= newIdempotencyKey();
+    const error = await mutate(() =>
+      entityClient().update(id, values as Partial<AmostraRow>, {
+        idempotencyKey: idempotencyKeyRef.current ?? newIdempotencyKey(),
+      })
+    );
+    if (!error) {
+      goToList();
+      return null;
+    }
+    if (!error.retryable) idempotencyKeyRef.current = null;
+    return error;
+  };
+
+  return (
+    <div className="mx-auto max-w-2xl space-y-4">
+      <h2 className="font-display text-2xl font-semibold">
+        {amostraSpec.titles.update}
+      </h2>
+      <EntityForm
+        spec={amostraSpec}
+        operation="update"
+        initial={record.data}
+        onSubmit={onSubmit}
+        onCancel={goToList}
+      />
+    </div>
+  );
+}
+
+function PageErrorBoundary() {
+  return (
+    <div className="rounded-lg border border-border bg-card p-8">
+      <h2 className="font-display text-xl font-semibold">
+        {uiLabels.errorTitle}
+      </h2>
+      <p className="mt-2 text-sm text-muted-foreground">
+        {errorMessages.INTERNAL}
+      </p>
+    </div>
+  );
+}

@@ -1,0 +1,9 @@
+/* @pollux-generated {"target":"react-router","entity":"amostra","generatorVersion":"1","modelVersion":"1"} — do not edit; regenerate with `pollux generate` */
+// Proxy allowlist registry fragment — consumed by
+// app/routes/api.pollux.$.ts via import.meta.glob. The proxy only
+// forwards requests for entities/methods/query keys declared here.
+export const registryEntry = {
+  entity: "amostra",
+  methods: {"list":true,"read":true,"create":true,"update":true,"delete":true},
+  queryKeys: ["f_titulo","f_titulo__contains","f_titulo__eq","f_descricao","f_descricao__contains","f_descricao__eq","f_ativo","f_ativo__eq","f_quantidadeMaxima","f_quantidadeMaxima__eq","f_quantidadeMaxima__gt","f_quantidadeMaxima__gte","f_quantidadeMaxima__lt","f_quantidadeMaxima__lte","f_preco","f_preco__eq","f_preco__gt","f_preco__gte","f_preco__lt","f_preco__lte","f_dataInicio","f_dataInicio__eq","f_dataInicio__gt","f_dataInicio__gte","f_dataInicio__lt","f_dataInicio__lte","f_horaInicio","f_horaInicio__eq","f_horaInicio__gt","f_horaInicio__gte","f_horaInicio__lt","f_horaInicio__lte","f_criadoEm","f_criadoEm__eq","f_criadoEm__gt","f_criadoEm__gte","f_criadoEm__lt","f_criadoEm__lte"],
+} as const;

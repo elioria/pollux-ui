@@ -9,6 +9,15 @@ Read-only discovery. This skill never writes files, never mutates Git state,
 and never infers support from the presence of a directory. Every claim in the
 output must come from a command, a manifest, or the packaged resource catalog.
 
+
+## Generator resolution
+
+Commands below run from the generator root — resolve it in this order:
+1. a start-ui-web checkout the user is working in (full surface);
+2. the plugin's bundled snapshot at `${CLAUDE_PLUGIN_ROOT}/generator`
+   (standalone surface only — run `pnpm install` there once). From an empty
+   folder this is the default; state which root you are using.
+
 ## Preconditions
 
 - You are inside a checkout that contains the `./pollux` CLI (repo root has

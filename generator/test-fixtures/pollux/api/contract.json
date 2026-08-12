@@ -1,0 +1,156 @@
+{
+  "contractVersion": "2.0.0",
+  "contractId": "pollux-standalone-api",
+  "basePath": "/api/generated/v2",
+  "description": "Versioned standalone Pollux CRUD API contract (SPEC-003). Machine-readable half of contract.md. Consumed by the mock server, the runtime contract suite and the SPEC-004..006 adapters.",
+  "endpoints": [
+    {
+      "operation": "list",
+      "method": "GET",
+      "path": "/api/generated/v2/:entity",
+      "successStatus": 200
+    },
+    {
+      "operation": "create",
+      "method": "POST",
+      "path": "/api/generated/v2/:entity",
+      "successStatus": 201,
+      "idempotency": "required"
+    },
+    {
+      "operation": "read",
+      "method": "GET",
+      "path": "/api/generated/v2/:entity/:id",
+      "successStatus": 200
+    },
+    {
+      "operation": "update",
+      "method": "PATCH",
+      "path": "/api/generated/v2/:entity/:id",
+      "successStatus": 200,
+      "idempotency": "required"
+    },
+    {
+      "operation": "delete",
+      "method": "DELETE",
+      "path": "/api/generated/v2/:entity/:id",
+      "successStatus": 200,
+      "idempotency": "required"
+    },
+    {
+      "operation": "capabilities",
+      "method": "GET",
+      "path": "/api/generated/v2/:entity/capabilities",
+      "successStatus": 200
+    }
+  ],
+  "listQuery": {
+    "strictKeys": true,
+    "page": { "type": "integer", "min": 1, "default": 1 },
+    "pageSize": {
+      "type": "integer",
+      "min": 1,
+      "max": 500,
+      "default": "model.list.defaultPageSize"
+    },
+    "sort": {
+      "type": "json",
+      "shape": "[{\"id\": string, \"desc\": boolean}]",
+      "allowedIds": "model.list.sortableFields"
+    },
+    "q": {
+      "type": "string",
+      "semantics": "case-insensitive contains across string/varchar/text visible columns"
+    },
+    "filterKeyPattern": "f_<codeName>__<operator>",
+    "filterDefaultOperator": {
+      "stringFamily": "contains",
+      "otherwise": "eq"
+    },
+    "filterOperatorsByScalar": {
+      "uuid": ["eq"],
+      "string": ["contains", "eq"],
+      "varchar": ["contains", "eq"],
+      "text": ["contains", "eq"],
+      "boolean": ["eq"],
+      "integer": ["eq", "gt", "gte", "lt", "lte"],
+      "float": ["eq", "gt", "gte", "lt", "lte"],
+      "numeric": ["eq", "gt", "gte", "lt", "lte"],
+      "date": ["eq", "gt", "gte", "lt", "lte"],
+      "time": ["eq", "gt", "gte", "lt", "lte"],
+      "timestamp": ["eq", "gt", "gte", "lt", "lte"]
+    }
+  },
+  "envelopes": {
+    "success": "{ ok: true, data: <payload> }",
+    "error": "{ ok: false, code, message, requestId, retryable, fieldErrors? }",
+    "listPayload": "{ rows, totalRows, page, pageSize, capabilities }",
+    "recordPayload": "canonical record (all model fields, wire encoding)",
+    "deletePayload": "{ id, deleted: true }",
+    "capabilitiesPayload": "{ list, read, create, update, delete } booleans"
+  },
+  "wireEncodingByScalar": {
+    "uuid": "string",
+    "string": "string",
+    "varchar": "string",
+    "text": "string",
+    "boolean": "boolean",
+    "integer": "number (integer)",
+    "float": "number",
+    "numeric": "string (decimal literal, precision preserved)",
+    "date": "string YYYY-MM-DD",
+    "time": "string HH:MM:SS",
+    "timestamp": "string ISO-8601 UTC"
+  },
+  "mutationRules": {
+    "contentType": "application/json",
+    "strict": true,
+    "unknownFieldRejection": "VALIDATION_FAILED with fieldErrors[field] = ['unknown_field']",
+    "nonWritableFieldRejection": "VALIDATION_FAILED (mutability enforced per operation)",
+    "emptyNumeric": "empty string is rejected with VALIDATION_FAILED; absent/null stays null, never coerced to 0",
+    "returns": "canonical created/updated record or deletion confirmation"
+  },
+  "errorTaxonomy": {
+    "UNAUTHENTICATED": { "httpStatus": 401, "retryable": false },
+    "FORBIDDEN": { "httpStatus": 403, "retryable": false },
+    "VALIDATION_FAILED": { "httpStatus": 400, "retryable": false },
+    "NOT_FOUND": { "httpStatus": 404, "retryable": false },
+    "CONFLICT": { "httpStatus": 409, "retryable": false },
+    "REFERENCE_CONFLICT": { "httpStatus": 409, "retryable": false },
+    "STALE_WRITE": { "httpStatus": 412, "retryable": false },
+    "RATE_LIMITED": { "httpStatus": 429, "retryable": true },
+    "SERVICE_UNAVAILABLE": { "httpStatus": 503, "retryable": true },
+    "INTERNAL": { "httpStatus": 500, "retryable": false }
+  },
+  "headers": {
+    "request": {
+      "Authorization": "Bearer <access-token>; required on every endpoint",
+      "Idempotency-Key": "required on POST/PATCH/DELETE; opaque, <= 200 chars",
+      "If-Match": "optional on PATCH; record version for optimistic concurrency",
+      "X-Request-Id": "optional; echoed when present (sanitized), generated otherwise"
+    },
+    "response": {
+      "X-Request-Id": "always present; equals envelope requestId on errors",
+      "ETag": "record version on read/create/update responses",
+      "Idempotency-Replayed": "\"true\" only when a stored idempotent response is replayed"
+    }
+  },
+  "idempotency": {
+    "scope": ["actorId", "clientId", "method", "canonicalPath", "key"],
+    "bodyHash": "SHA-256 of canonical JSON body (object keys sorted by UTF-16 code units; empty body hashes the empty string)",
+    "states": ["in_progress", "complete"],
+    "sameScopeSameBody": "replay stored HTTP status + exact stored body with Idempotency-Replayed: true; no second mutation",
+    "sameScopeDifferentBody": "CONFLICT (409), no mutation",
+    "concurrentInProgress": "wait a bounded interval; then replay completion, or return retryable SERVICE_UNAVAILABLE (503); the mutation never runs concurrently",
+    "missingKey": "VALIDATION_FAILED (400)",
+    "expirySeconds": 86400,
+    "cleanup": "only expired complete records may be deleted; never live in_progress records"
+  },
+  "auth": {
+    "scheme": "Authorization: Bearer <token>",
+    "failClosed": true,
+    "missingOrInvalidToken": "UNAUTHENTICATED envelope (401)",
+    "authorization": "capability per (actor, entity, operation); API is authoritative; client capability checks only control presentation",
+    "capabilitiesEndpointRequires": "authentication only; it reports effective capabilities including all-false"
+  }
+}

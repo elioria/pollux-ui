@@ -1,0 +1,297 @@
+/* @pollux-generated {"target":"nextjs","entity":"amostra","generatorVersion":"1","modelVersion":"1"} — do not edit; regenerate with `pollux generate` */
+// SPEC-004 Next.js adapter — same-origin API proxy implementing the
+// SPEC-003 proxy security contract subset for the standalone API v2:
+//
+// - strict allowlist: only /api/generated/v2/<registered-entity> paths,
+//   declared methods, and per-entity declared query keys (registered
+//   entities come from the generated registry fragments in
+//   lib/pollux/registry/<entity>.json);
+// - upstream path constructed from normalized, validated segments (never
+//   concatenated user input); fixed upstream ORIGIN from POLLUX_API_URL;
+// - request header allowlist (Accept, Content-Type, If-Match,
+//   Idempotency-Key, X-Request-Id) — incoming cookies and Authorization are
+//   stripped; response header allowlist (Content-Type, X-Request-Id, ETag,
+//   Idempotency-Replayed) — Set-Cookie and hop-by-hop headers never cross;
+// - request/response byte limits, AbortSignal timeout
+//   (POLLUX_API_TIMEOUT_MS), redirect rejection, JSON content-type
+//   enforcement both ways;
+// - /auth paths are rejected here (served by the dedicated BFF endpoints).
+//
+// Authentication (SPEC-003 BFF): the bearer forwarded upstream comes from
+// the HttpOnly `pollux_access` cookie set by the /api/pollux/auth flow. On a
+// 401 the safe UNAUTHENTICATED envelope crosses back and the shared client
+// performs ONE refresh + ONE retry (same Idempotency-Key) — the refresh
+// cookie is path-scoped to /api/pollux/auth, so rotation happens at the auth
+// endpoint, never here. Mutations in cookie mode REQUIRE an Origin match
+// against POLLUX_PUBLIC_ORIGIN plus a valid X-CSRF-Token bound to the
+// HttpOnly session cookie. POLLUX_DEV_BEARER is an explicit DEV-ONLY
+// fallback used ONLY when set AND no access cookie is present.
+import 'server-only';
+
+import { findPolluxRegistryEntry } from '@/lib/pollux/registry';
+import {
+  checkMutationDefense,
+  resolveProxyAuth,
+} from '@/lib/pollux/server/bff-core';
+import { polluxServerEnv } from '@/lib/pollux/server/env';
+
+export const dynamic = 'force-dynamic';
+
+const MAX_REQUEST_BYTES = 1_048_576; // 1 MiB
+const MAX_RESPONSE_BYTES = 5_242_880; // 5 MiB
+const ENTITY_PATTERN = /^[a-z][a-z0-9_]*$/;
+const ID_PATTERN = /^[A-Za-z0-9._~-]{1,128}$/;
+const REQUEST_ID_PATTERN = /^[A-Za-z0-9._-]{1,128}$/;
+const IDEMPOTENCY_KEY_PATTERN = /^[\x21-\x7e]{1,200}$/;
+
+type ProxyCode =
+  | 'VALIDATION_FAILED'
+  | 'FORBIDDEN'
+  | 'NOT_FOUND'
+  | 'SERVICE_UNAVAILABLE'
+  | 'INTERNAL';
+
+const STATUS_BY_CODE: Record<ProxyCode, number> = {
+  VALIDATION_FAILED: 400,
+  FORBIDDEN: 403,
+  NOT_FOUND: 404,
+  SERVICE_UNAVAILABLE: 503,
+  INTERNAL: 500,
+};
+
+const RETRYABLE_BY_CODE: Record<ProxyCode, boolean> = {
+  VALIDATION_FAILED: false,
+  FORBIDDEN: false,
+  NOT_FOUND: false,
+  SERVICE_UNAVAILABLE: true,
+  INTERNAL: false,
+};
+
+// Safe Portuguese messages — same taxonomy text as the shared locale module.
+const MESSAGE_BY_CODE: Record<ProxyCode, string> = {
+  VALIDATION_FAILED: 'Dados inválidos. Verifique os campos e tente novamente.',
+  FORBIDDEN: 'Você não tem permissão para executar esta ação.',
+  NOT_FOUND: 'Registro não encontrado.',
+  SERVICE_UNAVAILABLE: 'Serviço temporariamente indisponível. Tente novamente.',
+  INTERNAL: 'Erro inesperado. Tente novamente ou contate o suporte.',
+};
+
+const resolveRequestId = (request: Request): string => {
+  const supplied = request.headers.get('x-request-id');
+  return supplied !== null && REQUEST_ID_PATTERN.test(supplied)
+    ? supplied
+    : crypto.randomUUID();
+};
+
+const reject = (
+  code: ProxyCode,
+  requestId: string,
+  status?: number
+): Response =>
+  Response.json(
+    {
+      ok: false,
+      code,
+      message: MESSAGE_BY_CODE[code],
+      requestId,
+      retryable: RETRYABLE_BY_CODE[code],
+    },
+    {
+      status: status ?? STATUS_BY_CODE[code],
+      headers: { 'X-Request-Id': requestId },
+    }
+  );
+
+type RouteContext = { params: Promise<{ path?: string[] }> };
+
+type Operation =
+  | 'list'
+  | 'read'
+  | 'capabilities'
+  | 'create'
+  | 'update'
+  | 'delete';
+
+const MUTATIONS: readonly Operation[] = ['create', 'update', 'delete'];
+
+async function proxy(
+  request: Request,
+  context: RouteContext
+): Promise<Response> {
+  const requestId = resolveRequestId(request);
+  const { path } = await context.params;
+  const segments = [...(path ?? [])];
+  // The shared client prefixes '/api'; both spellings normalize to one path.
+  if (segments[0] === 'api') segments.shift();
+  // /auth is served by the dedicated deferred-auth stubs, never proxied.
+  if (segments[0] === 'auth') return reject('NOT_FOUND', requestId);
+  if (
+    segments[0] !== 'generated' ||
+    segments[1] !== 'v2' ||
+    segments.length < 3 ||
+    segments.length > 4
+  ) {
+    return reject('NOT_FOUND', requestId);
+  }
+
+  const entity = segments[2] ?? '';
+  if (!ENTITY_PATTERN.test(entity)) return reject('NOT_FOUND', requestId);
+  const entry = findPolluxRegistryEntry(entity);
+  if (!entry) return reject('NOT_FOUND', requestId);
+
+  const tail = segments[3];
+  const method = request.method;
+  let operation: Operation | null = null;
+  if (method === 'GET') {
+    if (tail === undefined) operation = 'list';
+    else if (tail === 'capabilities') operation = 'capabilities';
+    else if (ID_PATTERN.test(tail)) operation = 'read';
+  } else if (method === 'POST' && tail === undefined) {
+    operation = 'create';
+  } else if (
+    (method === 'PATCH' || method === 'DELETE') &&
+    tail !== undefined &&
+    tail !== 'capabilities' &&
+    ID_PATTERN.test(tail)
+  ) {
+    operation = method === 'PATCH' ? 'update' : 'delete';
+  }
+  if (operation === null) return reject('NOT_FOUND', requestId);
+
+  // Strict query allowlist: only the list operation takes parameters, and
+  // only keys declared by the generated registry fragment for this entity.
+  const url = new URL(request.url);
+  const upstreamQuery = new URLSearchParams();
+  for (const [key, value] of url.searchParams.entries()) {
+    if (operation !== 'list' || !entry.queryKeys.includes(key)) {
+      return reject('VALIDATION_FAILED', requestId);
+    }
+    upstreamQuery.append(key, value);
+  }
+
+  const env = polluxServerEnv();
+  if (env.apiUrl === null) return reject('SERVICE_UNAVAILABLE', requestId);
+
+  // BFF credential resolution: HttpOnly access cookie first; explicit
+  // DEV-ONLY POLLUX_DEV_BEARER fallback only when no access cookie exists.
+  const auth = resolveProxyAuth(request.headers.get('cookie'), env.devBearer);
+
+  // Mutation defense: Origin match (POLLUX_PUBLIC_ORIGIN) always; in cookie
+  // mode additionally the CSRF double-submit bound to the session cookie.
+  if (MUTATIONS.includes(operation)) {
+    const defense = await checkMutationDefense(request, auth, {
+      publicOrigin: env.publicOrigin,
+      sessionSecret: env.sessionSecret,
+    });
+    if (!defense.ok) return reject('FORBIDDEN', requestId);
+  }
+
+  // Request header allowlist. Everything else — cookies and any client-sent
+  // Authorization header included — is stripped in both directions.
+  const headers = new Headers();
+  headers.set('Accept', 'application/json');
+  headers.set('X-Request-Id', requestId);
+  if (operation === 'update') {
+    const ifMatch = request.headers.get('if-match');
+    if (ifMatch !== null) headers.set('If-Match', ifMatch);
+  }
+  if (MUTATIONS.includes(operation)) {
+    const idempotencyKey = request.headers.get('idempotency-key');
+    if (
+      idempotencyKey === null ||
+      !IDEMPOTENCY_KEY_PATTERN.test(idempotencyKey)
+    ) {
+      return reject('VALIDATION_FAILED', requestId);
+    }
+    headers.set('Idempotency-Key', idempotencyKey);
+  }
+  // Upstream credential: BFF access-cookie bearer or the DEV-ONLY fallback;
+  // anonymous requests carry no Authorization (the upstream fails closed).
+  if (auth.bearer !== null) {
+    headers.set('Authorization', `Bearer ${auth.bearer}`);
+  }
+
+  let body: ArrayBuffer | undefined;
+  if (operation === 'create' || operation === 'update') {
+    body = await request.arrayBuffer();
+    if (body.byteLength > MAX_REQUEST_BYTES) {
+      return reject('VALIDATION_FAILED', requestId, 413);
+    }
+    if (body.byteLength > 0) {
+      const contentType = request.headers.get('content-type') ?? '';
+      if (!contentType.toLowerCase().includes('application/json')) {
+        return reject('VALIDATION_FAILED', requestId, 415);
+      }
+      headers.set('Content-Type', 'application/json');
+    }
+  }
+
+  // Normalized upstream path from validated segments; origin is fixed.
+  const upstreamPath = `/api/generated/v2/${encodeURIComponent(entity)}${
+    tail !== undefined ? `/${encodeURIComponent(tail)}` : ''
+  }`;
+  const qs = upstreamQuery.toString();
+  const upstreamUrl = `${env.apiUrl}${upstreamPath}${qs ? `?${qs}` : ''}`;
+
+  let upstream: Response;
+  try {
+    upstream = await fetch(upstreamUrl, {
+      method,
+      headers,
+      redirect: 'manual',
+      cache: 'no-store',
+      signal: AbortSignal.timeout(env.timeoutMs),
+      ...(body !== undefined && body.byteLength > 0 ? { body } : {}),
+    });
+  } catch {
+    // Network failure or timeout — safe retryable envelope.
+    return reject('SERVICE_UNAVAILABLE', requestId);
+  }
+
+  // Redirect rejection: the fixed upstream must answer in place.
+  if (upstream.status >= 300 && upstream.status < 400) {
+    return reject('INTERNAL', requestId, 502);
+  }
+  const upstreamType = upstream.headers.get('content-type') ?? '';
+  if (!upstreamType.toLowerCase().includes('application/json')) {
+    return reject('INTERNAL', requestId, 502);
+  }
+  const payload = await upstream.arrayBuffer();
+  if (payload.byteLength > MAX_RESPONSE_BYTES) {
+    return reject('INTERNAL', requestId, 502);
+  }
+
+  // Response header allowlist — never Set-Cookie / hop-by-hop / internal.
+  const responseHeaders = new Headers({
+    'Content-Type': 'application/json; charset=utf-8',
+  });
+  const upstreamRequestId = upstream.headers.get('x-request-id');
+  responseHeaders.set(
+    'X-Request-Id',
+    upstreamRequestId !== null && REQUEST_ID_PATTERN.test(upstreamRequestId)
+      ? upstreamRequestId
+      : requestId
+  );
+  const etag = upstream.headers.get('etag');
+  if (etag !== null) responseHeaders.set('ETag', etag);
+  if (upstream.headers.get('idempotency-replayed') === 'true') {
+    responseHeaders.set('Idempotency-Replayed', 'true');
+  }
+  return new Response(payload, {
+    status: upstream.status,
+    headers: responseHeaders,
+  });
+}
+
+export async function GET(request: Request, context: RouteContext) {
+  return proxy(request, context);
+}
+export async function POST(request: Request, context: RouteContext) {
+  return proxy(request, context);
+}
+export async function PATCH(request: Request, context: RouteContext) {
+  return proxy(request, context);
+}
+export async function DELETE(request: Request, context: RouteContext) {
+  return proxy(request, context);
+}

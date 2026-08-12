@@ -29,7 +29,14 @@ command so you can see what runs.
 
 ## 1. Session setup
 
-Open your agent session inside (or pointed at) a start-ui-web checkout:
+Two ways to run; the skills auto-detect which one you are in:
+
+- **Empty folder (no source repo):** just install the plugin and start a
+  session anywhere — skills use the bundled `generator/` snapshot inside
+  the installed plugin (standalone surface: workspaces, entity authoring,
+  generation, mock API). See "Zero-to-app" in INSTALL.md.
+- **Full checkout:** open the session inside start-ui-web for the complete
+  surface (in-repo /manager, /generated pages, Go backend):
 
 ```bash
 cd ~/projects/start-ui-web   # your checkout

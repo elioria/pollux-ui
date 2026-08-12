@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "version": "1.0.0",
+  "name": "start-ui-vite",
+  "displayName": "Start UI (React + Vite + TanStack Start)",
+  "framework": "react-vite-tanstack-start",
+  "language": "typescript",
+  "status": "reference",
+  "root": "../..",
+  "referenceRoot": "../..",
+  "packageManager": "pnpm",
+  "entrypoints": {
+    "layout": "src/routes/__root.tsx",
+    "appLayouts": "src/layout/",
+    "globalStyles": "src/styles/app.css",
+    "home": "src/routes/index.tsx",
+    "components": "src/components/ui/"
+  },
+  "designSystem": {
+    "tokens": "src/styles/app.css",
+    "sharedTokensCompatible": true,
+    "display": "Montserrat",
+    "body": "Inter",
+    "componentsStyle": "shadcn (Base UI dropdown-menu, not Radix)",
+    "tailwind": 4
+  },
+  "commands": {
+    "dev": "pnpm dev",
+    "build": "pnpm build",
+    "lint": "pnpm lint"
+  },
+  "generatorSupport": {
+    "pollux": true,
+    "targetAdapter": {
+      "id": "pollux-tanstack-start",
+      "version": "1.0.0",
+      "capabilityLevel": "full"
+    },
+    "notes": "Full Pollux target: /manager verticals (scripts/gen-entity.mjs) + /generated pages (_templates/pollux). This skeleton is the live repo itself, referenced in place — not a copyable boilerplate."
+  }
+}

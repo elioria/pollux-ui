@@ -1,0 +1,51 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const stats = [
+  {
+    label: 'Entidades cadastradas',
+    value: '55',
+    hint: 'metadados em json-files',
+  },
+  { label: 'Rotas geradas', value: '110', hint: 'páginas cliente + servidor' },
+  { label: 'Usuários ativos', value: '—', hint: 'aguardando integração' },
+  { label: 'Grupos de permissão', value: '—', hint: 'aguardando integração' },
+];
+---
+
+<Layout title="Dashboard">
+  <section class="space-y-6">
+    <div>
+      <h2 class="font-display text-2xl font-semibold">Bem-vindo</h2>
+      <p class="mt-1 text-sm text-muted-foreground">
+        Visão geral do painel administrativo do Pollux. Este é um
+        esqueleto Astro 5 pronto para receber o código gerado por entidade.
+      </p>
+    </div>
+
+    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        stats.map((stat) => (
+          <article class="rounded-lg border border-border bg-card p-5 shadow-sm">
+            <p class="text-sm font-medium text-muted-foreground">
+              {stat.label}
+            </p>
+            <p class="mt-2 font-mono text-3xl font-semibold text-card-foreground">
+              {stat.value}
+            </p>
+            <p class="mt-1 text-xs text-muted-foreground">{stat.hint}</p>
+          </article>
+        ))
+      }
+    </div>
+
+    <article class="rounded-lg border border-border bg-card p-6 shadow-sm">
+      <h3 class="font-display text-lg font-semibold">Próximos passos</h3>
+      <ul class="mt-3 list-inside list-disc space-y-1 text-sm text-muted-foreground">
+        <li>Conectar as páginas de entidades geradas pelo Pollux.</li>
+        <li>Integrar autenticação e permissões (perusr / pergrp).</li>
+        <li>Substituir os cartões de exemplo por métricas reais.</li>
+      </ul>
+    </article>
+  </section>
+</Layout>

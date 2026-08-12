@@ -1,0 +1,43 @@
+{
+  "success": true,
+  "data": {
+    "name": "limites",
+    "dbName": "limites",
+    "gridTitle": "Limites Inválidos",
+    "gridFooterTotalLines": "0,10",
+    "attributes": [
+      {
+        "name": "id",
+        "dataType": "uuid",
+        "isPrimaryKey": true,
+        "isNullable": false,
+        "defaultValue": "NULL",
+        "position": 1,
+        "grdIsinGrid": false,
+        "fnrIsinFormAdd": false,
+        "fedIsinFormUpd": false
+      },
+      {
+        "name": "titulo",
+        "dataType": "varchar",
+        "isPrimaryKey": false,
+        "isNullable": true,
+        "defaultValue": "NULL",
+        "position": 2,
+        "length": -5,
+        "grdIsinGrid": true,
+        "grdLabel": "Título",
+        "fnrIsinFormAdd": true,
+        "fnrLabel": "Título",
+        "fnrMandatory": "não",
+        "fnrReadonly": "não",
+        "fedIsinFormUpd": true,
+        "fedLabel": "Título",
+        "fedMandatory": "não",
+        "fedReadonly": "nunca"
+      }
+    ]
+  },
+  "message": "Fixture entity 'limites' — negative length and page size 0",
+  "timestamp": "2026-01-01T00:00:00.000Z"
+}

@@ -10,6 +10,15 @@ active flag") into a valid `json-files/<entity>.json` metadata file, validate
 it, and hand off to generation. The metadata file is the single source every
 Pollux generator consumes — author it, never hand-write generated code.
 
+
+## Generator resolution
+
+Commands below run from the generator root — resolve it in this order:
+1. a start-ui-web checkout the user is working in (full surface);
+2. the plugin's bundled snapshot at `${CLAUDE_PLUGIN_ROOT}/generator`
+   (standalone surface only — run `pnpm install` there once). From an empty
+   folder this is the default; state which root you are using.
+
 ## Preconditions
 
 - Running inside a checkout containing the `./pollux` CLI and `json-files/`.

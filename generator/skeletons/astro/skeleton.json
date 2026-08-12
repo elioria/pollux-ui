@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "version": "1.1.0",
+  "name": "astro",
+  "displayName": "Astro 5",
+  "framework": "astro",
+  "language": "typescript",
+  "status": "boilerplate",
+  "root": ".",
+  "packageManager": "pnpm@10.24.0",
+  "entrypoints": {
+    "layout": "src/layouts/Layout.astro",
+    "globalStyles": "src/styles/global.css",
+    "home": "src/pages/index.astro"
+  },
+  "designSystem": {
+    "tokens": "src/styles/tokens.css",
+    "display": "Montserrat",
+    "body": "Inter",
+    "tailwind": 4
+  },
+  "commands": {
+    "dev": "pnpm dev",
+    "build": "pnpm build",
+    "typecheck": "pnpm typecheck",
+    "test": "pnpm test"
+  },
+  "generatorSupport": {
+    "pollux": false,
+    "experimental": true,
+    "targetAdapter": {
+      "id": "astro-react",
+      "version": "0.1.0",
+      "capabilityLevel": "standalone-crud"
+    },
+    "notes": "EXPERIMENTAL Pollux target (SPEC-006): React-island CRUD over the standalone v2 API. Server output on Cloudflare Workers is mandatory (the same-origin proxy forwards credentials server-side); PKCE/BFF auth is deferred — the proxy uses the interim POLLUX_DEV_BEARER credential."
+  }
+}

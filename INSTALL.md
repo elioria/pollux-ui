@@ -2,18 +2,43 @@
 
 `pollux-ui` is a cross-model plugin: one neutral package (`pollux.plugin.json`)
 with native projections for **Claude Code** (`.claude-plugin/`) and **Codex**
-(`.codex-plugin/`), plus five shared Agent Skills under `skills/`.
+(`.codex-plugin/`), plus six shared Agent Skills under `skills/`.
 
 For a hands-on walkthrough of everything the plugin can do after installation,
 see **[GUIDE.md](./GUIDE.md)**.
+
+## Zero-to-app in an empty folder (nothing else needed)
+
+The repo now bundles a self-contained generator snapshot (`generator/`), so
+the plugin works with **no access to the start-ui-web source repository**:
+
+```bash
+mkdir my-pollux && cd my-pollux            # empty folder
+claude plugin marketplace add elioria/pollux-ui
+claude plugin install pollux-ui@pollux
+claude                                     # restart/open session
+```
+
+Then just ask: *"crie um app tanstack-start em ./meu-app"*. The skills
+resolve the generator automatically (your start-ui-web checkout if you have
+one, else the bundled `generator/` inside the installed plugin — the first
+use runs `pnpm install` there, whose only dependency is zod). Workspace
+creation also provisions the database automatically: `docker-compose.yml`
+with `pgvector/pgvector:pg17`, initdb `vector` extension, `DATABASE_URL` in
+`.env.example`.
+
+Bundled-generator surface: skeletons, workspace creation, entity authoring
++ validation, plan/generate/check-generated, mock v2 API, workspace matrix.
+In-repo surfaces (gen-entity/gen-all/Go backend) still need the full
+start-ui-web checkout. Details: `generator/README.md`.
 
 ## Requirements
 
 - Node.js >= 20, `pnpm`, and `git`
 - Claude Code >= 2.x (or Codex >= 0.147.0)
-- A checkout of the Pollux start-ui-web repository somewhere on disk — the
-  skills drive its `./pollux` CLI. The plugin itself carries only templates,
-  design tokens, references, and workflow skills.
+- OPTIONAL: a start-ui-web checkout, only for the in-repo surfaces
+  (gen-entity/gen-all/Go backend). Everything standalone works from the
+  bundled `generator/` snapshot — no checkout needed.
 
 ## Claude Code — install WITHOUT cloning (recommended)
 
@@ -52,7 +77,7 @@ Restart the session (or open a new one). The six skills become available:
 /plugin
 ```
 
-should list `pollux-ui 0.3.0` as installed. Then, from a session opened inside
+should list `pollux-ui 0.4.0` as installed. Then, from a session opened inside
 a start-ui-web checkout, ask e.g. *“which Pollux skeletons are available?”* —
 the `pollux-inspect` skill should trigger and run
 `./pollux list-skeletons --json`.

@@ -1,0 +1,59 @@
+{
+  "success": true,
+  "data": {
+    "name": "duplicado",
+    "dbName": "duplicado",
+    "gridTitle": "Duplicado",
+    "attributes": [
+      {
+        "name": "id",
+        "dataType": "uuid",
+        "isPrimaryKey": true,
+        "isNullable": false,
+        "defaultValue": "NULL",
+        "position": 1,
+        "grdIsinGrid": false,
+        "fnrIsinFormAdd": false,
+        "fedIsinFormUpd": false
+      },
+      {
+        "name": "nome",
+        "dataType": "char",
+        "isPrimaryKey": false,
+        "isNullable": true,
+        "defaultValue": "NULL",
+        "position": 2,
+        "grdIsinGrid": true,
+        "grdLabel": "Nome",
+        "fnrIsinFormAdd": true,
+        "fnrLabel": "Nome",
+        "fnrMandatory": "não",
+        "fnrReadonly": "não",
+        "fedIsinFormUpd": true,
+        "fedLabel": "Nome",
+        "fedMandatory": "não",
+        "fedReadonly": "nunca"
+      },
+      {
+        "name": "nome",
+        "dataType": "varchar",
+        "isPrimaryKey": false,
+        "isNullable": true,
+        "defaultValue": "NULL",
+        "position": 3,
+        "grdIsinGrid": true,
+        "grdLabel": "Nome (repetido)",
+        "fnrIsinFormAdd": true,
+        "fnrLabel": "Nome (repetido)",
+        "fnrMandatory": "não",
+        "fnrReadonly": "não",
+        "fedIsinFormUpd": true,
+        "fedLabel": "Nome (repetido)",
+        "fedMandatory": "não",
+        "fedReadonly": "nunca"
+      }
+    ]
+  },
+  "message": "Fixture entity 'duplicado' — duplicated attribute name",
+  "timestamp": "2026-01-01T00:00:00.000Z"
+}

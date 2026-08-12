@@ -1,0 +1,199 @@
+// Rota de listagem gerada — entidade '__ENTITY__' (/manager/__PLURAL__).
+//
+// URL search params são a única fonte de verdade do estado da lista (página,
+// tamanho, ordenação, busca e filtros): o loader relê a URL a cada navegação e
+// uma URL copiada/recarregada mostra a mesma lista. Durante uma navegação
+// pendente o estado exibido vem da URL de destino, então digitar em um filtro
+// nunca é apagado enquanto o loader roda. Mutações (exclusão) usam a action da
+// rota via fetcher e revalidam o loader sem recarregar o documento.
+import { useState } from 'react';
+import {
+  Link,
+  useLoaderData,
+  useNavigation,
+  useRevalidator,
+  useSearchParams,
+} from 'react-router';
+import type { ActionFunctionArgs, LoaderFunctionArgs } from 'react-router';
+
+import { CapabilityGate } from '../../../components/pollux/capability-gate';
+import { DataTable } from '../../../components/pollux/data-table';
+import { DeleteConfirm } from '../../../components/pollux/delete-confirm';
+import {
+  ErrorState,
+  ForbiddenState,
+  UnauthenticatedState,
+} from '../../../components/pollux/states';
+import { __ENTITY__Spec, type __PASCAL__Row } from '../../../generated/pollux/__ENTITY__/spec';
+import { usePolluxMutation } from '../../../lib/pollux/use-pollux-mutation';
+import type { ApiErrorShape } from '../../../lib/pollux/runtime/api-types';
+import { createEntityClient, newIdempotencyKey } from '../../../lib/pollux/runtime/client';
+import { errorMessages, uiLabels } from '../../../lib/pollux/runtime/errors-pt';
+import { parseListQuery, stringifyListQuery } from '../../../lib/pollux/runtime/query';
+
+const LIST_PATH = '/manager/__PLURAL__';
+
+// O loader/action chamam o proxy same-origin (app/routes/api.pollux.$.ts):
+// tokens e URL do upstream ficam exclusivamente no servidor.
+const serverClient = (request: Request) =>
+  createEntityClient<__PASCAL__Row>(__ENTITY__Spec, {
+    baseUrl: `${new URL(request.url).origin}/api/pollux`,
+    entity: '__ENTITY__',
+  });
+
+export function meta() {
+  return [{ title: __TITLE_LIST_JSON__ }];
+}
+
+export async function loader({ request }: LoaderFunctionArgs) {
+  const query = parseListQuery(new URL(request.url).searchParams, __ENTITY__Spec);
+  return serverClient(request).list(query, { signal: request.signal });
+}
+
+export async function action({ request }: ActionFunctionArgs) {
+  const payload = (await request.json()) as {
+    intent?: string;
+    id?: string;
+    idempotencyKey?: string;
+  };
+  if (payload.intent !== 'delete' || !payload.id || !payload.idempotencyKey) {
+    const error: ApiErrorShape = {
+      code: 'VALIDATION_FAILED',
+      message: errorMessages.VALIDATION_FAILED,
+      requestId: '',
+      retryable: false,
+    };
+    return { ok: false as const, error };
+  }
+  return serverClient(request).remove(payload.id, {
+    idempotencyKey: payload.idempotencyKey,
+  });
+}
+
+const actionLinkClass =
+  'rounded-md border border-border bg-background px-2.5 py-1 text-xs font-medium text-foreground hover:bg-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring';
+
+export default function __PASCAL__ListPage() {
+  const result = useLoaderData<typeof loader>();
+  const navigation = useNavigation();
+  const revalidator = useRevalidator();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const { mutate } = usePolluxMutation();
+  const [deleteTarget, setDeleteTarget] = useState<{
+    id: string;
+    subject: string;
+  } | null>(null);
+  const [deleteKey, setDeleteKey] = useState('');
+
+  // Estado pendente: durante a navegação disparada por um filtro/ordenação a
+  // URL de destino é a fonte de verdade — o input não "volta" ao valor antigo.
+  const pendingSearch = navigation.location
+    ? new URLSearchParams(navigation.location.search)
+    : null;
+  const query = parseListQuery(pendingSearch ?? searchParams, __ENTITY__Spec);
+  const refreshing = navigation.state === 'loading';
+
+  if (!result.ok) {
+    if (result.error.code === 'UNAUTHENTICATED') return <UnauthenticatedState />;
+    if (result.error.code === 'FORBIDDEN') return <ForbiddenState />;
+    return (
+      <ErrorState
+        error={result.error}
+        onRetry={
+          result.error.retryable ? () => revalidator.revalidate() : undefined
+        }
+      />
+    );
+  }
+  const { rows, totalRows, capabilities } = result.data;
+
+  return (
+    <div className="space-y-4">
+      <h2 className="font-display text-2xl font-semibold">
+        {__ENTITY__Spec.titles.list}
+      </h2>
+      <DataTable
+        spec={__ENTITY__Spec}
+        rows={rows}
+        totalRows={totalRows}
+        query={query}
+        onQueryChange={(next) =>
+          setSearchParams(stringifyListQuery(next, __ENTITY__Spec), {
+            replace: true,
+          })
+        }
+        capabilities={capabilities}
+        refreshing={refreshing}
+        toolbarActions={
+          <CapabilityGate capabilities={capabilities} require="create">
+            <Link
+              to={`${LIST_PATH}/new`}
+              className="rounded-md bg-primary px-3 py-1.5 text-sm font-medium text-primary-foreground hover:bg-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+            >
+              {uiLabels.create}
+            </Link>
+          </CapabilityGate>
+        }
+        renderRowActions={(row) => (
+          <div className="flex items-center justify-end gap-2">
+            <CapabilityGate capabilities={capabilities} require="update">
+              <Link
+                to={`${LIST_PATH}/${String(row.__PK__)}/edit`}
+                className={actionLinkClass}
+              >
+                {uiLabels.edit}
+              </Link>
+            </CapabilityGate>
+            <CapabilityGate capabilities={capabilities} require="delete">
+              <button
+                type="button"
+                onClick={() => {
+                  setDeleteTarget({
+                    id: String(row.__PK__),
+                    subject: String(row.__SUBJECT_FIELD__ ?? row.__PK__),
+                  });
+                  // Uma exclusão lógica = uma chave; retries reutilizam-na.
+                  setDeleteKey(newIdempotencyKey());
+                }}
+                className={`${actionLinkClass} text-destructive`}
+              >
+                {uiLabels.delete}
+              </button>
+            </CapabilityGate>
+          </div>
+        )}
+      />
+      <DeleteConfirm
+        open={deleteTarget !== null}
+        subject={deleteTarget?.subject}
+        onConfirm={() =>
+          mutate({
+            intent: 'delete',
+            id: deleteTarget?.id ?? '',
+            idempotencyKey: deleteKey,
+          })
+        }
+        onCancel={() => setDeleteTarget(null)}
+        onDeleted={() => {
+          setDeleteTarget(null);
+          // Revalidação in-place: o loader relê a lista sem recarregar a
+          // página e sem tocar nos filtros da URL.
+          revalidator.revalidate();
+        }}
+      />
+    </div>
+  );
+}
+
+export function ErrorBoundary() {
+  return (
+    <div className="rounded-lg border border-border bg-card p-8">
+      <h2 className="font-display text-xl font-semibold">
+        {uiLabels.errorTitle}
+      </h2>
+      <p className="mt-2 text-sm text-muted-foreground">
+        {errorMessages.INTERNAL}
+      </p>
+    </div>
+  );
+}

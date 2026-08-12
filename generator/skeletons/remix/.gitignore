@@ -1,0 +1,13 @@
+node_modules/
+
+# React Router / Vite
+/.react-router/
+/build/
+/dist/
+
+# Misc
+.DS_Store
+*.local
+.env
+.env.*
+!.env.example
