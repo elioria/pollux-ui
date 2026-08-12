@@ -95,9 +95,16 @@ const repoRoot = path.resolve(
   path.dirname(new URL(import.meta.url).pathname),
   '../..'
 );
-const dir = path.join(repoRoot, 'json-files');
+// --dir=<path> validates an external metadata directory (e.g. a user
+// project's pollux-metadata/ when the generator runs from the plugin's
+// bundled snapshot); default stays the checkout's json-files/.
+const argv = process.argv.slice(2);
+const dirFlag = argv.find((a) => a.startsWith('--dir='));
+const dir = dirFlag
+  ? path.resolve(dirFlag.slice('--dir='.length))
+  : path.join(repoRoot, 'json-files');
 
-const requested = process.argv.slice(2);
+const requested = argv.filter((a) => !a.startsWith('--'));
 const files = requested.length
   ? requested.map((e) => `${e.replace(/\.json$/, '')}.json`)
   : fs.readdirSync(dir).filter((f) => f.endsWith('.json'));

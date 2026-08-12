@@ -44,7 +44,14 @@ Derive from the user's description; only ask when genuinely ambiguous:
 
 ## Step 2 — Author the file
 
-Write `json-files/<name>.json` in the dbtool envelope:
+Metadata location depends on the generator root (see Generator
+resolution): in a start-ui-web checkout, write `json-files/<name>.json`;
+when using the plugin's bundled snapshot, write into the USER'S project at
+`./pollux-metadata/<name>.json` instead — the plugin cache is wiped on
+update, so user metadata must never live there — and pass
+`--metadata-dir=<abs path>` to every validate/plan/generate below.
+
+Write the file in the dbtool envelope:
 
 ```json
 {
@@ -113,7 +120,7 @@ its shape when unsure.
 ## Step 3 — Validate (loop until clean)
 
 ```bash
-./pollux validate <name> --json
+./pollux validate <name> [--metadata-dir=<dir>]
 ```
 
 Fix every reported issue and re-run. Then prove normalization end-to-end
@@ -136,7 +143,9 @@ Report per contract, then offer generation (pollux-generate-crud):
 2. **Validated** — validate output + plan summary (paths to be created).
 3. **Assumptions** — every field or behavior you inferred rather than was
    told (so the user can correct before generating).
-4. **Next** — `./pollux generate --workspace=<path> --entity=<name>` (or
+4. **Next** — `./pollux generate --workspace=<path> --entity=<name>`
+   (plus `--metadata-dir=<dir>` when the metadata lives in the user's
+   project) (or
    `./pollux gen-entity <name>` in-repo), and how to edit the metadata and
    regenerate.
 

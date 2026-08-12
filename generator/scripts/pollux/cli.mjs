@@ -635,8 +635,10 @@ const commands = {
 
   validate() {
     const targets = positional.slice(1);
+    const metadataDir = flag('metadata-dir');
     const result = run('node', [
       'scripts/pollux/validate-metadata.mjs',
+      ...(metadataDir ? [`--dir=${path.resolve(metadataDir)}`] : []),
       ...targets,
     ]);
     process.exit(result.status ?? 1);
@@ -879,7 +881,8 @@ const HELP = {
   'check-generated --workspace=<path>':
     'verify generated files against .pollux/generated.json (edits, pending journals)',
   'describe <entity>': 'field-level metadata summary for one entity',
-  'validate [entity...]': 'validate metadata (all entities by default)',
+  'validate [entity...] [--metadata-dir=<dir>]':
+    'validate metadata (json-files/ or an external dir)',
   'gen-entity <e> [--groups=..] [--renderer=go|node]':
     'regenerate one entity (default groups: page,serverpage,form-fields)',
   'gen-all [--renderer=go|node]': 'regenerate every valid entity (TS output)',

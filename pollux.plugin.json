@@ -64,8 +64,8 @@
       },
       "commands": [
         "./pollux list-entities --json",
-        "./pollux validate <entity> --json",
-        "./pollux plan --workspace=<path> --entity=<name> --json"
+        "./pollux validate <entity> [--metadata-dir=<dir>]",
+        "./pollux plan --workspace=<path> --entity=<name> [--metadata-dir=<dir>] --json"
       ],
       "description": "Author new Pollux entity metadata (json-files/<entity>.json) from a brief description of the intended app entity, validate it, and prepare it for generation.",
       "environment": ["node >= 20"],
@@ -93,7 +93,8 @@
       "mode": "create",
       "postconditions": [
         "metadata file passes ./pollux validate with zero errors",
-        "assumptions inferred from the brief are reported explicitly"
+        "assumptions inferred from the brief are reported explicitly",
+        "bundled-generator mode: metadata written to the user's project (pollux-metadata/), never into the plugin cache"
       ],
       "preconditions": [
         "running inside a checkout that contains the ./pollux CLI and json-files/",
@@ -381,10 +382,10 @@
     }
   ],
   "source": {
-    "builtAt": "2026-08-12T10:39:35.414Z",
+    "builtAt": "2026-08-12T12:08:33.277Z",
     "dirty": true,
     "repository": "https://github.com/elioria/start-ui-web",
-    "revision": "59c7e4e31a78c7d4be71988429106a717b9535fa"
+    "revision": "5adf4350cc1a40fd9d494ef943c421edec3414c5"
   },
-  "version": "0.4.0"
+  "version": "0.4.1"
 }
