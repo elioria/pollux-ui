@@ -648,7 +648,7 @@ const commands = {
     const entity = positional[1];
     if (!entity)
       fail(
-        'usage: pollux gen-entity <entity> [--groups=page,serverpage,form-fields] [--renderer=go|node]'
+        'usage: pollux gen-entity <entity> [--groups=page,serverpage,form-fields,data-table-components,debug] [--renderer=go|node]'
       );
     const { valid } = readEntities();
     if (!valid.includes(entity)) fail(`unknown or stub entity '${entity}'`);
@@ -661,7 +661,10 @@ const commands = {
     if (check.status !== 0)
       fail(`metadata validation failed:\n${check.stdout}${check.stderr}`);
 
-    const groups = (flag('groups') ?? 'page,serverpage,form-fields').split(',');
+    const groups = (
+      flag('groups') ??
+      'page,serverpage,form-fields,data-table-components,debug'
+    ).split(',');
     const renderer = flag('renderer') ?? 'go';
     const bin = renderer === 'node' ? 'hygen' : '.cache/gohygen';
     if (renderer !== 'node' && !fs.existsSync(bin)) {
@@ -884,7 +887,7 @@ const HELP = {
   'validate [entity...] [--metadata-dir=<dir>]':
     'validate metadata (json-files/ or an external dir)',
   'gen-entity <e> [--groups=..] [--renderer=go|node]':
-    'regenerate one entity (default groups: page,serverpage,form-fields)',
+    'regenerate one entity (default groups: page,serverpage,form-fields,data-table-components,debug)',
   'gen-all [--renderer=go|node]': 'regenerate every valid entity (TS output)',
   'gen-backend --backend=typescript|go':
     'backend selector (go -> generated/pollux-go)',
