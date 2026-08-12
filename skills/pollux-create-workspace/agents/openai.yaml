@@ -1,0 +1,4 @@
+interface:
+  display_name: "Pollux Create Workspace"
+  short_description: "Scaffold a new app from a Pollux skeleton."
+  default_prompt: "Use $pollux-create-workspace to scaffold a new Pollux app workspace from a registered skeleton."

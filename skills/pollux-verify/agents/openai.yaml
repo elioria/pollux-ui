@@ -1,0 +1,4 @@
+interface:
+  display_name: "Pollux Verify"
+  short_description: "Run Pollux drift, package, and target gates."
+  default_prompt: "Use $pollux-verify to run the Pollux package, drift, and target verification gates for recent changes."

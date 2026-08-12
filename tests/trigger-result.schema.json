@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "selectedSkills": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "mutated": { "type": "boolean" },
+    "questionAsked": { "type": "boolean" },
+    "references": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "outputFields": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  },
+  "required": [
+    "selectedSkills",
+    "mutated",
+    "questionAsked",
+    "references",
+    "outputFields"
+  ]
+}

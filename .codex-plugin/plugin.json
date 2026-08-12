@@ -1,0 +1,30 @@
+{
+  "author": {
+    "name": "elioria"
+  },
+  "description": "Use Pollux templates and layouts through safe, verified generator workflows.",
+  "interface": {
+    "capabilities": [
+      "pollux.inspect",
+      "pollux.workspace.create",
+      "pollux.layout.apply",
+      "pollux.crud.generate",
+      "pollux.verify"
+    ],
+    "category": "developer-tools",
+    "defaultPrompt": [
+      "Inspect this repository and identify the applicable Pollux workflow.",
+      "Create a Pollux workspace from a registered skeleton.",
+      "Verify Pollux package, generator, and target drift."
+    ],
+    "developerName": "elioria",
+    "displayName": "Pollux UI",
+    "longDescription": "Inspect, scaffold, apply layouts, generate CRUD surfaces, and verify Pollux projects through canonical repository workflows.",
+    "shortDescription": "Safe, verified Pollux generator and layout workflows."
+  },
+  "license": "MIT",
+  "name": "pollux-ui",
+  "repository": "https://github.com/elioria/start-ui-web",
+  "skills": "./skills/",
+  "version": "0.1.0"
+}

@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "version": "1.1.0",
+  "name": "nextjs",
+  "displayName": "Next.js App Router",
+  "framework": "nextjs-app-router",
+  "language": "typescript",
+  "status": "boilerplate",
+  "root": ".",
+  "packageManager": "pnpm@10.24.0",
+  "entrypoints": {
+    "layout": "app/layout.tsx",
+    "globalStyles": "app/globals.css",
+    "home": "app/page.tsx",
+    "components": "components/"
+  },
+  "designSystem": {
+    "tokens": "app/tokens.css",
+    "sharedTokensCompatible": true,
+    "display": "Montserrat",
+    "body": "Inter",
+    "tailwind": 4
+  },
+  "commands": {
+    "dev": "pnpm dev",
+    "build": "pnpm build",
+    "lint": "pnpm lint",
+    "typecheck": "pnpm typecheck",
+    "test": "pnpm test"
+  },
+  "generatorSupport": {
+    "pollux": false,
+    "experimental": true,
+    "targetAdapter": {
+      "id": "nextjs",
+      "version": "0.1.0",
+      "capabilityLevel": "standalone-crud",
+      "modelVersion": "1"
+    },
+    "notes": "EXPERIMENTAL Pollux target (SPEC-004): generation is allowed, but the skeleton is not promoted to full support until the SPEC-007 CI matrix is green."
+  }
+}

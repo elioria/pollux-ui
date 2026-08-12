@@ -1,0 +1,334 @@
+{
+  "schemaVersion": 1,
+  "name": "pollux-ui",
+  "version": "0.1.0",
+  "description": "Use Pollux templates and layouts through safe, verified generator workflows.",
+  "license": "MIT",
+  "repository": "https://github.com/elioria/start-ui-web",
+  "publisher": {
+    "name": "elioria",
+    "url": "https://github.com/elioria"
+  },
+  "interface": {
+    "displayName": "Pollux UI",
+    "shortDescription": "Safe, verified Pollux generator and layout workflows.",
+    "longDescription": "Inspect, scaffold, apply layouts, generate CRUD surfaces, and verify Pollux projects through canonical repository workflows.",
+    "category": "developer-tools",
+    "developerName": "elioria",
+    "defaultPrompt": [
+      "Inspect this repository and identify the applicable Pollux workflow.",
+      "Create a Pollux workspace from a registered skeleton.",
+      "Verify Pollux package, generator, and target drift."
+    ]
+  },
+  "skillUi": {
+    "pollux-inspect": {
+      "shortDescription": "Inspect Pollux surfaces, targets, and support status.",
+      "defaultPrompt": "Use $pollux-inspect to report which Pollux generator surface, target, and verification gates apply to this repository."
+    },
+    "pollux-create-workspace": {
+      "shortDescription": "Scaffold a new app from a Pollux skeleton.",
+      "defaultPrompt": "Use $pollux-create-workspace to scaffold a new Pollux app workspace from a registered skeleton."
+    },
+    "pollux-apply-layout": {
+      "shortDescription": "Apply the Pollux admin shell to a target.",
+      "defaultPrompt": "Use $pollux-apply-layout to apply the Pollux admin shell and design tokens to a framework target."
+    },
+    "pollux-generate-crud": {
+      "shortDescription": "Regenerate Pollux CRUD pages and backends.",
+      "defaultPrompt": "Use $pollux-generate-crud to regenerate Pollux CRUD output from json-files metadata through the canonical CLI."
+    },
+    "pollux-verify": {
+      "shortDescription": "Run Pollux drift, package, and target gates.",
+      "defaultPrompt": "Use $pollux-verify to run the Pollux package, drift, and target verification gates for recent changes."
+    }
+  },
+  "compatibility": {
+    "polluxCli": "^0.2.0",
+    "metadataModel": "1",
+    "resourceCatalog": "0.1.0",
+    "skillContract": "0.1.0",
+    "hosts": {
+      "codex": ">=0.1.0",
+      "claudeCode": ">=1.0.0"
+    }
+  },
+  "capabilities": [
+    {
+      "id": "pollux.inspect",
+      "description": "Read-only discovery of repositories, generator surfaces, skeleton provenance, targets, support status, and required resource IDs.",
+      "mode": "inspect",
+      "skills": ["pollux-inspect"],
+      "resources": [
+        "generator.pollux-cli",
+        "templates.legacy-typescript",
+        "templates.go-backend",
+        "templates.standalone-shared",
+        "layout.start-ui-vite",
+        "design.tokens"
+      ],
+      "generatorSurfaces": [
+        "manager",
+        "generated",
+        "generated-server",
+        "go-backend",
+        "standalone"
+      ],
+      "frameworkTargets": ["start-ui-vite", "nextjs", "react-router", "astro"],
+      "minSupportStatus": "reference-only",
+      "commands": [
+        "./pollux list-entities --json",
+        "./pollux list-templates --json",
+        "./pollux list-skeletons --json",
+        "./pollux describe-skeleton <name> --json",
+        "./pollux describe <entity> --json",
+        "./pollux doctor --json",
+        "./pollux check-generated --workspace=<path>"
+      ],
+      "environment": ["node >= 20", "git"],
+      "authority": {
+        "writesFilesystem": false,
+        "spawnsSubprocess": true,
+        "networkAccess": false
+      },
+      "preconditions": [
+        "running inside a checkout that contains the ./pollux CLI"
+      ],
+      "postconditions": [
+        "no filesystem writes",
+        "structured proposed operation with exact affected paths"
+      ],
+      "failureCodes": [
+        "WORKFLOW_PRECONDITION_FAILED",
+        "CAPABILITY_UNSUPPORTED",
+        "PATH_UNSAFE"
+      ]
+    },
+    {
+      "id": "pollux.workspace.create",
+      "description": "Create a fresh application workspace from a registered boilerplate skeleton through staged, atomic copy with provenance.",
+      "mode": "create",
+      "skills": ["pollux-create-workspace"],
+      "resources": [
+        "generator.pollux-cli",
+        "layout.nextjs",
+        "layout.react-router",
+        "layout.astro",
+        "design.tokens"
+      ],
+      "generatorSurfaces": ["standalone"],
+      "frameworkTargets": ["nextjs", "react-router", "astro"],
+      "minSupportStatus": "experimental",
+      "commands": [
+        "./pollux list-skeletons --json",
+        "./pollux describe-skeleton <name> --json",
+        "./pollux new-workspace <skeleton> --dir=<path> [--name=<pkg>]"
+      ],
+      "environment": ["node >= 20", "pnpm"],
+      "authority": {
+        "writesFilesystem": true,
+        "spawnsSubprocess": true,
+        "networkAccess": false
+      },
+      "preconditions": [
+        "explicit user request naming skeleton and destination",
+        "destination is empty or does not exist",
+        "skeleton status is boilerplate (not reference-only)"
+      ],
+      "postconditions": [
+        ".pollux/workspace.json provenance exists",
+        "install and verification commands reported"
+      ],
+      "failureCodes": [
+        "SKELETON_UNKNOWN",
+        "DESTINATION_NOT_EMPTY",
+        "PACKAGE_NAME_INVALID",
+        "WORKFLOW_PRECONDITION_FAILED",
+        "PATH_UNSAFE"
+      ]
+    },
+    {
+      "id": "pollux.layout.apply",
+      "description": "Apply or port a Pollux admin shell (sidebar, topbar, tokens, content canvas) into a supported framework target.",
+      "mode": "modify",
+      "skills": ["pollux-apply-layout"],
+      "resources": [
+        "layout.start-ui-vite",
+        "layout.nextjs",
+        "layout.react-router",
+        "layout.astro",
+        "design.tokens"
+      ],
+      "generatorSurfaces": ["manager", "standalone"],
+      "frameworkTargets": ["start-ui-vite", "nextjs", "react-router", "astro"],
+      "minSupportStatus": "experimental",
+      "commands": [
+        "./pollux describe-skeleton <name> --json",
+        "./pollux validate-skeletons"
+      ],
+      "environment": ["node >= 20", "pnpm"],
+      "authority": {
+        "writesFilesystem": true,
+        "spawnsSubprocess": true,
+        "networkAccess": false
+      },
+      "preconditions": [
+        "explicit user request with exact target",
+        "target layout resource is packaged and hash-verified",
+        "affected files classified as handwritten-host, generator-owned, or generated"
+      ],
+      "postconditions": [
+        "light/dark themes verified after reload",
+        "responsive shell, keyboard navigation, and target build verified",
+        "no framework-crossing imports"
+      ],
+      "failureCodes": [
+        "TARGET_EXPERIMENTAL",
+        "CAPABILITY_UNSUPPORTED",
+        "PATH_UNSAFE",
+        "WORKFLOW_PRECONDITION_FAILED",
+        "VERIFICATION_FAILED"
+      ]
+    },
+    {
+      "id": "pollux.crud.generate",
+      "description": "Regenerate legacy TypeScript pages, standalone Go backend, or standalone framework CRUD from json-files metadata through the canonical Pollux CLI.",
+      "mode": "modify",
+      "skills": ["pollux-generate-crud"],
+      "resources": [
+        "generator.pollux-cli",
+        "templates.legacy-typescript",
+        "templates.go-backend",
+        "templates.standalone-shared",
+        "templates.target.nextjs",
+        "templates.target.react-router",
+        "templates.target.astro-react"
+      ],
+      "generatorSurfaces": [
+        "generated",
+        "generated-server",
+        "go-backend",
+        "standalone"
+      ],
+      "frameworkTargets": ["start-ui-vite", "nextjs", "react-router", "astro"],
+      "minSupportStatus": "supported",
+      "commands": [
+        "./pollux validate [entity...]",
+        "./pollux gen-entity <entity> [--groups=..] [--renderer=go|node]",
+        "./pollux gen-all [--renderer=go|node]",
+        "./pollux gen-backend --backend=typescript|go",
+        "./pollux fmt",
+        "./pollux check",
+        "./pollux plan --workspace=<path> --entity=<name> --json",
+        "./pollux generate --workspace=<path> --entity=<name> | --all"
+      ],
+      "environment": ["node >= 20", "pnpm", "gohygen (go backend only)"],
+      "authority": {
+        "writesFilesystem": true,
+        "spawnsSubprocess": true,
+        "networkAccess": false
+      },
+      "preconditions": [
+        "metadata validation passes before writes",
+        "explicit backend/target selection; no silent defaults",
+        "generated paths are clean or user approved --accept-generated-overwrite for named files"
+      ],
+      "postconditions": [
+        "canonical fmt pipeline ran (oxlint --fix, then oxfmt)",
+        "drift gate ./pollux check passes",
+        "generated ownership manifest updated by the CLI only"
+      ],
+      "failureCodes": [
+        "PLAN_INVALID",
+        "TARGET_UNSUPPORTED",
+        "TARGET_MISMATCH",
+        "OWNERSHIP_CONFLICT",
+        "GENERATED_EDITED",
+        "GENERATED_PATH_DIRTY",
+        "WORKFLOW_PRECONDITION_FAILED",
+        "VERIFICATION_FAILED"
+      ]
+    },
+    {
+      "id": "pollux.verify",
+      "description": "Run plugin package validation, source-drift checks, generator drift gates, and target verification matrices matched to changed resources.",
+      "mode": "verify",
+      "skills": ["pollux-verify"],
+      "resources": [
+        "generator.pollux-cli",
+        "templates.legacy-typescript",
+        "templates.go-backend",
+        "templates.standalone-shared",
+        "design.tokens"
+      ],
+      "generatorSurfaces": [
+        "manager",
+        "generated",
+        "generated-server",
+        "go-backend",
+        "standalone"
+      ],
+      "frameworkTargets": ["start-ui-vite", "nextjs", "react-router", "astro"],
+      "minSupportStatus": "supported",
+      "commands": [
+        "node plugins/pollux-ui/scripts/validate-package.mjs",
+        "node plugins/pollux-ui/scripts/verify-source-drift.mjs",
+        "./pollux validate",
+        "./pollux test --suite=unit",
+        "./pollux test --suite=selection",
+        "./pollux test --suite=go",
+        "./pollux check",
+        "./pollux validate-skeletons",
+        "node scripts/pollux/test/workspace-matrix.mjs --target nextjs",
+        "node scripts/pollux/test/workspace-matrix.mjs --target remix",
+        "node scripts/pollux/test/workspace-matrix.mjs --target astro"
+      ],
+      "environment": ["node >= 20", "pnpm"],
+      "authority": {
+        "writesFilesystem": false,
+        "spawnsSubprocess": true,
+        "networkAccess": false
+      },
+      "preconditions": [
+        "package snapshot built from the current source revision"
+      ],
+      "postconditions": [
+        "layered verification result separating package, host, generator, and runtime gates"
+      ],
+      "failureCodes": [
+        "PLUGIN_MANIFEST_INVALID",
+        "RESOURCE_CATALOG_INVALID",
+        "RESOURCE_DRIFT",
+        "HOST_PROJECTION_INVALID",
+        "VERIFICATION_FAILED"
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "id": "pollux-inspect",
+      "path": "./skills/pollux-inspect/SKILL.md",
+      "description": "Inspect Pollux generators, templates, layouts, skeletons, and support status before generation or layout work. Use when a user asks what Pollux can generate, whether a Next.js, React Router, or Astro target is production-ready or supported, which target or template applies, or what checks are required."
+    },
+    {
+      "id": "pollux-create-workspace",
+      "path": "./skills/pollux-create-workspace/SKILL.md",
+      "description": "Create a new application workspace from a registered Pollux skeleton (Next.js, React Router/Remix, Astro). Use when a user asks to scaffold, bootstrap, or start a new Pollux app from a skeleton."
+    },
+    {
+      "id": "pollux-apply-layout",
+      "path": "./skills/pollux-apply-layout/SKILL.md",
+      "description": "Apply or port the Pollux admin layout — sidebar, topbar, design tokens, theme behavior, content canvas — into a supported framework target. Use when a user asks to reuse the Pollux shell, port the layout, or sync design tokens."
+    },
+    {
+      "id": "pollux-generate-crud",
+      "path": "./skills/pollux-generate-crud/SKILL.md",
+      "description": "Generate or regenerate Pollux CRUD pages and backends from json-files entity metadata — legacy TypeScript /generated pages, the Go backend, or standalone Next.js/React Router/Astro targets. Use when entity metadata or templates change."
+    },
+    {
+      "id": "pollux-verify",
+      "path": "./skills/pollux-verify/SKILL.md",
+      "description": "Verify Pollux work: plugin package conformance, resource and generator drift, target build/test gates, and release readiness. Use when a user asks to check drift, validate the plugin, or prove a Pollux change is safe."
+    }
+  ]
+}

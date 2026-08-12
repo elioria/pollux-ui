@@ -1,0 +1,4 @@
+interface:
+  display_name: "Pollux Inspect"
+  short_description: "Inspect Pollux surfaces, targets, and support status."
+  default_prompt: "Use $pollux-inspect to report which Pollux generator surface, target, and verification gates apply to this repository."

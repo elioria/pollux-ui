@@ -1,0 +1,1638 @@
+{
+  "catalogDigest": "4cb0133357195534ed7cf744552263a082cb2836f2ee8d837bc78ba60ec7f936",
+  "resources": [
+    {
+      "dependencies": [
+        "generator.pollux-cli"
+      ],
+      "entrypoints": [
+        "./pollux gen-entity",
+        "./pollux gen-all"
+      ],
+      "files": [
+        {
+          "bytes": 2894,
+          "path": "templates/legacy-typescript/form-fields/add-form-fields.ejs.t",
+          "sha256": "73debf8acfa35cda4bd27a4afc07adf2b9fa4f0f20bafedd23a51dda4f6b3dd1",
+          "sourcePath": "_templates/pollux/form-fields/add-form-fields.ejs.t"
+        },
+        {
+          "bytes": 2244,
+          "path": "templates/legacy-typescript/form-fields/edit-form-fields.ejs.t",
+          "sha256": "ff27fdc977ed36aa234387db9666c38d21fef48ff0daf00a8033e61ad383045a",
+          "sourcePath": "_templates/pollux/form-fields/edit-form-fields.ejs.t"
+        },
+        {
+          "bytes": 1154,
+          "path": "templates/legacy-typescript/form-fields/help-txts.ejs.t",
+          "sha256": "32a51a0de6e7c165b15d31b1c5085d62d19d4b44a86d0a221f4d0db3a6087b83",
+          "sourcePath": "_templates/pollux/form-fields/help-txts.ejs.t"
+        },
+        {
+          "bytes": 10862,
+          "path": "templates/legacy-typescript/page/actions/entityActions.ejs.t",
+          "sha256": "70f6d7bd597d482207a9cbf35a9594a6c60d8e79eed0c439da6d9fbe3e116368",
+          "sourcePath": "_templates/pollux/page/actions/entityActions.ejs.t"
+        },
+        {
+          "bytes": 17990,
+          "path": "templates/legacy-typescript/page/components/add-data-table-dialog.ejs.t",
+          "sha256": "57c08d4a4ae07993fd300d32a4209e39c2a492fd8e514d930ea97b39ae8e3bdf",
+          "sourcePath": "_templates/pollux/page/components/add-data-table-dialog.ejs.t"
+        },
+        {
+          "bytes": 2990,
+          "path": "templates/legacy-typescript/page/components/delete-data-table-dialog.ejs.t",
+          "sha256": "216b5d2ec22286c49707f2c2d6e8d3d361bcd5f8b7bcb13504467a52b0ed9a1b",
+          "sourcePath": "_templates/pollux/page/components/delete-data-table-dialog.ejs.t"
+        },
+        {
+          "bytes": 3283,
+          "path": "templates/legacy-typescript/page/components/delete-multiple-entity-models-dialog.ejs.t",
+          "sha256": "bf965f9ecfcd318a2b05a7750daf7d3b60e52f4d83b09371fdd9a057305dd0b7",
+          "sourcePath": "_templates/pollux/page/components/delete-multiple-entity-models-dialog.ejs.t"
+        },
+        {
+          "bytes": 20205,
+          "path": "templates/legacy-typescript/page/components/edit-data-table-dialog.ejs.t",
+          "sha256": "da5e620e6c3f6c329aa34d23636e3ca582e9835997c10c28b48b46963d6c2163",
+          "sourcePath": "_templates/pollux/page/components/edit-data-table-dialog.ejs.t"
+        },
+        {
+          "bytes": 6444,
+          "path": "templates/legacy-typescript/page/data-table-components/columns.ejs.t",
+          "sha256": "ee78540f441998f1e4cbdba317ab0b32d645181d7698178371b40e2fc70d12d1",
+          "sourcePath": "_templates/pollux/page/data-table-components/columns.ejs.t"
+        },
+        {
+          "bytes": 2509,
+          "path": "templates/legacy-typescript/page/data-table-components/data-table-column-header.ejs.t",
+          "sha256": "19baedc9b55066c66a24d57a5c278119e7316446932d276a0b8d87194a714d5f",
+          "sourcePath": "_templates/pollux/page/data-table-components/data-table-column-header.ejs.t"
+        },
+        {
+          "bytes": 5244,
+          "path": "templates/legacy-typescript/page/data-table-components/data-table-faceted-filter.ejs.t",
+          "sha256": "51f8b618abccfb64e14cbeaa906bb17d79a1100cf176745646adb32e689c5de9",
+          "sourcePath": "_templates/pollux/page/data-table-components/data-table-faceted-filter.ejs.t"
+        },
+        {
+          "bytes": 6173,
+          "path": "templates/legacy-typescript/page/data-table-components/data-table-pagination.ejs.t",
+          "sha256": "203be47bd18d23500d7bd7abd30af6298686fab6881f88a26a2e1ad8187d261a",
+          "sourcePath": "_templates/pollux/page/data-table-components/data-table-pagination.ejs.t"
+        },
+        {
+          "bytes": 3302,
+          "path": "templates/legacy-typescript/page/data-table-components/data-table-row-actions.ejs.t",
+          "sha256": "6b319eca237054c4a693db860b6dfe8cfa0e585beb2ef62997be6300bdb93c38",
+          "sourcePath": "_templates/pollux/page/data-table-components/data-table-row-actions.ejs.t"
+        },
+        {
+          "bytes": 26004,
+          "path": "templates/legacy-typescript/page/data-table-components/data-table-toolbar.ejs.t",
+          "sha256": "c8768f593db7e9a8864ba5d2e8b3811778964c5ccf8e9a3b578fcd74669ad6be",
+          "sourcePath": "_templates/pollux/page/data-table-components/data-table-toolbar.ejs.t"
+        },
+        {
+          "bytes": 4361,
+          "path": "templates/legacy-typescript/page/data-table-components/data-table-view-options.ejs.t",
+          "sha256": "2dad4c13a052e4d9ef8c1bc8f68082ce12451af1d775e460e59d751575016420",
+          "sourcePath": "_templates/pollux/page/data-table-components/data-table-view-options.ejs.t"
+        },
+        {
+          "bytes": 8006,
+          "path": "templates/legacy-typescript/page/data-table-components/data-table.ejs.t",
+          "sha256": "8a6cbe5a5a868a6110ed86ff2523dd951cea9b46a611a13569a5431c68ecf0d0",
+          "sourcePath": "_templates/pollux/page/data-table-components/data-table.ejs.t"
+        },
+        {
+          "bytes": 4056,
+          "path": "templates/legacy-typescript/page/data-table-components/force-column-width.ejs.t",
+          "sha256": "fd807dfa58abc52ee4439157a132e2a815f8b629933392889493635012cb1387",
+          "sourcePath": "_templates/pollux/page/data-table-components/force-column-width.ejs.t"
+        },
+        {
+          "bytes": 1264,
+          "path": "templates/legacy-typescript/page/page.ejs.t",
+          "sha256": "06f96691fc23d5a9a97d2f928bbcfd799e6d8485e3825afa7263b2e338535fbe",
+          "sourcePath": "_templates/pollux/page/page.ejs.t"
+        },
+        {
+          "bytes": 1397,
+          "path": "templates/legacy-typescript/page/route.ejs.t",
+          "sha256": "7767870be13314e128d7fd7ab67b2591b2397b16ced9fac596850b928d7f6003",
+          "sourcePath": "_templates/pollux/page/route.ejs.t"
+        },
+        {
+          "bytes": 2763,
+          "path": "templates/legacy-typescript/partials/add-dialog-form-fields.ejs.t",
+          "sha256": "2a15366b77e141a4ac4b9cc2cb82e3331fa99274550d82bec6b5dee6ff332956",
+          "sourcePath": "_templates/pollux/partials/add-dialog-form-fields.ejs.t"
+        },
+        {
+          "bytes": 1905,
+          "path": "templates/legacy-typescript/partials/add-dialog-form-on-submit.ejs.t",
+          "sha256": "ea6ce045c6ee24879acbe1b79c34df741024a5fcd99fc40a723c6b53a0ce5809",
+          "sourcePath": "_templates/pollux/partials/add-dialog-form-on-submit.ejs.t"
+        },
+        {
+          "bytes": 3246,
+          "path": "templates/legacy-typescript/partials/add-dialog-form-schema-zod.ejs.t",
+          "sha256": "966bf68f409de9e2a28fead23a9ab49cf59930b300ea8415b5826025b7895335",
+          "sourcePath": "_templates/pollux/partials/add-dialog-form-schema-zod.ejs.t"
+        },
+        {
+          "bytes": 1472,
+          "path": "templates/legacy-typescript/partials/add-dialog-form-use-form.ejs.t",
+          "sha256": "071490a4e13073403aeed89afb3cb54b01836a5773b512510f7cc3c5f29961ce",
+          "sourcePath": "_templates/pollux/partials/add-dialog-form-use-form.ejs.t"
+        },
+        {
+          "bytes": 1832,
+          "path": "templates/legacy-typescript/partials/add-edit-dialog-form-help-txts.ejs.t",
+          "sha256": "2409040c3af6a38d6f35b6a027d5333b2462da369c1121252223bcf1c1a42afe",
+          "sourcePath": "_templates/pollux/partials/add-edit-dialog-form-help-txts.ejs.t"
+        },
+        {
+          "bytes": 1005,
+          "path": "templates/legacy-typescript/partials/add-form-fields-boolean.ejs.t",
+          "sha256": "a8afcf7a5361dea5f0f70997196de160a6c0c92a76907394f3367f8d60edb4fe",
+          "sourcePath": "_templates/pollux/partials/add-form-fields-boolean.ejs.t"
+        },
+        {
+          "bytes": 899,
+          "path": "templates/legacy-typescript/partials/add-form-fields-date.ejs.t",
+          "sha256": "331380468bc5791a660ec633e4e98bde3b8422ccd10519ae4cd8fffb06bf2726",
+          "sourcePath": "_templates/pollux/partials/add-form-fields-date.ejs.t"
+        },
+        {
+          "bytes": 1016,
+          "path": "templates/legacy-typescript/partials/add-form-fields-float.ejs.t",
+          "sha256": "2fd1dfc6368c3889d516a42d85fb3eafd046a0ac8bfb982c139eb4e324f491c4",
+          "sourcePath": "_templates/pollux/partials/add-form-fields-float.ejs.t"
+        },
+        {
+          "bytes": 1042,
+          "path": "templates/legacy-typescript/partials/add-form-fields-integer.ejs.t",
+          "sha256": "4db660feaae7abeabf3e704178bd108f6acb7de910a7d8137ea423a46d612398",
+          "sourcePath": "_templates/pollux/partials/add-form-fields-integer.ejs.t"
+        },
+        {
+          "bytes": 965,
+          "path": "templates/legacy-typescript/partials/add-form-fields-numeric.ejs.t",
+          "sha256": "effec4986bdc3eee0639ed2bf74df5fc8bc8b3a8bf428a20dfdeaa8cb9cada7e",
+          "sourcePath": "_templates/pollux/partials/add-form-fields-numeric.ejs.t"
+        },
+        {
+          "bytes": 863,
+          "path": "templates/legacy-typescript/partials/add-form-fields-string.ejs.t",
+          "sha256": "4b462eadd26ba244bc630eb3b0f0ec24cf24bc0ad9c5b630fc61a47219f4e431",
+          "sourcePath": "_templates/pollux/partials/add-form-fields-string.ejs.t"
+        },
+        {
+          "bytes": 1386,
+          "path": "templates/legacy-typescript/partials/add-form-fields-text.ejs.t",
+          "sha256": "277d8d1b10b9b413cbc1b2e985026a7a2889b26663d1a706e699956d024ebee1",
+          "sourcePath": "_templates/pollux/partials/add-form-fields-text.ejs.t"
+        },
+        {
+          "bytes": 899,
+          "path": "templates/legacy-typescript/partials/add-form-fields-time.ejs.t",
+          "sha256": "849eed0af23a6fb34b4902bb8ca750e4eae022e736df392038e69e93476c22bb",
+          "sourcePath": "_templates/pollux/partials/add-form-fields-time.ejs.t"
+        },
+        {
+          "bytes": 909,
+          "path": "templates/legacy-typescript/partials/add-form-fields-timestamp.ejs.t",
+          "sha256": "ab5f5a12a712330d1a0f0bcf0d0adcf672d64242ff0fd3dfb22bc6cf19702dba",
+          "sourcePath": "_templates/pollux/partials/add-form-fields-timestamp.ejs.t"
+        },
+        {
+          "bytes": 870,
+          "path": "templates/legacy-typescript/partials/add-form-fields-uuid.ejs.t",
+          "sha256": "0615b47ff668117e28e598c509760da9972209795f5e7019f2b459c5c0dcbeb9",
+          "sourcePath": "_templates/pollux/partials/add-form-fields-uuid.ejs.t"
+        },
+        {
+          "bytes": 1313,
+          "path": "templates/legacy-typescript/partials/add-form-fields-varchar.ejs.t",
+          "sha256": "19ff3d3818834956e180dd44c53650861df55d409fe85cb3feacc70f526e2823",
+          "sourcePath": "_templates/pollux/partials/add-form-fields-varchar.ejs.t"
+        },
+        {
+          "bytes": 1940,
+          "path": "templates/legacy-typescript/partials/data-table-columns-boolean.ejs.t",
+          "sha256": "d9cdc41079d4c892b3b3dd9324e297650241b750b506deefb9bdac57f5d69bfa",
+          "sourcePath": "_templates/pollux/partials/data-table-columns-boolean.ejs.t"
+        },
+        {
+          "bytes": 3242,
+          "path": "templates/legacy-typescript/partials/data-table-columns-date.ejs.t",
+          "sha256": "9b8767ee40911c35a1609a0629a8259a7c302c1e1f4ead1f5e4fb05eb416e4f1",
+          "sourcePath": "_templates/pollux/partials/data-table-columns-date.ejs.t"
+        },
+        {
+          "bytes": 2789,
+          "path": "templates/legacy-typescript/partials/data-table-columns-datetime.ejs.t",
+          "sha256": "4541e335995ccafd1ce4886ef7760ea983f6bed6e0608528f082be53954f52f3",
+          "sourcePath": "_templates/pollux/partials/data-table-columns-datetime.ejs.t"
+        },
+        {
+          "bytes": 2700,
+          "path": "templates/legacy-typescript/partials/data-table-columns-float.ejs.t",
+          "sha256": "947cd534472048621bd030ed4921529a6830a2e4ba4af541a8eeb1ff6127eddb",
+          "sourcePath": "_templates/pollux/partials/data-table-columns-float.ejs.t"
+        },
+        {
+          "bytes": 622,
+          "path": "templates/legacy-typescript/partials/data-table-columns-id.ejs.t",
+          "sha256": "0dfb0f193394dad10cb5a6d428245326b5048fb8678a4b7aeff7c435187f459b",
+          "sourcePath": "_templates/pollux/partials/data-table-columns-id.ejs.t"
+        },
+        {
+          "bytes": 2797,
+          "path": "templates/legacy-typescript/partials/data-table-columns-integer.ejs.t",
+          "sha256": "721ce3385839b1be12f6c04c61e0972376fb12c241ee1454135d53c001f0147c",
+          "sourcePath": "_templates/pollux/partials/data-table-columns-integer.ejs.t"
+        },
+        {
+          "bytes": 2587,
+          "path": "templates/legacy-typescript/partials/data-table-columns-numeric.ejs.t",
+          "sha256": "ce05727d838a0ba59b98db14f80f6405eb308d08a1939bfb78472d6571ec10b8",
+          "sourcePath": "_templates/pollux/partials/data-table-columns-numeric.ejs.t"
+        },
+        {
+          "bytes": 2272,
+          "path": "templates/legacy-typescript/partials/data-table-columns-string.ejs.t",
+          "sha256": "98a95787d5633247dbc5b48b930249a1d8c31971966f4444a8a73554ec6debd8",
+          "sourcePath": "_templates/pollux/partials/data-table-columns-string.ejs.t"
+        },
+        {
+          "bytes": 2229,
+          "path": "templates/legacy-typescript/partials/data-table-columns-text.ejs.t",
+          "sha256": "54d152fb7c5dcd595dcee000bfae8f501d4f5776d2f66f14711a60ea9f7d86a1",
+          "sourcePath": "_templates/pollux/partials/data-table-columns-text.ejs.t"
+        },
+        {
+          "bytes": 2113,
+          "path": "templates/legacy-typescript/partials/edit-dialog-form-fields.ejs.t",
+          "sha256": "e0d0a582929f2daa17aab14d8ebdad9299cc759d61c4f888e8c54ba56ef0c7bc",
+          "sourcePath": "_templates/pollux/partials/edit-dialog-form-fields.ejs.t"
+        },
+        {
+          "bytes": 2279,
+          "path": "templates/legacy-typescript/partials/edit-dialog-form-on-submit.ejs.t",
+          "sha256": "ee400a9c3dd73bff4d09d562577b58b962b9a59851585b087d6be842fde52b44",
+          "sourcePath": "_templates/pollux/partials/edit-dialog-form-on-submit.ejs.t"
+        },
+        {
+          "bytes": 1714,
+          "path": "templates/legacy-typescript/partials/edit-dialog-form-reset-values.ejs.t",
+          "sha256": "9f6ce81c9d61c2771de3ee5081543e1e5201d99efb2f97eb48b8b04cebc6e862",
+          "sourcePath": "_templates/pollux/partials/edit-dialog-form-reset-values.ejs.t"
+        },
+        {
+          "bytes": 3246,
+          "path": "templates/legacy-typescript/partials/edit-dialog-form-schema-zod.ejs.t",
+          "sha256": "966bf68f409de9e2a28fead23a9ab49cf59930b300ea8415b5826025b7895335",
+          "sourcePath": "_templates/pollux/partials/edit-dialog-form-schema-zod.ejs.t"
+        },
+        {
+          "bytes": 2037,
+          "path": "templates/legacy-typescript/partials/edit-dialog-form-use-form.ejs.t",
+          "sha256": "3847f281700952af48f1c154b9188a49763a6198f7e22dae82d7edf8ea9985ec",
+          "sourcePath": "_templates/pollux/partials/edit-dialog-form-use-form.ejs.t"
+        },
+        {
+          "bytes": 1033,
+          "path": "templates/legacy-typescript/partials/edit-form-field-boolean.ejs.t",
+          "sha256": "94a43c53f9981bab0c5a768ca48b7bd8a872d2a623e6975310b8fca6fb690409",
+          "sourcePath": "_templates/pollux/partials/edit-form-field-boolean.ejs.t"
+        },
+        {
+          "bytes": 816,
+          "path": "templates/legacy-typescript/partials/edit-form-field-date.ejs.t",
+          "sha256": "bdde95aa7b8e8f614d7320949c303d2c9cf45b14be64caf574f54d63afbc7c59",
+          "sourcePath": "_templates/pollux/partials/edit-form-field-date.ejs.t"
+        },
+        {
+          "bytes": 959,
+          "path": "templates/legacy-typescript/partials/edit-form-field-float.ejs.t",
+          "sha256": "5107498fda7308ed6eef90027b598489cf040c81e2b03d1cefb807ec094a7ed7",
+          "sourcePath": "_templates/pollux/partials/edit-form-field-float.ejs.t"
+        },
+        {
+          "bytes": 1399,
+          "path": "templates/legacy-typescript/partials/edit-form-field-integer.ejs.t",
+          "sha256": "25f2bda5ffb6ee6d000c83b528dcf6e7ff73d543b92a7d16e421d90fcf875de2",
+          "sourcePath": "_templates/pollux/partials/edit-form-field-integer.ejs.t"
+        },
+        {
+          "bytes": 1087,
+          "path": "templates/legacy-typescript/partials/edit-form-field-numeric.ejs.t",
+          "sha256": "96f041c8f692684b3be3d394e80aad420ffe14f3d08dd6f3df9a688e3447e28b",
+          "sourcePath": "_templates/pollux/partials/edit-form-field-numeric.ejs.t"
+        },
+        {
+          "bytes": 790,
+          "path": "templates/legacy-typescript/partials/edit-form-field-string.ejs.t",
+          "sha256": "db1d7801bfaab70cc5c7836021eed9b5072f7f02ea5ca8c686e0a5bd5e5697ff",
+          "sourcePath": "_templates/pollux/partials/edit-form-field-string.ejs.t"
+        },
+        {
+          "bytes": 1303,
+          "path": "templates/legacy-typescript/partials/edit-form-field-text.ejs.t",
+          "sha256": "5d4a079a0b6b2858f7438296f05909d1834fc106021431337eb192d660279d4e",
+          "sourcePath": "_templates/pollux/partials/edit-form-field-text.ejs.t"
+        },
+        {
+          "bytes": 923,
+          "path": "templates/legacy-typescript/partials/edit-form-field-time.ejs.t",
+          "sha256": "de5a76482fd169d51300f44f9a39a055be63d8ca90277d932d4674c67099b266",
+          "sourcePath": "_templates/pollux/partials/edit-form-field-time.ejs.t"
+        },
+        {
+          "bytes": 939,
+          "path": "templates/legacy-typescript/partials/edit-form-field-timestamp.ejs.t",
+          "sha256": "9d73d8e5ee81e6d515517a16adc0788a2de3d2a42839b3cf2a919e33f7fccbd7",
+          "sourcePath": "_templates/pollux/partials/edit-form-field-timestamp.ejs.t"
+        },
+        {
+          "bytes": 917,
+          "path": "templates/legacy-typescript/partials/edit-form-field-uuid.ejs.t",
+          "sha256": "4d9b03e1df5fb6b6c21569323cb1059ec50c09dbeede66b7f060ef6d67ed3a71",
+          "sourcePath": "_templates/pollux/partials/edit-form-field-uuid.ejs.t"
+        },
+        {
+          "bytes": 1194,
+          "path": "templates/legacy-typescript/partials/edit-form-field-varchar.ejs.t",
+          "sha256": "6913ff7c05bbd0b4d94798952d782f34ab7e4a0037820ece7d9e860b99e2eec8",
+          "sourcePath": "_templates/pollux/partials/edit-form-field-varchar.ejs.t"
+        },
+        {
+          "bytes": 6023,
+          "path": "templates/legacy-typescript/serverpage/actions.ejs.t",
+          "sha256": "11f144731ca012ad1a74c706182e8c007d2119511cc29a53e1d4270ba5de19fc",
+          "sourcePath": "_templates/pollux/serverpage/actions.ejs.t"
+        },
+        {
+          "bytes": 1002,
+          "path": "templates/legacy-typescript/serverpage/data-table-skeleton.ejs.t",
+          "sha256": "d35e449da323a5be2918eeafd6857d58e01ce607363ce6051b10ed1b69eb18dc",
+          "sourcePath": "_templates/pollux/serverpage/data-table-skeleton.ejs.t"
+        },
+        {
+          "bytes": 11083,
+          "path": "templates/legacy-typescript/serverpage/data-table.ejs.t",
+          "sha256": "fe3f38d46d9d9dba74c57111c40fd3c534453462d10a95d379063d59c50bf7bf",
+          "sourcePath": "_templates/pollux/serverpage/data-table.ejs.t"
+        },
+        {
+          "bytes": 3893,
+          "path": "templates/legacy-typescript/serverpage/route.ejs.t",
+          "sha256": "eda75c3bb1f52eaa3ad2bbbfc2f3719d3ae27b7752bedce277c799bbf47d5ec6",
+          "sourcePath": "_templates/pollux/serverpage/route.ejs.t"
+        },
+        {
+          "bytes": 1015,
+          "path": "templates/legacy-typescript/serverpage/server-page.ejs.t",
+          "sha256": "dc73361b0190f384479a8b5edf2c4a648a5de6938439934ab70c1c4c9400ba1f",
+          "sourcePath": "_templates/pollux/serverpage/server-page.ejs.t"
+        }
+      ],
+      "frameworkTargets": [
+        "start-ui-vite"
+      ],
+      "generatorSurfaces": [
+        "generated",
+        "generated-server"
+      ],
+      "id": "templates.legacy-typescript",
+      "kind": "template-tree",
+      "mutationPolicy": "render",
+      "ownership": "canonical-source",
+      "packagePath": "./resources/templates/legacy-typescript",
+      "sha256": "7b43d7a0bad75568035b3674f8cbd5ff30ec6fe2ddfe383cc7b4db0dc461b8a2",
+      "sourcePaths": [
+        "_templates/pollux/form-fields",
+        "_templates/pollux/page",
+        "_templates/pollux/partials",
+        "_templates/pollux/serverpage"
+      ],
+      "sourceRevision": "948d476fa1f51a00fab5af83e190ef020cd7e24a",
+      "supportStatus": "supported",
+      "verification": [
+        "./pollux check",
+        "./pollux test --suite=unit"
+      ]
+    },
+    {
+      "dependencies": [
+        "generator.pollux-cli"
+      ],
+      "entrypoints": [
+        "./pollux gen-backend --backend=go"
+      ],
+      "files": [
+        {
+          "bytes": 6534,
+          "path": "templates/go-backend/go-entity/handler-test.ejs.t",
+          "sha256": "6c1e47942dd4fac85e7d407f49a75099963df4ee4bf65c698b926d76b40d29d3",
+          "sourcePath": "_templates/pollux/go-entity/handler-test.ejs.t"
+        },
+        {
+          "bytes": 10919,
+          "path": "templates/go-backend/go-entity/handler-v2-test.ejs.t",
+          "sha256": "8de471cae2dbe36a976a6cac6863c45ecd39a95e1031f91d60b8f2bbb8e6d612",
+          "sourcePath": "_templates/pollux/go-entity/handler-v2-test.ejs.t"
+        },
+        {
+          "bytes": 8799,
+          "path": "templates/go-backend/go-entity/handler-v2.ejs.t",
+          "sha256": "f94fbd22fd5eb79b6789f49cd653000be81f7e35478fa6e44470870fb33e6901",
+          "sourcePath": "_templates/pollux/go-entity/handler-v2.ejs.t"
+        },
+        {
+          "bytes": 3846,
+          "path": "templates/go-backend/go-entity/handler.ejs.t",
+          "sha256": "0ab250a1f77bccee9db729307ff2b81df0a3259e58b2b69fcd92fa6c89c43d2a",
+          "sourcePath": "_templates/pollux/go-entity/handler.ejs.t"
+        },
+        {
+          "bytes": 2217,
+          "path": "templates/go-backend/go-entity/model.ejs.t",
+          "sha256": "e8ebc6d78e806c0f9288f91150ffe7ab9a87f7de7ebd55bc63987170ded5dce8",
+          "sourcePath": "_templates/pollux/go-entity/model.ejs.t"
+        },
+        {
+          "bytes": 1572,
+          "path": "templates/go-backend/go-entity/repository-pg-test.ejs.t",
+          "sha256": "5e1336749d9adb3ecb03314e65f6ac5a975823b8bf47e23124ac7b1362ea1a48",
+          "sourcePath": "_templates/pollux/go-entity/repository-pg-test.ejs.t"
+        },
+        {
+          "bytes": 5201,
+          "path": "templates/go-backend/go-entity/repository.ejs.t",
+          "sha256": "bedbf050b7cb0dcfc0c3dd48507b2ec4d0620e6e8cc286452f22594f9315e1b2",
+          "sourcePath": "_templates/pollux/go-entity/repository.ejs.t"
+        },
+        {
+          "bytes": 2588,
+          "path": "templates/go-backend/go-entity/routes.ejs.t",
+          "sha256": "4e336f3db9806d4c1eef469ed13c44b0ab0af74c19ff2260b14773a034516123",
+          "sourcePath": "_templates/pollux/go-entity/routes.ejs.t"
+        },
+        {
+          "bytes": 7493,
+          "path": "templates/go-backend/go-entity/service.ejs.t",
+          "sha256": "410f115f7e189dba0bbf989107fe87bfe157a52d0fadb2bc8d750bd27ad6cf42",
+          "sourcePath": "_templates/pollux/go-entity/service.ejs.t"
+        },
+        {
+          "bytes": 15250,
+          "path": "templates/go-backend/go-entity/v2.ejs.t",
+          "sha256": "d59ccccc1e11e81c1a473af84571c8883db1935e6118d130a9b98a2457581605",
+          "sourcePath": "_templates/pollux/go-entity/v2.ejs.t"
+        },
+        {
+          "bytes": 11633,
+          "path": "templates/go-backend/go-entity/validation.ejs.t",
+          "sha256": "232afc88f094acc8cce37054cd6be0b817a52bfcc8d13e900f37a1a44ee07248",
+          "sourcePath": "_templates/pollux/go-entity/validation.ejs.t"
+        },
+        {
+          "bytes": 4355,
+          "path": "templates/go-backend/go-service/app.ejs.t",
+          "sha256": "d7e477ab3c7530c52c4fad92709f6beb23ea312ad0ff42303d7d47190192e71d",
+          "sourcePath": "_templates/pollux/go-service/app.ejs.t"
+        },
+        {
+          "bytes": 1457,
+          "path": "templates/go-backend/go-service/audit.ejs.t",
+          "sha256": "0dbbe036a7268128b264b7b161a3e9e56cad373bda3739cc0e7fb9312acc9989",
+          "sourcePath": "_templates/pollux/go-service/audit.ejs.t"
+        },
+        {
+          "bytes": 7892,
+          "path": "templates/go-backend/go-service/auth-client-test.ejs.t",
+          "sha256": "d610267cf9993fdf1a33c9846bd0c3b6c394ca89adff0787a1c5b20fdc9b1afb",
+          "sourcePath": "_templates/pollux/go-service/auth-client-test.ejs.t"
+        },
+        {
+          "bytes": 9084,
+          "path": "templates/go-backend/go-service/auth-client.ejs.t",
+          "sha256": "9fb711e7b43ace9850b738b3d15847cbdc0f98d12d08d79d124c17367cac1df4",
+          "sourcePath": "_templates/pollux/go-service/auth-client.ejs.t"
+        },
+        {
+          "bytes": 1724,
+          "path": "templates/go-backend/go-service/authz.ejs.t",
+          "sha256": "bcd517bb88d7d0a8f0baadb3b82a031cc5328039974020d7e33f6082c464e7de",
+          "sourcePath": "_templates/pollux/go-service/authz.ejs.t"
+        },
+        {
+          "bytes": 1408,
+          "path": "templates/go-backend/go-service/config-test.ejs.t",
+          "sha256": "6406f573d7e24205fb1fc8758e6e490d6767214a4c28278964cd3c0cb3d5428d",
+          "sourcePath": "_templates/pollux/go-service/config-test.ejs.t"
+        },
+        {
+          "bytes": 4178,
+          "path": "templates/go-backend/go-service/config.ejs.t",
+          "sha256": "25f19f89a4f122f72f82edfff4a3a390a0957de49b24002d5d7ec4dc7fb3294e",
+          "sourcePath": "_templates/pollux/go-service/config.ejs.t"
+        },
+        {
+          "bytes": 1384,
+          "path": "templates/go-backend/go-service/database.ejs.t",
+          "sha256": "a98b5822321adc6e9daa3b32fdec71fe244c8a96691a1eccca91272779e1587d",
+          "sourcePath": "_templates/pollux/go-service/database.ejs.t"
+        },
+        {
+          "bytes": 399,
+          "path": "templates/go-backend/go-service/dockerfile.ejs.t",
+          "sha256": "872eafab4fea647c5a4c8cce5bd3dee2092f8acd2bb95888dbe65775319f197d",
+          "sourcePath": "_templates/pollux/go-service/dockerfile.ejs.t"
+        },
+        {
+          "bytes": 327,
+          "path": "templates/go-backend/go-service/go-mod.ejs.t",
+          "sha256": "f4ab4e4ba7709275eb777ea599b8f01a29838eddf3d96c23e900a3a5a892d9eb",
+          "sourcePath": "_templates/pollux/go-service/go-mod.ejs.t"
+        },
+        {
+          "bytes": 2116,
+          "path": "templates/go-backend/go-service/httperr-test.ejs.t",
+          "sha256": "b12ba6cdddeacf7b66fd7597791af2a5ff417fddf341346e0be0d28136e27eac",
+          "sourcePath": "_templates/pollux/go-service/httperr-test.ejs.t"
+        },
+        {
+          "bytes": 4423,
+          "path": "templates/go-backend/go-service/httperr.ejs.t",
+          "sha256": "0e74eb7d28faaa4e38dc7c8bb914dc707a89c90e65c04fc811b8b08f32bf1ebd",
+          "sourcePath": "_templates/pollux/go-service/httperr.ejs.t"
+        },
+        {
+          "bytes": 8605,
+          "path": "templates/go-backend/go-service/idempotency-pg-test.ejs.t",
+          "sha256": "1e89224bcf88cd629710313f952c2c5758607e108acbf7d6430b0c350ffe5962",
+          "sourcePath": "_templates/pollux/go-service/idempotency-pg-test.ejs.t"
+        },
+        {
+          "bytes": 2439,
+          "path": "templates/go-backend/go-service/idempotency-test.ejs.t",
+          "sha256": "4dd20e01f4634b110b3e97dbaa6570a97292462ebb8bbeaab577ef49f5749d40",
+          "sourcePath": "_templates/pollux/go-service/idempotency-test.ejs.t"
+        },
+        {
+          "bytes": 9860,
+          "path": "templates/go-backend/go-service/idempotency.ejs.t",
+          "sha256": "e6e8cee7d54db114aa9be132da21405959b213079d78b1fc9907a111df094224",
+          "sourcePath": "_templates/pollux/go-service/idempotency.ejs.t"
+        },
+        {
+          "bytes": 556,
+          "path": "templates/go-backend/go-service/main.ejs.t",
+          "sha256": "08c3aec137775ba22cc93f7a686d51370160323094890476132f1598d64510d5",
+          "sourcePath": "_templates/pollux/go-service/main.ejs.t"
+        },
+        {
+          "bytes": 258,
+          "path": "templates/go-backend/go-service/makefile.ejs.t",
+          "sha256": "37e345c58198e421dfaafc7340eea8d8359a5e9d2540c8bb96ccbaa472a48e05",
+          "sourcePath": "_templates/pollux/go-service/makefile.ejs.t"
+        },
+        {
+          "bytes": 2032,
+          "path": "templates/go-backend/go-service/middleware-access-log.ejs.t",
+          "sha256": "4205822d25584a9b22ef9c55da0a8af8ee4eb4b16c8798f7e2ea1757154c25b8",
+          "sourcePath": "_templates/pollux/go-service/middleware-access-log.ejs.t"
+        },
+        {
+          "bytes": 989,
+          "path": "templates/go-backend/go-service/middleware-recovery.ejs.t",
+          "sha256": "c947aabbbea868224a2a7628714afac054c82256c4f560373608ed62aa3361ff",
+          "sourcePath": "_templates/pollux/go-service/middleware-recovery.ejs.t"
+        },
+        {
+          "bytes": 783,
+          "path": "templates/go-backend/go-service/middleware-request-id-test.ejs.t",
+          "sha256": "0a923584d171859f0bc30a741698cdcf5f8244f49bf0039dfa6a6fd022d56819",
+          "sourcePath": "_templates/pollux/go-service/middleware-request-id-test.ejs.t"
+        },
+        {
+          "bytes": 1046,
+          "path": "templates/go-backend/go-service/middleware-request-id.ejs.t",
+          "sha256": "c6c264869f5b1069a6f1a788d5680fc6f0cf104b4107707a9f803aed0da36907",
+          "sourcePath": "_templates/pollux/go-service/middleware-request-id.ejs.t"
+        },
+        {
+          "bytes": 552,
+          "path": "templates/go-backend/go-service/middleware-timeout.ejs.t",
+          "sha256": "752afa039f15daf8d746baa7af02d501dd79ebd5fa6f31c9300d99817809598e",
+          "sourcePath": "_templates/pollux/go-service/middleware-timeout.ejs.t"
+        },
+        {
+          "bytes": 4007,
+          "path": "templates/go-backend/go-service/readme.ejs.t",
+          "sha256": "a926765168686a4210d46c46a77a1684c804b2b891206c843a57679521ff02d4",
+          "sourcePath": "_templates/pollux/go-service/readme.ejs.t"
+        },
+        {
+          "bytes": 1226,
+          "path": "templates/go-backend/go-service/response.ejs.t",
+          "sha256": "c42014ff96fa65b0e17cb99ebfb2ad90c50aad51b8c96a47f705061f9fdab0e3",
+          "sourcePath": "_templates/pollux/go-service/response.ejs.t"
+        },
+        {
+          "bytes": 1286,
+          "path": "templates/go-backend/go-service/server.ejs.t",
+          "sha256": "5d67b7556aac5d8e22278d01733ff61af2ae315f5cb5268150fa1b04aec8ca60",
+          "sourcePath": "_templates/pollux/go-service/server.ejs.t"
+        },
+        {
+          "bytes": 1141,
+          "path": "templates/go-backend/go-service/strictjson-test.ejs.t",
+          "sha256": "7e9ff59ef3341bd963c8bb5066b18910bc78dad85cf21ca110e76d0f54f891ca",
+          "sourcePath": "_templates/pollux/go-service/strictjson-test.ejs.t"
+        },
+        {
+          "bytes": 1257,
+          "path": "templates/go-backend/go-service/strictjson.ejs.t",
+          "sha256": "485912b35238d210c71116bcc63e6ac16374e9ecf864ae2245db6ded837efbe4",
+          "sourcePath": "_templates/pollux/go-service/strictjson.ejs.t"
+        },
+        {
+          "bytes": 4430,
+          "path": "templates/go-backend/go-service/v2-authz.ejs.t",
+          "sha256": "6a6d9f25fe22863ae4c26fd4130fc3e38755d423ea42e386417a8025ff98e50e",
+          "sourcePath": "_templates/pollux/go-service/v2-authz.ejs.t"
+        },
+        {
+          "bytes": 1828,
+          "path": "templates/go-backend/go-service/v2-body.ejs.t",
+          "sha256": "8b6a4b487347142c9c739343c609a1d19c494676bde4d9100c6425df13f47e71",
+          "sourcePath": "_templates/pollux/go-service/v2-body.ejs.t"
+        },
+        {
+          "bytes": 3679,
+          "path": "templates/go-backend/go-service/v2-query-test.ejs.t",
+          "sha256": "b58c09193a005066199d6e075c3dd5ecd38dd1b3a8fb06f5a3ad62bf3dd9ef37",
+          "sourcePath": "_templates/pollux/go-service/v2-query-test.ejs.t"
+        },
+        {
+          "bytes": 4881,
+          "path": "templates/go-backend/go-service/v2-query.ejs.t",
+          "sha256": "30994bd61a47f27555e8a3dd649557e4a882719c0354978703f47c9faf1562af",
+          "sourcePath": "_templates/pollux/go-service/v2-query.ejs.t"
+        },
+        {
+          "bytes": 2434,
+          "path": "templates/go-backend/go-service/v2-respond.ejs.t",
+          "sha256": "986cd071f2c4d0a5b071034d1abd708e44163862780ed54b2604630cc4fe1647",
+          "sourcePath": "_templates/pollux/go-service/v2-respond.ejs.t"
+        }
+      ],
+      "frameworkTargets": [],
+      "generatorSurfaces": [
+        "go-backend"
+      ],
+      "id": "templates.go-backend",
+      "kind": "template-tree",
+      "mutationPolicy": "render",
+      "ownership": "canonical-source",
+      "packagePath": "./resources/templates/go-backend",
+      "sha256": "b035ddb91ea904731c8e16a3d3d9809c13184a1f7fd05151c5363400ba648757",
+      "sourcePaths": [
+        "_templates/pollux/go-entity",
+        "_templates/pollux/go-service"
+      ],
+      "sourceRevision": "948d476fa1f51a00fab5af83e190ef020cd7e24a",
+      "supportStatus": "supported",
+      "verification": [
+        "./pollux test --suite=go",
+        "./pollux test --suite=selection"
+      ]
+    },
+    {
+      "dependencies": [],
+      "entrypoints": [
+        "./pollux generate --workspace=<path> --entity=<name>"
+      ],
+      "files": [
+        {
+          "bytes": 8285,
+          "path": "templates/standalone-shared/shared/README.md",
+          "sha256": "6856de185eb4ee45ac9bd3685e2ea133dae06f382092ee447042531d1ce88515",
+          "sourcePath": "_templates/pollux-targets/shared/README.md"
+        },
+        {
+          "bytes": 3872,
+          "path": "templates/standalone-shared/shared/runtime/api-types.ts",
+          "sha256": "7c34e911895356b1f18771d352e2893466a849690470379ab214054a0fdfb54a",
+          "sourcePath": "_templates/pollux-targets/shared/runtime/api-types.ts"
+        },
+        {
+          "bytes": 30832,
+          "path": "templates/standalone-shared/shared/runtime/bff-core.ts",
+          "sha256": "67146789bf2358baade6e7a2ef57f2d2aba027b25b5c1edb5b88ca1f5c87b66e",
+          "sourcePath": "_templates/pollux-targets/shared/runtime/bff-core.ts"
+        },
+        {
+          "bytes": 8971,
+          "path": "templates/standalone-shared/shared/runtime/client.ts",
+          "sha256": "711d6c8da0ed430e2c3883fadd78b78b3ac0afe917fbf59674527f78bd87857f",
+          "sourcePath": "_templates/pollux-targets/shared/runtime/client.ts"
+        },
+        {
+          "bytes": 6969,
+          "path": "templates/standalone-shared/shared/runtime/codecs.ts",
+          "sha256": "8b539c53891401dea9134244e2b641749d0345e00bbf6dcef13ca9828553651a",
+          "sourcePath": "_templates/pollux-targets/shared/runtime/codecs.ts"
+        },
+        {
+          "bytes": 4405,
+          "path": "templates/standalone-shared/shared/runtime/errors-pt.ts",
+          "sha256": "d5308949eea456a9667fd30eff7a6c69663154727d0f7aa82be3e9c85b214ab0",
+          "sourcePath": "_templates/pollux-targets/shared/runtime/errors-pt.ts"
+        },
+        {
+          "bytes": 5452,
+          "path": "templates/standalone-shared/shared/runtime/query.ts",
+          "sha256": "42d85b443e851b8f7c341f04b89b1e2ddfb5c39e8f396682850d2f93173336e3",
+          "sourcePath": "_templates/pollux-targets/shared/runtime/query.ts"
+        },
+        {
+          "bytes": 949,
+          "path": "templates/standalone-shared/shared/ui/capability-gate.tsx",
+          "sha256": "84a2c886d6d08b7fe6dc489ef103656b0b41ffd90939e87df7bcc01d0be2a74a",
+          "sourcePath": "_templates/pollux-targets/shared/ui/capability-gate.tsx"
+        },
+        {
+          "bytes": 11659,
+          "path": "templates/standalone-shared/shared/ui/data-table.tsx",
+          "sha256": "9c46a8a062bf78e385b74b82fc5c8301355cf78f7a7e1af085eaefdaaca913b1",
+          "sourcePath": "_templates/pollux-targets/shared/ui/data-table.tsx"
+        },
+        {
+          "bytes": 4350,
+          "path": "templates/standalone-shared/shared/ui/delete-confirm.tsx",
+          "sha256": "2902e925b24091032d842587e39d73257c843d5b54c3d78c0d2da1d469b5612f",
+          "sourcePath": "_templates/pollux-targets/shared/ui/delete-confirm.tsx"
+        },
+        {
+          "bytes": 9093,
+          "path": "templates/standalone-shared/shared/ui/entity-form.tsx",
+          "sha256": "1c357fea9cbd40b5b4654b4e3084c31934c0d134431aeaff7f733296e8882539",
+          "sourcePath": "_templates/pollux-targets/shared/ui/entity-form.tsx"
+        },
+        {
+          "bytes": 4460,
+          "path": "templates/standalone-shared/shared/ui/states.tsx",
+          "sha256": "8d7f0d3537dcc2c0416e8a55c0dfd7535a0ae4e0bd74b65860f48088ce63e101",
+          "sourcePath": "_templates/pollux-targets/shared/ui/states.tsx"
+        }
+      ],
+      "frameworkTargets": [
+        "nextjs",
+        "react-router",
+        "astro"
+      ],
+      "generatorSurfaces": [
+        "standalone"
+      ],
+      "id": "templates.standalone-shared",
+      "kind": "template-tree",
+      "mutationPolicy": "render",
+      "ownership": "canonical-source",
+      "packagePath": "./resources/templates/standalone-shared",
+      "sha256": "69bcd9cb06e3e9d244b862bdf33d8aeca24052f649c39d2d077fc6ad5ed04376",
+      "sourcePaths": [
+        "_templates/pollux-targets/shared"
+      ],
+      "sourceRevision": "948d476fa1f51a00fab5af83e190ef020cd7e24a",
+      "supportStatus": "experimental",
+      "verification": [
+        "./pollux test --suite=targets"
+      ]
+    },
+    {
+      "dependencies": [
+        "templates.standalone-shared"
+      ],
+      "entrypoints": [
+        "./pollux generate --target=nextjs --workspace=<path>"
+      ],
+      "files": [
+        {
+          "bytes": 11505,
+          "path": "templates/target/nextjs/nextjs/entity-templates.mjs",
+          "sha256": "39336320476d69ca422c30c851ee5413e5479c2b442bef59428141e14c7e4ed4",
+          "sourcePath": "_templates/pollux-targets/nextjs/entity-templates.mjs"
+        },
+        {
+          "bytes": 3525,
+          "path": "templates/target/nextjs/nextjs/README.md",
+          "sha256": "332faeed97b7a6dcc0bd5b53ad81fc45ed4067230acb429def0ffac4b809ad17",
+          "sourcePath": "_templates/pollux-targets/nextjs/README.md"
+        },
+        {
+          "bytes": 1960,
+          "path": "templates/target/nextjs/nextjs/static/app/api/pollux/auth-route.ts",
+          "sha256": "464a7c944b800be72734eb51f6c44a1dbdfe4c11f587d0ce59b71e472063b01b",
+          "sourcePath": "_templates/pollux-targets/nextjs/static/app/api/pollux/auth-route.ts"
+        },
+        {
+          "bytes": 10746,
+          "path": "templates/target/nextjs/nextjs/static/app/api/pollux/proxy-route.ts",
+          "sha256": "e59477626810d949114099c390c39953d5aa1ca8f357e09cf3e26f7cbb2aa342",
+          "sourcePath": "_templates/pollux-targets/nextjs/static/app/api/pollux/proxy-route.ts"
+        },
+        {
+          "bytes": 1699,
+          "path": "templates/target/nextjs/nextjs/static/components/pollux/next/entity-create-form.tsx",
+          "sha256": "64f950b702fc5b40909ebbd9003521a7c66abdcaf891c1f17bd3a3716825483a",
+          "sourcePath": "_templates/pollux-targets/nextjs/static/components/pollux/next/entity-create-form.tsx"
+        },
+        {
+          "bytes": 1723,
+          "path": "templates/target/nextjs/nextjs/static/components/pollux/next/entity-edit-form.tsx",
+          "sha256": "ca5e8fa1c630e42ef72a0ad6c74ee21d1b642112b7b679fdeabf4dff37e98115",
+          "sourcePath": "_templates/pollux-targets/nextjs/static/components/pollux/next/entity-edit-form.tsx"
+        },
+        {
+          "bytes": 4936,
+          "path": "templates/target/nextjs/nextjs/static/components/pollux/next/entity-table.tsx",
+          "sha256": "c82e06f7038274537270b7d5878571ebdc13ae4254e06397c40606317ccada7d",
+          "sourcePath": "_templates/pollux-targets/nextjs/static/components/pollux/next/entity-table.tsx"
+        },
+        {
+          "bytes": 2243,
+          "path": "templates/target/nextjs/nextjs/static/lib/pollux/server/data.ts",
+          "sha256": "0de0295cf22b65ecd4a4d01e8eb7d6f14cb8175885d90df91abff9c7c91eef77",
+          "sourcePath": "_templates/pollux-targets/nextjs/static/lib/pollux/server/data.ts"
+        },
+        {
+          "bytes": 2358,
+          "path": "templates/target/nextjs/nextjs/static/lib/pollux/server/env.ts",
+          "sha256": "2877431714188a70c3a28512e1d0776d8e953261cd7fecf531c044946415d861",
+          "sourcePath": "_templates/pollux-targets/nextjs/static/lib/pollux/server/env.ts"
+        }
+      ],
+      "frameworkTargets": [
+        "nextjs"
+      ],
+      "generatorSurfaces": [
+        "standalone"
+      ],
+      "id": "templates.target.nextjs",
+      "kind": "template-tree",
+      "mutationPolicy": "render",
+      "ownership": "canonical-source",
+      "packagePath": "./resources/templates/target/nextjs",
+      "sha256": "5dbb10ae43146b8d165628ab32d4496837e97c9fe9dc26cfaf767289f3373fb4",
+      "sourcePaths": [
+        "_templates/pollux-targets/nextjs"
+      ],
+      "sourceRevision": "948d476fa1f51a00fab5af83e190ef020cd7e24a",
+      "supportStatus": "experimental",
+      "verification": [
+        "node scripts/pollux/test/workspace-matrix.mjs --target nextjs"
+      ]
+    },
+    {
+      "dependencies": [
+        "templates.standalone-shared"
+      ],
+      "entrypoints": [
+        "./pollux generate --target=react-router --workspace=<path>"
+      ],
+      "files": [
+        {
+          "bytes": 5148,
+          "path": "templates/target/react-router/react-router/README.md",
+          "sha256": "af746fbc7836bc8b03f9035429547da7eaf8b73311f6d756a0c2b2e9b51cdc16",
+          "sourcePath": "_templates/pollux-targets/react-router/README.md"
+        },
+        {
+          "bytes": 11461,
+          "path": "templates/target/react-router/react-router/workspace/api-proxy.ts",
+          "sha256": "e9d53c13318e8aa49d456689eca7d81832d3d05d4eaac787da7fededc80d60db",
+          "sourcePath": "_templates/pollux-targets/react-router/workspace/api-proxy.ts"
+        },
+        {
+          "bytes": 1575,
+          "path": "templates/target/react-router/react-router/workspace/auth-stub.ts",
+          "sha256": "80f46cf36c8f2d05930d5a55f67281dd165a841e44d16f56505a85a15a27ede0",
+          "sourcePath": "_templates/pollux-targets/react-router/workspace/auth-stub.ts"
+        },
+        {
+          "bytes": 3934,
+          "path": "templates/target/react-router/react-router/workspace/edit.tsx.tpl",
+          "sha256": "ca863c1760d897691ee0c7ce23d1830c1b421f797655294cc5b2109725c97b5f",
+          "sourcePath": "_templates/pollux-targets/react-router/workspace/edit.tsx.tpl"
+        },
+        {
+          "bytes": 7306,
+          "path": "templates/target/react-router/react-router/workspace/list.tsx.tpl",
+          "sha256": "28423bedf0c42c8fb66cc0c948f9636625e6ec72ad5718178d69b17f6e616f7a",
+          "sourcePath": "_templates/pollux-targets/react-router/workspace/list.tsx.tpl"
+        },
+        {
+          "bytes": 4091,
+          "path": "templates/target/react-router/react-router/workspace/new.tsx.tpl",
+          "sha256": "b35acb6165d0beb72b3185900f58592510b08a9d10821e88b3fcc10cfd5b9c99",
+          "sourcePath": "_templates/pollux-targets/react-router/workspace/new.tsx.tpl"
+        },
+        {
+          "bytes": 1586,
+          "path": "templates/target/react-router/react-router/workspace/use-pollux-mutation.ts",
+          "sha256": "42bd44eb6f8b9986591fe98b4aa2a5f0267171b7e1732beeea5dd23eec10fc14",
+          "sourcePath": "_templates/pollux-targets/react-router/workspace/use-pollux-mutation.ts"
+        }
+      ],
+      "frameworkTargets": [
+        "react-router"
+      ],
+      "generatorSurfaces": [
+        "standalone"
+      ],
+      "id": "templates.target.react-router",
+      "kind": "template-tree",
+      "mutationPolicy": "render",
+      "ownership": "canonical-source",
+      "packagePath": "./resources/templates/target/react-router",
+      "sha256": "62260e30895c7f11222c8548e68ffc3ff01eb9012a00428953ee8157e126ee73",
+      "sourcePaths": [
+        "_templates/pollux-targets/react-router"
+      ],
+      "sourceRevision": "948d476fa1f51a00fab5af83e190ef020cd7e24a",
+      "supportStatus": "experimental",
+      "verification": [
+        "node scripts/pollux/test/workspace-matrix.mjs --target remix"
+      ]
+    },
+    {
+      "dependencies": [
+        "templates.standalone-shared"
+      ],
+      "entrypoints": [
+        "./pollux generate --target=astro-react --workspace=<path>"
+      ],
+      "files": [
+        {
+          "bytes": 3663,
+          "path": "templates/target/astro-react/astro-react/README.md",
+          "sha256": "6f8b7b0e8760843a31ffd31acec3aa8943c0706f113e7eff1febbaeaa4afd9f5",
+          "sourcePath": "_templates/pollux-targets/astro-react/README.md"
+        },
+        {
+          "bytes": 11917,
+          "path": "templates/target/astro-react/astro-react/workspace/api-proxy.ts",
+          "sha256": "1e629dd9b4c2c4af93856e0534378a1920afec60c69bea723db43af56178a685",
+          "sourcePath": "_templates/pollux-targets/astro-react/workspace/api-proxy.ts"
+        },
+        {
+          "bytes": 2328,
+          "path": "templates/target/astro-react/astro-react/workspace/auth-stub.ts",
+          "sha256": "46bbc8fae047d4562c0c397adb6c0fad1f2d7f6caadbee74644dae14ee647a55",
+          "sourcePath": "_templates/pollux-targets/astro-react/workspace/auth-stub.ts"
+        },
+        {
+          "bytes": 1066,
+          "path": "templates/target/astro-react/astro-react/workspace/edit.astro.tpl",
+          "sha256": "75b5112027123ef02380c959ccfbe3e2338412d50d8a0f55742dee6b386509fb",
+          "sourcePath": "_templates/pollux-targets/astro-react/workspace/edit.astro.tpl"
+        },
+        {
+          "bytes": 10240,
+          "path": "templates/target/astro-react/astro-react/workspace/island.tsx.tpl",
+          "sha256": "e99724cd998d53edf8fb0290f389bd0989a9a4a865b0467ed73328e4956797b2",
+          "sourcePath": "_templates/pollux-targets/astro-react/workspace/island.tsx.tpl"
+        },
+        {
+          "bytes": 1038,
+          "path": "templates/target/astro-react/astro-react/workspace/list.astro.tpl",
+          "sha256": "4e554be7d2f1c5ec658c0be412c7f6f574919693fc02af4a48a85f7eccf5f828",
+          "sourcePath": "_templates/pollux-targets/astro-react/workspace/list.astro.tpl"
+        },
+        {
+          "bytes": 820,
+          "path": "templates/target/astro-react/astro-react/workspace/new.astro.tpl",
+          "sha256": "65e9325e84626a6378a98088a375214e15e077d739a9dbc8aba9097377fd4f9d",
+          "sourcePath": "_templates/pollux-targets/astro-react/workspace/new.astro.tpl"
+        }
+      ],
+      "frameworkTargets": [
+        "astro"
+      ],
+      "generatorSurfaces": [
+        "standalone"
+      ],
+      "id": "templates.target.astro-react",
+      "kind": "template-tree",
+      "mutationPolicy": "render",
+      "ownership": "canonical-source",
+      "packagePath": "./resources/templates/target/astro-react",
+      "sha256": "0760489527e705a438b66af119af68ae8530aa0add85b64b53c5e0888b8d8a46",
+      "sourcePaths": [
+        "_templates/pollux-targets/astro-react"
+      ],
+      "sourceRevision": "948d476fa1f51a00fab5af83e190ef020cd7e24a",
+      "supportStatus": "experimental",
+      "verification": [
+        "node scripts/pollux/test/workspace-matrix.mjs --target astro"
+      ]
+    },
+    {
+      "dependencies": [
+        "design.tokens"
+      ],
+      "entrypoints": [
+        "src/routes/__root.tsx",
+        "src/layout/manager/layout.tsx",
+        "src/styles/app.css"
+      ],
+      "files": [
+        {
+          "bytes": 4033,
+          "path": "layouts/start-ui-vite/__root.tsx",
+          "sha256": "40388ce2df834853e4b022b45c4eac1c6e218b3c8344b790f61ebe929d4d5fb1",
+          "sourcePath": "src/routes/__root.tsx"
+        },
+        {
+          "bytes": 12941,
+          "path": "layouts/start-ui-vite/app.css",
+          "sha256": "19455ec2aa071a4473342bf009596307221ff103a72f8f2518037c976514ca66",
+          "sourcePath": "src/styles/app.css"
+        },
+        {
+          "bytes": 1322,
+          "path": "layouts/start-ui-vite/app/layout.tsx",
+          "sha256": "03ab419eb174088968ca96ba58e0f2ba7520dd5197e3abb9c87bc97e0a293aea",
+          "sourcePath": "src/layout/app/layout.tsx"
+        },
+        {
+          "bytes": 861,
+          "path": "layouts/start-ui-vite/app/main-nav-config.ts",
+          "sha256": "47c2e89f84aa854a7afdcfa5149e2d4464c9f4e0b616bbfa53f77aeb1fcecef6",
+          "sourcePath": "src/layout/app/main-nav-config.ts"
+        },
+        {
+          "bytes": 1768,
+          "path": "layouts/start-ui-vite/app/main-nav-desktop.tsx",
+          "sha256": "1037db3b7303bd62e5bac416efd1eafada4c828c5d6e1f79c458d389d3338d36",
+          "sourcePath": "src/layout/app/main-nav-desktop.tsx"
+        },
+        {
+          "bytes": 1379,
+          "path": "layouts/start-ui-vite/app/main-nav-mobile.tsx",
+          "sha256": "10681e1ab19be79a6dbb1f49b932333dea1499565f2072f4e23395f27d67b71d",
+          "sourcePath": "src/layout/app/main-nav-mobile.tsx"
+        },
+        {
+          "bytes": 2917,
+          "path": "layouts/start-ui-vite/app/page-layout.tsx",
+          "sha256": "f54bc4c1c9e46e8d30185cf89af1d99574698a43eb20e35050b69f707e0bfac6",
+          "sourcePath": "src/layout/app/page-layout.tsx"
+        },
+        {
+          "bytes": 307,
+          "path": "layouts/start-ui-vite/manager/layout.tsx",
+          "sha256": "2de30d25b354a3e7ef387256cb1b484b2a80c0e28b033756efee59f12dee22d1",
+          "sourcePath": "src/layout/manager/layout.tsx"
+        },
+        {
+          "bytes": 5181,
+          "path": "layouts/start-ui-vite/manager/nav-generated.ts",
+          "sha256": "f1e75c7710d75a472ddcad83f12b9a6a9c25773c3872365c0a0706a86be6533f",
+          "sourcePath": "src/layout/manager/nav-generated.ts"
+        },
+        {
+          "bytes": 6843,
+          "path": "layouts/start-ui-vite/manager/nav-sidebar.tsx",
+          "sha256": "66c7332a33534c69fec35d6f2eae7ed1e1892d3eab5336db809211a6453cc18d",
+          "sourcePath": "src/layout/manager/nav-sidebar.tsx"
+        },
+        {
+          "bytes": 6364,
+          "path": "layouts/start-ui-vite/manager/nav-user.tsx",
+          "sha256": "5595a7f05c233fdc9a52191c93d3d3c3f4d690b46836863e165c6a848531e7fd",
+          "sourcePath": "src/layout/manager/nav-user.tsx"
+        },
+        {
+          "bytes": 3525,
+          "path": "layouts/start-ui-vite/manager/page-layout.tsx",
+          "sha256": "a971c175cb5379133032981aac7be1ceaea9f24305c33f39e95fd2edd1ee7b7b",
+          "sourcePath": "src/layout/manager/page-layout.tsx"
+        }
+      ],
+      "frameworkTargets": [
+        "start-ui-vite"
+      ],
+      "generatorSurfaces": [
+        "manager"
+      ],
+      "id": "layout.start-ui-vite",
+      "kind": "layout-shell",
+      "mutationPolicy": "read-only",
+      "ownership": "canonical-source",
+      "packagePath": "./resources/layouts/start-ui-vite",
+      "sha256": "4ed14b6430d288f4f9f4d62635c778148dc09e0351a366727b17410cf1f81f82",
+      "sourcePaths": [
+        "src/layout/app",
+        "src/layout/manager",
+        "src/routes/__root.tsx",
+        "src/styles/app.css"
+      ],
+      "sourceRevision": "948d476fa1f51a00fab5af83e190ef020cd7e24a",
+      "supportStatus": "supported",
+      "verification": [
+        "pnpm build",
+        "./pollux validate-skeletons"
+      ]
+    },
+    {
+      "dependencies": [
+        "design.tokens"
+      ],
+      "entrypoints": [
+        "skeletons/nextjs/app/layout.tsx",
+        "skeletons/nextjs/components/sidebar.tsx",
+        "skeletons/nextjs/components/topbar.tsx"
+      ],
+      "files": [
+        {
+          "bytes": 1127,
+          "path": "layouts/nextjs/components/pollux-nav.tsx",
+          "sha256": "5a9ffbdd687c062a28ba7fdd5667989fc819eeca3d6e15c3f01532fcabd8f258",
+          "sourcePath": "skeletons/nextjs/components/pollux-nav.tsx"
+        },
+        {
+          "bytes": 1340,
+          "path": "layouts/nextjs/components/sidebar.tsx",
+          "sha256": "5910f42f24953ea6f30483ffd5fdbd55b79c53cff451312495150817f8927b9a",
+          "sourcePath": "skeletons/nextjs/components/sidebar.tsx"
+        },
+        {
+          "bytes": 1086,
+          "path": "layouts/nextjs/components/topbar.tsx",
+          "sha256": "2b3b96c70027ef2b55825cbee3dc10244b9f76038f283f4adf0fd60de0ab6d9e",
+          "sourcePath": "skeletons/nextjs/components/topbar.tsx"
+        },
+        {
+          "bytes": 47,
+          "path": "layouts/nextjs/globals.css",
+          "sha256": "27f0475d5e52de751e31670f2919d0abdc00545611eaf10a2c8536f4b80515ee",
+          "sourcePath": "skeletons/nextjs/app/globals.css"
+        },
+        {
+          "bytes": 1471,
+          "path": "layouts/nextjs/layout.tsx",
+          "sha256": "c4f91d38a10a96881ee615aa4556292d0006d7650b2ede3e69166e9ce5503c9b",
+          "sourcePath": "skeletons/nextjs/app/layout.tsx"
+        },
+        {
+          "bytes": 1108,
+          "path": "layouts/nextjs/skeleton.json",
+          "sha256": "3f07f5e9da74f8a3d3b00f7c6a10b175287d69a4064c95a2b66ccaafd94ea7f7",
+          "sourcePath": "skeletons/nextjs/skeleton.json"
+        },
+        {
+          "bytes": 8618,
+          "path": "layouts/nextjs/tokens.css",
+          "sha256": "a504e59c59e53bee76edf18c9cb9ce6bfade3ab58a1b12f75ebd7d357e78a31d",
+          "sourcePath": "skeletons/nextjs/app/tokens.css"
+        }
+      ],
+      "frameworkTargets": [
+        "nextjs"
+      ],
+      "generatorSurfaces": [
+        "standalone"
+      ],
+      "id": "layout.nextjs",
+      "kind": "layout-shell",
+      "mutationPolicy": "copy",
+      "ownership": "canonical-source",
+      "packagePath": "./resources/layouts/nextjs",
+      "sha256": "2f3a51d478ea16cf921adaf84edde86140f3e06db7115ab8e1e3e262521cccba",
+      "sourcePaths": [
+        "skeletons/nextjs/app/globals.css",
+        "skeletons/nextjs/app/layout.tsx",
+        "skeletons/nextjs/app/tokens.css",
+        "skeletons/nextjs/components",
+        "skeletons/nextjs/skeleton.json"
+      ],
+      "sourceRevision": "948d476fa1f51a00fab5af83e190ef020cd7e24a",
+      "supportStatus": "experimental",
+      "verification": [
+        "./pollux validate-skeletons",
+        "node scripts/pollux/test/workspace-matrix.mjs --target nextjs"
+      ]
+    },
+    {
+      "dependencies": [
+        "design.tokens"
+      ],
+      "entrypoints": [
+        "skeletons/remix/app/root.tsx"
+      ],
+      "files": [
+        {
+          "bytes": 54,
+          "path": "layouts/react-router/app.css",
+          "sha256": "908a3f324dc147045ee527acf5499dc2d7ac467893cf23598f47b20c16a4d234",
+          "sourcePath": "skeletons/remix/app/app.css"
+        },
+        {
+          "bytes": 5646,
+          "path": "layouts/react-router/root.tsx",
+          "sha256": "d1c9670afbd79615ba08a85b2b44b4e7a8b562c778da049907dd62b8f06e028d",
+          "sourcePath": "skeletons/remix/app/root.tsx"
+        },
+        {
+          "bytes": 1272,
+          "path": "layouts/react-router/routes.ts",
+          "sha256": "8268c557a6627f1983c074a06ad989106a452e5fab2267c7b5c5bcda4bf20f6d",
+          "sourcePath": "skeletons/remix/app/routes.ts"
+        },
+        {
+          "bytes": 2023,
+          "path": "layouts/react-router/routes/home.tsx",
+          "sha256": "b57539c2f99a43f666a8380bf727fd10dcac325cda89819b0f6117de123630b1",
+          "sourcePath": "skeletons/remix/app/routes/home.tsx"
+        },
+        {
+          "bytes": 1386,
+          "path": "layouts/react-router/skeleton.json",
+          "sha256": "0c80ab50be9d85ac1033428ad4cfa8ac3494f98cfeae58edba6fb261dc12abec",
+          "sourcePath": "skeletons/remix/skeleton.json"
+        }
+      ],
+      "frameworkTargets": [
+        "react-router"
+      ],
+      "generatorSurfaces": [
+        "standalone"
+      ],
+      "id": "layout.react-router",
+      "kind": "layout-shell",
+      "mutationPolicy": "copy",
+      "ownership": "canonical-source",
+      "packagePath": "./resources/layouts/react-router",
+      "sha256": "c6ed8f497b1a64497ae1497475358f31fc4e0fccb9a22b846576c3fc488269e6",
+      "sourcePaths": [
+        "skeletons/remix/app/app.css",
+        "skeletons/remix/app/root.tsx",
+        "skeletons/remix/app/routes",
+        "skeletons/remix/app/routes.ts",
+        "skeletons/remix/skeleton.json"
+      ],
+      "sourceRevision": "948d476fa1f51a00fab5af83e190ef020cd7e24a",
+      "supportStatus": "experimental",
+      "verification": [
+        "./pollux validate-skeletons",
+        "node scripts/pollux/test/workspace-matrix.mjs --target remix"
+      ]
+    },
+    {
+      "dependencies": [
+        "design.tokens"
+      ],
+      "entrypoints": [
+        "skeletons/astro/src/layouts/Layout.astro"
+      ],
+      "files": [
+        {
+          "bytes": 5655,
+          "path": "layouts/astro/layouts/Layout.astro",
+          "sha256": "e2160885e7fb1420541962ec5bfd5d06e1f4db36d6eb7a9ae94d18209bbaf774",
+          "sourcePath": "skeletons/astro/src/layouts/Layout.astro"
+        },
+        {
+          "bytes": 1129,
+          "path": "layouts/astro/skeleton.json",
+          "sha256": "825795ffbb08af634f0e80780d84ce3da6c77a57fc49d99c393ab6d8d733b3da",
+          "sourcePath": "skeletons/astro/skeleton.json"
+        },
+        {
+          "bytes": 96,
+          "path": "layouts/astro/styles/global.css",
+          "sha256": "b0e46129d9e3b31fa47dbf74eca288306c6417b5d6b5fd5d239a1bfa74407748",
+          "sourcePath": "skeletons/astro/src/styles/global.css"
+        },
+        {
+          "bytes": 8618,
+          "path": "layouts/astro/styles/tokens.css",
+          "sha256": "a504e59c59e53bee76edf18c9cb9ce6bfade3ab58a1b12f75ebd7d357e78a31d",
+          "sourcePath": "skeletons/astro/src/styles/tokens.css"
+        }
+      ],
+      "frameworkTargets": [
+        "astro"
+      ],
+      "generatorSurfaces": [
+        "standalone"
+      ],
+      "id": "layout.astro",
+      "kind": "layout-shell",
+      "mutationPolicy": "copy",
+      "ownership": "canonical-source",
+      "packagePath": "./resources/layouts/astro",
+      "sha256": "799bbd5621de9927f67a7cff4991bf331a744c0ffde2638a97c9ced2a9f25b43",
+      "sourcePaths": [
+        "skeletons/astro/skeleton.json",
+        "skeletons/astro/src/layouts",
+        "skeletons/astro/src/styles"
+      ],
+      "sourceRevision": "948d476fa1f51a00fab5af83e190ef020cd7e24a",
+      "supportStatus": "experimental",
+      "verification": [
+        "./pollux validate-skeletons",
+        "node scripts/pollux/test/workspace-matrix.mjs --target astro"
+      ]
+    },
+    {
+      "dependencies": [],
+      "entrypoints": [
+        "skeletons/_shared/design-tokens.css"
+      ],
+      "files": [
+        {
+          "bytes": 8618,
+          "path": "design-system/design-tokens.css",
+          "sha256": "a504e59c59e53bee76edf18c9cb9ce6bfade3ab58a1b12f75ebd7d357e78a31d",
+          "sourcePath": "skeletons/_shared/design-tokens.css"
+        }
+      ],
+      "frameworkTargets": [
+        "start-ui-vite",
+        "nextjs",
+        "react-router",
+        "astro"
+      ],
+      "generatorSurfaces": [
+        "manager",
+        "standalone"
+      ],
+      "id": "design.tokens",
+      "kind": "design-system",
+      "mutationPolicy": "read-only",
+      "ownership": "canonical-source",
+      "packagePath": "./resources/design-system/design-tokens.css",
+      "sha256": "0d5754b5bcafc9b5ec8bbde157ef2d92bf3bfbdbd35c1a259c4080a53a06025a",
+      "sourcePaths": [
+        "skeletons/_shared/design-tokens.css"
+      ],
+      "sourceRevision": "948d476fa1f51a00fab5af83e190ef020cd7e24a",
+      "supportStatus": "supported",
+      "verification": [
+        "./pollux validate-skeletons"
+      ]
+    },
+    {
+      "dependencies": [],
+      "entrypoints": [
+        "./pollux help"
+      ],
+      "frameworkTargets": [
+        "start-ui-vite",
+        "nextjs",
+        "react-router",
+        "astro"
+      ],
+      "generatorSurfaces": [
+        "manager",
+        "generated",
+        "generated-server",
+        "go-backend",
+        "standalone"
+      ],
+      "id": "generator.pollux-cli",
+      "kind": "generator-entrypoint",
+      "mutationPolicy": "invoke",
+      "ownership": "invoke-only",
+      "packagePath": null,
+      "sha256": "fb5ecb14e10778bbbfaa941485fb0c616001f596a6d2209c5fa5b12b710e5737",
+      "sourcePaths": [
+        "pollux",
+        "scripts/pollux/cli.mjs"
+      ],
+      "sourceRevision": "948d476fa1f51a00fab5af83e190ef020cd7e24a",
+      "supportStatus": "supported",
+      "verification": [
+        "./pollux test --suite=unit"
+      ]
+    },
+    {
+      "dependencies": [],
+      "entrypoints": [],
+      "files": [
+        {
+          "bytes": 18612,
+          "path": "references/CLAUDE.md",
+          "sha256": "36825e23467cd456b0ec06305bef05c4e49b95f61b7af29bb95dd8160f4fab7e",
+          "sourcePath": "CLAUDE.md"
+        }
+      ],
+      "frameworkTargets": [
+        "start-ui-vite",
+        "nextjs",
+        "react-router",
+        "astro"
+      ],
+      "generatorSurfaces": [
+        "manager",
+        "generated",
+        "generated-server",
+        "go-backend",
+        "standalone"
+      ],
+      "id": "reference.agent-contract",
+      "kind": "reference",
+      "mutationPolicy": "read-only",
+      "ownership": "canonical-source",
+      "packagePath": "./resources/references/CLAUDE.md",
+      "sha256": "703135a83d71b20c90e0f19788429c07d25b0e5eb8435547f9f5663873cae4ed",
+      "sourcePaths": [
+        "CLAUDE.md"
+      ],
+      "sourceRevision": "948d476fa1f51a00fab5af83e190ef020cd7e24a",
+      "supportStatus": "supported",
+      "verification": []
+    },
+    {
+      "dependencies": [],
+      "entrypoints": [],
+      "files": [
+        {
+          "bytes": 60100,
+          "path": "references/POLLUX-GEN-KB.md",
+          "sha256": "7589e5f5e3a5b8259e5c76336eafefba05a2821e822b2cee8c26a0e8ae6ef5a2",
+          "sourcePath": "POLLUX-GEN-KB.md"
+        }
+      ],
+      "frameworkTargets": [
+        "start-ui-vite",
+        "nextjs",
+        "react-router",
+        "astro"
+      ],
+      "generatorSurfaces": [
+        "manager",
+        "generated",
+        "generated-server",
+        "go-backend",
+        "standalone"
+      ],
+      "id": "reference.pollux-kb",
+      "kind": "reference",
+      "mutationPolicy": "read-only",
+      "ownership": "canonical-source",
+      "packagePath": "./resources/references/POLLUX-GEN-KB.md",
+      "sha256": "a8237698427a9a2692e95950c1856c964a8bb666386cda9c45213b68d7f1fd51",
+      "sourcePaths": [
+        "POLLUX-GEN-KB.md"
+      ],
+      "sourceRevision": "948d476fa1f51a00fab5af83e190ef020cd7e24a",
+      "supportStatus": "supported",
+      "verification": []
+    },
+    {
+      "dependencies": [],
+      "entrypoints": [],
+      "files": [
+        {
+          "bytes": 4596,
+          "path": "references/templates-README.md",
+          "sha256": "3e59f6da940e0101819c4e7946ec434e4a6778bc8019562643ed8fb1574ae4f6",
+          "sourcePath": "_templates/README.md"
+        }
+      ],
+      "frameworkTargets": [
+        "start-ui-vite"
+      ],
+      "generatorSurfaces": [
+        "generated",
+        "generated-server",
+        "go-backend"
+      ],
+      "id": "reference.templates-readme",
+      "kind": "reference",
+      "mutationPolicy": "read-only",
+      "ownership": "canonical-source",
+      "packagePath": "./resources/references/templates-README.md",
+      "sha256": "dffb4a899a80bfdb45787ca63dfb370d9c27d85f708a7a91d8bad6af76794171",
+      "sourcePaths": [
+        "_templates/README.md"
+      ],
+      "sourceRevision": "948d476fa1f51a00fab5af83e190ef020cd7e24a",
+      "supportStatus": "reference-only",
+      "verification": []
+    },
+    {
+      "dependencies": [],
+      "entrypoints": [],
+      "files": [
+        {
+          "bytes": 10208,
+          "path": "references/skeletons/README.md",
+          "sha256": "10dd56116a32478d19735a6227f91180626dd1fcf0a5716837711ce14a2c2266",
+          "sourcePath": "skeletons/README.md"
+        },
+        {
+          "bytes": 638,
+          "path": "references/skeletons/registry.json",
+          "sha256": "41680e0df2e5fd9988c919ca0613b0fa81492aee68bbc954cd6ae4deab559e92",
+          "sourcePath": "skeletons/registry.json"
+        }
+      ],
+      "frameworkTargets": [
+        "nextjs",
+        "react-router",
+        "astro"
+      ],
+      "generatorSurfaces": [
+        "standalone"
+      ],
+      "id": "reference.skeletons-readme",
+      "kind": "reference",
+      "mutationPolicy": "read-only",
+      "ownership": "canonical-source",
+      "packagePath": "./resources/references/skeletons",
+      "sha256": "e4725330f77f36172cc1688497c8ba7b1ae76982eff5a88037ccf5161294a124",
+      "sourcePaths": [
+        "skeletons/README.md",
+        "skeletons/registry.json"
+      ],
+      "sourceRevision": "948d476fa1f51a00fab5af83e190ef020cd7e24a",
+      "supportStatus": "experimental",
+      "verification": [
+        "./pollux validate-skeletons"
+      ]
+    },
+    {
+      "dependencies": [],
+      "entrypoints": [],
+      "files": [
+        {
+          "bytes": 4153,
+          "path": "references/operations/pollux-generated-crud.md",
+          "sha256": "fe5c9f5c68940df600a762275c48c5c5559a594a6a2b39464c64339dcf7b42a7",
+          "sourcePath": "docs/operations/pollux-generated-crud.md"
+        },
+        {
+          "bytes": 9252,
+          "path": "references/operations/pollux-go-backend.md",
+          "sha256": "713561b7764a7024a6a90e4264ae412884b7371f5fd6f2c6bb35ca77c1ccb484",
+          "sourcePath": "docs/operations/pollux-go-backend.md"
+        },
+        {
+          "bytes": 4209,
+          "path": "references/operations/pollux-runbook.md",
+          "sha256": "a986a5b3707658d63cff8b9049f6d07e0076cc6a2dbd1665a0919c4ef8f5815b",
+          "sourcePath": "docs/operations/pollux-runbook.md"
+        },
+        {
+          "bytes": 8505,
+          "path": "references/operations/pollux-skeletons-runbook.md",
+          "sha256": "a7d59bc284ddd2e759c0138aaba8a30c0b17e9801149cd242575c3803179dca0",
+          "sourcePath": "docs/operations/pollux-skeletons-runbook.md"
+        }
+      ],
+      "frameworkTargets": [
+        "start-ui-vite",
+        "nextjs",
+        "react-router",
+        "astro"
+      ],
+      "generatorSurfaces": [
+        "manager",
+        "generated",
+        "generated-server",
+        "go-backend",
+        "standalone"
+      ],
+      "id": "reference.ops-runbooks",
+      "kind": "reference",
+      "mutationPolicy": "read-only",
+      "ownership": "canonical-source",
+      "packagePath": "./resources/references/operations",
+      "sha256": "e25df13bd5da453ab5c22a0100bbf5bdc44020367d4c92bcf6d839c09443fded",
+      "sourcePaths": [
+        "docs/operations/pollux-generated-crud.md",
+        "docs/operations/pollux-go-backend.md",
+        "docs/operations/pollux-runbook.md",
+        "docs/operations/pollux-skeletons-runbook.md"
+      ],
+      "sourceRevision": "948d476fa1f51a00fab5af83e190ef020cd7e24a",
+      "supportStatus": "reference-only",
+      "verification": []
+    }
+  ],
+  "schemaVersion": 1,
+  "sourceRevision": "948d476fa1f51a00fab5af83e190ef020cd7e24a",
+  "version": "0.1.0"
+}

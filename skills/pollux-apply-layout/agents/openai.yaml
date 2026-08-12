@@ -1,0 +1,4 @@
+interface:
+  display_name: "Pollux Apply Layout"
+  short_description: "Apply the Pollux admin shell to a target."
+  default_prompt: "Use $pollux-apply-layout to apply the Pollux admin shell and design tokens to a framework target."

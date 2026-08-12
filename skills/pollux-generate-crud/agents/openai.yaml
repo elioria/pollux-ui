@@ -1,0 +1,4 @@
+interface:
+  display_name: "Pollux Generate Crud"
+  short_description: "Regenerate Pollux CRUD pages and backends."
+  default_prompt: "Use $pollux-generate-crud to regenerate Pollux CRUD output from json-files metadata through the canonical CLI."

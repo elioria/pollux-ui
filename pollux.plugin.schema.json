@@ -1,0 +1,209 @@
+{
+  "$schema": "http://json-schema.org/draft/2020-12/schema",
+  "$id": "https://pollux.local/schemas/pollux.plugin.schema.json",
+  "title": "PolluxPluginManifestV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "name",
+    "version",
+    "description",
+    "source",
+    "compatibility",
+    "capabilities",
+    "skills",
+    "resourceCatalog",
+    "projections"
+  ],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "name": { "const": "pollux-ui" },
+    "version": {
+      "type": "string",
+      "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(-[0-9A-Za-z.-]+)?$"
+    },
+    "description": { "type": "string", "minLength": 1 },
+    "publisher": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "url": { "type": "string", "format": "uri" }
+      }
+    },
+    "license": { "type": "string", "minLength": 1 },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["repository", "revision", "dirty", "builtAt"],
+      "properties": {
+        "repository": { "type": "string", "minLength": 1 },
+        "revision": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+        "dirty": { "type": "boolean" },
+        "builtAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "compatibility": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "polluxCli",
+        "metadataModel",
+        "resourceCatalog",
+        "skillContract",
+        "hosts"
+      ],
+      "properties": {
+        "polluxCli": { "type": "string", "minLength": 1 },
+        "metadataModel": { "type": "string", "minLength": 1 },
+        "resourceCatalog": {
+          "type": "string",
+          "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)$"
+        },
+        "skillContract": {
+          "type": "string",
+          "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)$"
+        },
+        "hosts": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["codex", "claudeCode"],
+          "properties": {
+            "codex": { "type": "string", "minLength": 1 },
+            "claudeCode": { "type": "string", "minLength": 1 }
+          }
+        }
+      }
+    },
+    "capabilities": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/capability" }
+    },
+    "skills": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/skill" }
+    },
+    "resourceCatalog": { "const": "./resources/catalog.json" },
+    "projections": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["codex", "claudeCode"],
+      "properties": {
+        "codex": { "const": "./.codex-plugin/plugin.json" },
+        "claudeCode": { "const": "./.claude-plugin/plugin.json" }
+      }
+    }
+  },
+  "$defs": {
+    "capability": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "description",
+        "mode",
+        "skills",
+        "resources",
+        "generatorSurfaces",
+        "frameworkTargets",
+        "minSupportStatus",
+        "commands",
+        "environment",
+        "authority",
+        "preconditions",
+        "postconditions",
+        "failureCodes"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^pollux\\.[a-z][a-z0-9-]*(\\.[a-z][a-z0-9-]*)*$"
+        },
+        "description": { "type": "string", "minLength": 1 },
+        "mode": {
+          "enum": ["inspect", "create", "modify", "verify"]
+        },
+        "skills": {
+          "type": "array",
+          "items": { "type": "string", "pattern": "^pollux-[a-z0-9-]+$" }
+        },
+        "resources": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "generatorSurfaces": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "manager",
+              "generated",
+              "generated-server",
+              "go-backend",
+              "standalone"
+            ]
+          }
+        },
+        "frameworkTargets": {
+          "type": "array",
+          "items": {
+            "enum": ["start-ui-vite", "nextjs", "react-router", "astro"]
+          }
+        },
+        "minSupportStatus": {
+          "enum": ["supported", "experimental", "reference-only"]
+        },
+        "commands": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "environment": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "authority": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["writesFilesystem", "spawnsSubprocess", "networkAccess"],
+          "properties": {
+            "writesFilesystem": { "type": "boolean" },
+            "spawnsSubprocess": { "type": "boolean" },
+            "networkAccess": { "type": "boolean" }
+          }
+        },
+        "preconditions": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "postconditions": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "failureCodes": {
+          "type": "array",
+          "items": { "type": "string", "pattern": "^[A-Z][A-Z0-9_]+$" }
+        }
+      }
+    },
+    "skill": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "path", "description"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^pollux-[a-z0-9-]+$",
+          "maxLength": 64
+        },
+        "path": {
+          "type": "string",
+          "pattern": "^\\./skills/[a-z0-9-]+/SKILL\\.md$"
+        },
+        "description": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}

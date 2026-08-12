@@ -1,0 +1,12 @@
+{
+  "author": {
+    "name": "elioria",
+    "url": "https://github.com/elioria"
+  },
+  "description": "Use Pollux templates and layouts through safe, verified generator workflows.",
+  "displayName": "Pollux UI",
+  "license": "MIT",
+  "name": "pollux-ui",
+  "skills": "./skills/",
+  "version": "0.1.0"
+}

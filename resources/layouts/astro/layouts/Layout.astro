@@ -1,0 +1,157 @@
+---
+import '@fontsource-variable/inter';
+import '@fontsource-variable/montserrat';
+
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+}
+
+const { title = 'Dashboard' } = Astro.props;
+
+const navLinks = [
+  { href: '/', label: 'Dashboard' },
+  { href: '/entidades', label: 'Entidades' },
+  { href: '/administracao', label: 'Administração' },
+];
+
+// Generated sidebar registry fragments (Pollux astro-react adapter output,
+// src/generated/pollux/nav/<entity>.ts). The glob is empty before the first
+// `pollux generate`, so the handwritten shell works standalone.
+const generatedNav = Object.values(
+  import.meta.glob<{ navEntry: { href: string; label: string } }>(
+    '../generated/pollux/nav/*.ts',
+    { eager: true }
+  )
+)
+  .map((mod) => mod.navEntry)
+  .sort((a, b) => (a.label < b.label ? -1 : a.label > b.label ? 1 : 0));
+
+const currentPath = Astro.url.pathname;
+---
+
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title} — Pollux</title>
+    <script is:inline>
+      // Applied before first paint to avoid dark-mode flash.
+      (function () {
+        try {
+          var theme = localStorage.getItem('theme');
+          var prefersDark = window.matchMedia(
+            '(prefers-color-scheme: dark)'
+          ).matches;
+          if (theme === 'dark' || (!theme && prefersDark)) {
+            document.documentElement.classList.add('dark');
+          }
+        } catch (_e) {
+          /* noop */
+        }
+      })();
+    </script>
+  </head>
+  <body class="min-h-screen bg-background text-foreground antialiased">
+    <div class="flex min-h-screen">
+      <aside
+        class="flex w-64 shrink-0 flex-col border-r border-sidebar-border bg-sidebar text-sidebar-foreground"
+      >
+        <div class="flex items-center gap-3 border-b border-sidebar-border px-5 py-4">
+          <div
+            class="flex size-9 items-center justify-center rounded-lg bg-sidebar-primary font-display text-sm font-bold text-sidebar-primary-foreground"
+          >
+            PK
+          </div>
+          <div class="leading-tight">
+            <p class="font-display text-sm font-semibold text-foreground">
+              Pollux
+            </p>
+            <p class="text-xs text-muted-foreground">Painel administrativo</p>
+          </div>
+        </div>
+        <nav class="flex-1 space-y-1 px-3 py-4" aria-label="Navegação principal">
+          {
+            navLinks.map((link) => (
+              <a
+                href={link.href}
+                aria-current={currentPath === link.href ? 'page' : undefined}
+                class:list={[
+                  'block rounded-md px-3 py-2 text-sm font-medium transition-colors',
+                  currentPath === link.href
+                    ? 'bg-sidebar-accent text-sidebar-accent-foreground'
+                    : 'hover:bg-sidebar-accent hover:text-sidebar-accent-foreground',
+                ]}
+              >
+                {link.label}
+              </a>
+            ))
+          }
+          {
+            generatedNav.length > 0 ? (
+              <div class="pt-4">
+                <p class="px-3 pb-1 text-xs font-semibold tracking-wide text-muted-foreground uppercase">
+                  Entidades geradas
+                </p>
+                {generatedNav.map((entry) => (
+                  <a
+                    href={entry.href}
+                    aria-current={
+                      currentPath.startsWith(entry.href) ? 'page' : undefined
+                    }
+                    class:list={[
+                      'block rounded-md px-3 py-2 text-sm font-medium transition-colors',
+                      currentPath.startsWith(entry.href)
+                        ? 'bg-sidebar-accent text-sidebar-accent-foreground'
+                        : 'hover:bg-sidebar-accent hover:text-sidebar-accent-foreground',
+                    ]}
+                  >
+                    {entry.label}
+                  </a>
+                ))}
+              </div>
+            ) : null
+          }
+        </nav>
+        <div class="border-t border-sidebar-border px-5 py-3">
+          <p class="text-xs text-muted-foreground">Pollux · esqueleto Astro 5</p>
+        </div>
+      </aside>
+
+      <div class="flex min-w-0 flex-1 flex-col">
+        <header
+          class="flex items-center justify-between border-b border-border bg-card px-6 py-3"
+        >
+          <h1 class="font-display text-lg font-semibold">
+            <slot name="title">{title}</slot>
+          </h1>
+          <button
+            id="theme-toggle"
+            type="button"
+            class="inline-flex items-center gap-2 rounded-md border border-border bg-card px-3 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+            aria-label="Alternar tema"
+          >
+            <span class="dark:hidden" aria-hidden="true">🌙</span>
+            <span class="hidden dark:inline" aria-hidden="true">☀️</span>
+            <span class="dark:hidden">Escuro</span>
+            <span class="hidden dark:inline">Claro</span>
+          </button>
+        </header>
+
+        <main class="flex-1 px-6 py-6">
+          <slot />
+        </main>
+      </div>
+    </div>
+
+    <script>
+      const toggle = document.getElementById('theme-toggle');
+      toggle?.addEventListener('click', () => {
+        const isDark = document.documentElement.classList.toggle('dark');
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      });
+    </script>
+  </body>
+</html>

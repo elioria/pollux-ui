@@ -1,0 +1,153 @@
+{
+  "schemaVersion": 1,
+  "description": "Workflow evaluation cases (SPEC-006 layer 4). Each case runs in a temporary fixture workspace; tests inspect filesystem, command results, manifests, and hashes — model prose alone is not proof.",
+  "cases": [
+    {
+      "id": "inspect-repo-surfaces",
+      "capability": "pollux.inspect",
+      "expectedSkill": "pollux-inspect",
+      "prompt": "Inspect this repository and identify every Pollux generator surface and target status.",
+      "fixture": "source-repo",
+      "steps": [
+        "./pollux list-entities --json",
+        "./pollux list-templates --json",
+        "./pollux list-skeletons --json"
+      ],
+      "assertions": [
+        "identifies all four generator surfaces: manager, generated/generated-server, go-backend, standalone",
+        "lists experimental status for nextjs, react-router, astro targets",
+        "makes no filesystem writes"
+      ]
+    },
+    {
+      "id": "workspace-create-atomic",
+      "capability": "pollux.workspace.create",
+      "expectedSkill": "pollux-create-workspace",
+      "prompt": "Create a new Pollux Next.js workspace in the empty requested directory.",
+      "fixture": "temp-dir",
+      "steps": ["./pollux new-workspace nextjs --dir=<tmp>/app --json"],
+      "assertions": [
+        ".pollux/workspace.json provenance exists with skeleton, adapter, and versions",
+        "no staging residue remains in the destination parent",
+        "unrelated files in the destination parent are byte-identical"
+      ]
+    },
+    {
+      "id": "workspace-create-refuses-nonempty",
+      "capability": "pollux.workspace.create",
+      "expectedSkill": "pollux-create-workspace",
+      "prompt": "Create a Pollux Next.js workspace at this non-empty destination without overwriting its files.",
+      "fixture": "temp-dir-with-file",
+      "steps": ["./pollux new-workspace nextjs --dir=<tmp>/app --json"],
+      "assertions": [
+        "fails with DESTINATION_NOT_EMPTY",
+        "pre-existing directory contents are byte-identical"
+      ]
+    },
+    {
+      "id": "layout-selection-correct-target",
+      "capability": "pollux.layout.apply",
+      "expectedSkill": "pollux-apply-layout",
+      "expectedDecisions": [
+        {
+          "selectedSkill": "pollux-apply-layout",
+          "capability": "pollux.layout.apply"
+        },
+        {
+          "selectedSkill": "pollux-inspect",
+          "capability": "pollux.inspect"
+        }
+      ],
+      "prompt": "Select the packaged layout and design tokens for this Next.js Pollux workspace.",
+      "fixture": "workspace:nextjs",
+      "steps": ["select layout resource for the workspace target"],
+      "assertions": [
+        "selects layout.nextjs plus design.tokens, never another target's shell",
+        "no framework-crossing imports appear in edited files",
+        "routes/loaders/handlers unchanged"
+      ]
+    },
+    {
+      "id": "generate-legacy-typescript",
+      "capability": "pollux.crud.generate",
+      "expectedSkill": "pollux-generate-crud",
+      "prompt": "Regenerate the legacy TypeScript CRUD entity through the canonical Pollux CLI and verify drift.",
+      "fixture": "source-repo",
+      "steps": [
+        "./pollux validate",
+        "./pollux gen-entity fortestsonly",
+        "./pollux fmt",
+        "./pollux check"
+      ],
+      "assertions": [
+        "uses canonical CLI, never hygen/gohygen directly",
+        "drift gate passes after fmt",
+        "only generator-owned paths changed"
+      ]
+    },
+    {
+      "id": "generate-standalone-plan-first",
+      "capability": "pollux.crud.generate",
+      "expectedSkill": "pollux-generate-crud",
+      "prompt": "Plan and generate rich-valid CRUD into this standalone Next.js workspace, then verify ownership.",
+      "fixture": "workspace:nextjs",
+      "steps": [
+        "./pollux plan --workspace=<ws> --entity=rich-valid --json",
+        "./pollux generate --workspace=<ws> --entity=rich-valid",
+        "./pollux check-generated --workspace=<ws>"
+      ],
+      "assertions": [
+        "plan performs no writes",
+        "generate is journaled and all-or-nothing",
+        "check-generated passes after generate"
+      ]
+    },
+    {
+      "id": "generate-go-backend",
+      "capability": "pollux.crud.generate",
+      "expectedSkill": "pollux-generate-crud",
+      "prompt": "Regenerate and verify the Pollux Go backend using the explicit backend selector.",
+      "fixture": "source-repo",
+      "steps": [
+        "./pollux gen-backend --backend=go",
+        "./pollux test --suite=go"
+      ],
+      "assertions": [
+        "uses the canonical backend selector with an explicit go backend",
+        "Go generation and verification complete successfully",
+        "only generated/pollux-go paths change, or regeneration is a byte fixpoint"
+      ]
+    },
+    {
+      "id": "verify-selects-implicated-gates",
+      "capability": "pollux.verify",
+      "expectedSkill": "pollux-verify",
+      "prompt": "Choose the smallest sufficient verification gates for these Pollux plugin and template changes.",
+      "fixture": "source-repo",
+      "steps": [
+        "map changed paths to catalog resource IDs",
+        "run layer 1-2 gates for plugin changes only"
+      ],
+      "assertions": [
+        "plugin-only changes do not trigger workspace matrices",
+        "template changes trigger ./pollux check",
+        "result separates package, host, generator, and runtime gates"
+      ]
+    },
+    {
+      "id": "failure-preserves-unrelated",
+      "capability": "pollux.crud.generate",
+      "expectedSkill": "pollux-generate-crud",
+      "prompt": "Attempt the requested unknown entity generation safely and preserve unrelated dirty files on failure.",
+      "fixture": "workspace:nextjs-dirty",
+      "steps": [
+        "./pollux generate --workspace=<ws> --entity=unknown-entity --json"
+      ],
+      "assertions": [
+        "fails with a stable code (PLAN_INVALID)",
+        "unrelated dirty files remain byte-identical",
+        "no partial generated output or journal residue beyond recovered state"
+      ]
+    }
+  ]
+}

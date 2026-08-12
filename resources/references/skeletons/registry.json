@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "version": 1,
+  "sharedTokens": "_shared/design-tokens.css",
+  "skeletons": [
+    {
+      "name": "start-ui-vite",
+      "path": "start-ui-vite",
+      "framework": "react-vite-tanstack-start",
+      "status": "reference"
+    },
+    {
+      "name": "nextjs",
+      "path": "nextjs",
+      "framework": "nextjs-app-router",
+      "status": "boilerplate"
+    },
+    {
+      "name": "astro",
+      "path": "astro",
+      "framework": "astro",
+      "status": "boilerplate"
+    },
+    {
+      "name": "remix",
+      "path": "remix",
+      "framework": "remix-react-router",
+      "status": "boilerplate"
+    }
+  ]
+}
