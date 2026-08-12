@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "name": "pollux-ui",
-  "version": "0.4.3",
+  "version": "0.4.4",
   "description": "Use Pollux templates and layouts through safe, verified generator workflows.",
   "license": "MIT",
   "repository": "https://github.com/elioria/start-ui-web",
