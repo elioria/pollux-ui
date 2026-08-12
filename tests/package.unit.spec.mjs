@@ -586,8 +586,8 @@ test('skills: reject YAML plain scalars containing colon-space', () => {
 
 test('package: full validation passes on the built package', () => {
   const summary = validatePackage();
-  assert.equal(summary.skills, 5);
-  assert.equal(summary.capabilities, 5);
+  assert.equal(summary.skills, 6);
+  assert.equal(summary.capabilities, 6);
   assert.ok(summary.resources >= 17);
 });
 

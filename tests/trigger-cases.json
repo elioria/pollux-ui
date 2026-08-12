@@ -114,6 +114,25 @@
       "decisiveOutputFields": ["package", "generator", "verdict"]
     },
     {
+      "id": "author-entity-positive-brief-idea",
+      "kind": "positive",
+      "prompt": "I need a new entity for people — name, email, phone, active flag. Create it for my Pollux app.",
+      "expectedSkill": "pollux-author-entity",
+      "forbiddenSkills": [
+        "pollux-generate-crud",
+        "pollux-create-workspace",
+        "pollux-apply-layout"
+      ],
+      "questionAllowed": true,
+      "mutationAllowed": true,
+      "requiredReferences": ["json-files/"],
+      "decisiveOutputFields": [
+        "authoredMetadataPath",
+        "validation",
+        "assumptions"
+      ]
+    },
+    {
       "id": "negative-incidental-mention",
       "kind": "negative",
       "prompt": "The Pollux deployment failed last night; help me read this nginx log",

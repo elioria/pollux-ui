@@ -1,0 +1,4 @@
+interface:
+  display_name: "Pollux Author Entity"
+  short_description: "Author entity metadata from a brief app-entity idea."
+  default_prompt: "Use $pollux-author-entity to create validated json-files metadata for a new entity from my description."

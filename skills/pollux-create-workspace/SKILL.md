@@ -19,7 +19,7 @@ files by hand.
 - If either is missing, ask one bounded question listing the valid skeletons.
 - Never create into a non-empty directory; never add `--force` (the CLI has
   none); never copy the `start-ui-vite` reference skeleton.
-- All three boilerplate targets are **experimental** Pollux generator targets.
+- All four boilerplate targets are **experimental** Pollux generator targets.
   State this before mutating.
 
 ## Steps
@@ -52,6 +52,10 @@ files by hand.
    from the source repo, or the skeleton's own `test`/`build` commands.
 5. **Status** — repeat that the target is experimental until its CI matrix is
    green.
+6. **Next** — offer both follow-ups: generate an EXISTING entity
+   (pollux-generate-crud) or author a NEW one from a brief description
+   (pollux-author-entity — do not tell the user to hand-write
+   json-files metadata).
 
 ## Failure behavior
 

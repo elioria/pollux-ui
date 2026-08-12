@@ -35,7 +35,7 @@ claude plugin marketplace add elioria/pollux-ui
 claude plugin install pollux-ui@pollux
 ```
 
-Restart the session (or open a new one). The five skills become available:
+Restart the session (or open a new one). The six skills become available:
 
 | Skill | Purpose |
 | --- | --- |
@@ -51,7 +51,7 @@ Restart the session (or open a new one). The five skills become available:
 /plugin
 ```
 
-should list `pollux-ui 0.2.0` as installed. Then, from a session opened inside
+should list `pollux-ui 0.3.0` as installed. Then, from a session opened inside
 a start-ui-web checkout, ask e.g. *“which Pollux skeletons are available?”* —
 the `pollux-inspect` skill should trigger and run
 `./pollux list-skeletons --json`.
@@ -88,7 +88,7 @@ trigger/workflow matrices.)
 ## Validating package integrity (optional, needs a local copy)
 
 ```bash
-node scripts/validate-package.mjs      # 5 skills, 5 capabilities, 19 resources
+node scripts/validate-package.mjs      # 6 skills, 6 capabilities, 19 resources
 node scripts/validate-hosts.mjs        # Codex + Claude host validators
 node --test "tests/*.unit.spec.mjs"    # package unit suite
 ```
@@ -99,7 +99,7 @@ node --test "tests/*.unit.spec.mjs"    # package unit suite
   It is rebuilt from the canonical start-ui-web repository
   (`pnpm pollux:plugin` there).
 - Version policy, stages, and governance: `VERSIONING.md`.
-- 0.2.0 adds the fourth standalone target: `tanstack-start` (SPEC-008,
+- 0.3.0 adds the pollux-author-entity skill (entity metadata from a brief idea); 0.2.0 added the fourth standalone target: `tanstack-start` (SPEC-008,
   TanStack Start / React 19 + Vite). All four standalone targets are
   **experimental**; the in-place `start-ui-vite` reference target is
   supported.

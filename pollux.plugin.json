@@ -63,6 +63,52 @@
         "writesFilesystem": true
       },
       "commands": [
+        "./pollux list-entities --json",
+        "./pollux validate <entity> --json",
+        "./pollux plan --workspace=<path> --entity=<name> --json"
+      ],
+      "description": "Author new Pollux entity metadata (json-files/<entity>.json) from a brief description of the intended app entity, validate it, and prepare it for generation.",
+      "environment": ["node >= 20"],
+      "failureCodes": [
+        "WORKFLOW_PRECONDITION_FAILED",
+        "PLAN_INVALID",
+        "PATH_UNSAFE"
+      ],
+      "frameworkTargets": [
+        "start-ui-vite",
+        "nextjs",
+        "react-router",
+        "astro",
+        "tanstack-start"
+      ],
+      "generatorSurfaces": [
+        "manager",
+        "generated",
+        "generated-server",
+        "go-backend",
+        "standalone"
+      ],
+      "id": "pollux.entity.author",
+      "minSupportStatus": "experimental",
+      "mode": "create",
+      "postconditions": [
+        "metadata file passes ./pollux validate with zero errors",
+        "assumptions inferred from the brief are reported explicitly"
+      ],
+      "preconditions": [
+        "running inside a checkout that contains the ./pollux CLI and json-files/",
+        "entity name does not already exist (or explicit confirmation to edit)"
+      ],
+      "resources": ["generator.pollux-cli", "reference.pollux-kb"],
+      "skills": ["pollux-author-entity"]
+    },
+    {
+      "authority": {
+        "networkAccess": false,
+        "spawnsSubprocess": true,
+        "writesFilesystem": true
+      },
+      "commands": [
         "./pollux list-skeletons --json",
         "./pollux describe-skeleton <name> --json",
         "./pollux new-workspace <skeleton> --dir=<path> [--name=<pkg>]"
@@ -308,6 +354,11 @@
       "path": "./skills/pollux-inspect/SKILL.md"
     },
     {
+      "description": "Author new Pollux entity metadata (a json-files entity file) from a brief description of the app entity — e.g. \"people\", \"products with price and stock\". Use when a user wants a new entity and no metadata file exists yet; produces validated metadata ready for pollux-generate-crud.",
+      "id": "pollux-author-entity",
+      "path": "./skills/pollux-author-entity/SKILL.md"
+    },
+    {
       "description": "Create a new application workspace from a registered Pollux skeleton (Next.js, React Router/Remix, Astro, TanStack Start). Use when a user asks to scaffold, bootstrap, or start a new Pollux app from a skeleton.",
       "id": "pollux-create-workspace",
       "path": "./skills/pollux-create-workspace/SKILL.md"
@@ -329,10 +380,10 @@
     }
   ],
   "source": {
-    "builtAt": "2026-08-12T08:21:55.497Z",
-    "dirty": false,
+    "builtAt": "2026-08-12T10:19:14.583Z",
+    "dirty": true,
     "repository": "https://github.com/elioria/start-ui-web",
-    "revision": "3726e24b73aec56c3821d3d3eb0f9ea189bc4d34"
+    "revision": "46d2294530ae595871864f9a1ba252bdc9350ddb"
   },
-  "version": "0.2.0"
+  "version": "0.3.0"
 }

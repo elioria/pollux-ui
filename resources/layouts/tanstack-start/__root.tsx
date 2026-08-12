@@ -6,7 +6,7 @@ import {
   Outlet,
   Scripts,
 } from '@tanstack/react-router';
-import { type ReactNode,useState } from 'react';
+import { useState, type ReactNode } from 'react';
 
 import appCss from '../styles/app.css?url';
 

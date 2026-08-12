@@ -10,7 +10,7 @@ command so you can see what runs.
 
 - **The plugin is a workflow layer, not the generator.** The generator lives
   in the start-ui-web repository (`./pollux` CLI). The plugin packages the
-  templates, design tokens, references, and five guarded skills that drive
+  templates, design tokens, references, and six guarded skills that drive
   that CLI safely.
 - **Two kinds of generation:**
   - *In-repo* — inside the start-ui-web checkout itself: `/manager` verticals,
@@ -93,6 +93,21 @@ Montserrat/Inter design tokens) with **zero** entities, plus
 `.pollux/workspace.json` provenance recording skeleton + adapter versions.
 Creation is staged and atomic — a non-empty destination is refused, nothing
 is half-written. Same flow for `nextjs`, `remix`, `astro`.
+
+## 4b. Author a NEW entity from a brief idea (`pollux-author-entity`)
+
+No metadata file yet? Don't write one by hand — describe the entity:
+
+> "I need a new entity for people — name, email, phone, birth date, active
+> flag."
+
+The skill infers a sensible field set, writes `json-files/<name>.json`
+(dbtool envelope, PT-BR labels/titles, uuid `id` pk, `criado_em` audit
+column, grid/form visibility, default sort), then loops
+`./pollux validate <name>` until clean and proves normalization with a
+no-write `./pollux plan`. It reports every assumption it made so you can
+correct fields before generating. Unsupported field kinds (uploads, rich
+text, foreign keys) are refused with the closest scalar suggested.
 
 ## 5. Generate CRUD into the workspace (`pollux-generate-crud`)
 

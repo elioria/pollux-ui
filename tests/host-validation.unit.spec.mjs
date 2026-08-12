@@ -68,7 +68,7 @@ test('host validation: exact declared skill discovery is required', () => {
 });
 
 test('host validation: repository Codex compatibility validator accepts projection', () => {
-  assert.deepEqual(validateCodexPlugin(), { skills: 5 });
+  assert.deepEqual(validateCodexPlugin(), { skills: 6 });
 });
 
 test('host validation: nonzero validator exit is failed evidence', () => {

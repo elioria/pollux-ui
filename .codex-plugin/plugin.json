@@ -6,6 +6,7 @@
   "interface": {
     "capabilities": [
       "pollux.inspect",
+      "pollux.entity.author",
       "pollux.workspace.create",
       "pollux.layout.apply",
       "pollux.crud.generate",
@@ -26,5 +27,5 @@
   "name": "pollux-ui",
   "repository": "https://github.com/elioria/start-ui-web",
   "skills": "./skills/",
-  "version": "0.2.0"
+  "version": "0.3.0"
 }
