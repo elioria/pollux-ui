@@ -1,6 +1,6 @@
 ---
 name: pollux-create-workspace
-description: Create a new application workspace from a registered Pollux skeleton (Next.js, React Router/Remix, Astro). Use when a user asks to scaffold, bootstrap, or start a new Pollux app from a skeleton.
+description: Create a new application workspace from a registered Pollux skeleton (Next.js, React Router/Remix, Astro, TanStack Start). Use when a user asks to scaffold, bootstrap, or start a new Pollux app from a skeleton.
 ---
 
 # pollux-create-workspace
@@ -14,7 +14,7 @@ files by hand.
 
 - Explicit user request naming (or answering) both:
   1. the skeleton — one of `./pollux list-skeletons --json` entries with
-     `status: boilerplate` (`nextjs`, `astro`, `remix`);
+     `status: boilerplate` (`nextjs`, `astro`, `remix`, `tanstack-start`);
   2. the destination directory.
 - If either is missing, ask one bounded question listing the valid skeletons.
 - Never create into a non-empty directory; never add `--force` (the CLI has
@@ -48,7 +48,7 @@ files by hand.
 3. **Install** — the package-manager command (e.g. `pnpm install
    --frozen-lockfile`) from the skeleton manifest.
 4. **Verify** — the target verification command, typically
-   `node scripts/pollux/test/workspace-matrix.mjs --target <nextjs|remix|astro>`
+   `node scripts/pollux/test/workspace-matrix.mjs --target <nextjs|remix|astro|tanstack-start>`
    from the source repo, or the skeleton's own `test`/`build` commands.
 5. **Status** — repeat that the target is experimental until its CI matrix is
    green.

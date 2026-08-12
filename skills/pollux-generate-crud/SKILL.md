@@ -1,6 +1,6 @@
 ---
 name: pollux-generate-crud
-description: Generate or regenerate Pollux CRUD pages and backends from json-files entity metadata — legacy TypeScript /generated pages, the Go backend, or standalone Next.js/React Router/Astro targets. Use when entity metadata or templates change.
+description: Generate or regenerate Pollux CRUD pages and backends from json-files entity metadata — legacy TypeScript /generated pages, the Go backend, or standalone Next.js/React Router/Astro/TanStack Start targets. Use when entity metadata or templates change.
 ---
 
 # pollux-generate-crud
@@ -44,7 +44,7 @@ Commit generated output together with the template/metadata change, then
 ./pollux test --suite=selection
 ```
 
-**Standalone framework targets** (`nextjs`, `react-router`/remix, `astro`;
+**Standalone framework targets** (`nextjs`, `react-router`/remix, `astro`, `tanstack-start`;
 all experimental — keep the label visible):
 
 ```bash
@@ -63,7 +63,7 @@ all experimental — keep the label visible):
    targets, run `plan` first and show the affected paths.
 4. Run the surface's verification gates (above). For standalone targets also
    run the matching workspace matrix when generation changed:
-   `node scripts/pollux/test/workspace-matrix.mjs --target <nextjs|remix|astro>`.
+   `node scripts/pollux/test/workspace-matrix.mjs --target <nextjs|remix|astro|tanstack-start>`.
 5. Report evidence: entities processed, changed paths (from the CLI output or
    `git status --porcelain` filtered to generator-owned paths), commands run,
    and unresolved gaps.

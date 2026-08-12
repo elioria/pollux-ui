@@ -87,7 +87,7 @@ After installation, in a session ask for a Pollux inventory — the
 against your Pollux checkout. To validate package integrity locally:
 
 ```bash
-node scripts/validate-package.mjs      # 5 skills, 5 capabilities, 17 resources
+node scripts/validate-package.mjs      # 5 skills, 5 capabilities, 19 resources
 node scripts/validate-hosts.mjs        # Codex + Claude host validators
 node --test "tests/*.unit.spec.mjs"    # package unit suite
 ```

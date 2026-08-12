@@ -29,6 +29,7 @@ same change that makes its CI matrix leg green and required.
 | `nextjs` | Next.js 15 App Router | `nextjs@0.1.0` (SPEC-004) | **experimental** (`pollux: false`) | `./pollux new-workspace nextjs --dir=<path>` then `./pollux generate --workspace=<path> --entity=<e>` | `node scripts/pollux/test/workspace-matrix.mjs --target nextjs` · CI `pollux-matrix (nextjs)` |
 | `remix` | React Router 7 (framework mode) | `react-router@0.1.0` (SPEC-005) | **experimental** (`pollux: false`) | `./pollux new-workspace remix --dir=<path>` then `./pollux generate --workspace=<path> --entity=<e>` | `node scripts/pollux/test/workspace-matrix.mjs --target remix` · CI `pollux-matrix (remix)` |
 | `astro` | Astro 5 + React islands (Cloudflare server output) | `astro-react@0.1.0` (SPEC-006) | **experimental** (`pollux: false`) | `./pollux new-workspace astro --dir=<path>` then `./pollux generate --workspace=<path> --entity=<e>` | `node scripts/pollux/test/workspace-matrix.mjs --target astro` · CI `pollux-matrix (astro)` |
+| `tanstack-start` | TanStack Start (React 19 + Vite, Node output via Nitro) | `tanstack-start@0.1.0` (SPEC-008) | **experimental** (`pollux: false`) | `./pollux new-workspace tanstack-start --dir=<path>` then `./pollux generate --workspace=<path> --entity=<e>` | `node scripts/pollux/test/workspace-matrix.mjs --target tanstack-start` · CI `pollux-matrix (tanstack-start)` |
 
 `reference` = the skeleton lives elsewhere (here: the repo root) and is
 described, not copied. `boilerplate` = the directory IS the app; copy it out
@@ -167,7 +168,7 @@ allows no generation — before any write, with stable error codes
 `node --test scripts/pollux/test/version-compat.unit.spec.mjs`.
 
 Boilerplate verification is executable, not dated: run
-`node scripts/pollux/test/workspace-matrix.mjs --target nextjs|remix|astro`
+`node scripts/pollux/test/workspace-matrix.mjs --target nextjs|remix|astro|tanstack-start`
 (see the support matrix above and `docs/operations/pollux-skeletons-runbook.md`).
 
 ## Adding a skeleton

@@ -26,6 +26,12 @@
       "path": "remix",
       "framework": "remix-react-router",
       "status": "boilerplate"
+    },
+    {
+      "name": "tanstack-start",
+      "path": "tanstack-start",
+      "framework": "react-tanstack-start",
+      "status": "boilerplate"
     }
   ]
 }

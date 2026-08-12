@@ -1,14 +1,9 @@
 {
-  "catalogDigest": "4cb0133357195534ed7cf744552263a082cb2836f2ee8d837bc78ba60ec7f936",
+  "catalogDigest": "e112d9e9bd35d035165167dcc77fb372da427ce64ae78254fe148c50f6f75c51",
   "resources": [
     {
-      "dependencies": [
-        "generator.pollux-cli"
-      ],
-      "entrypoints": [
-        "./pollux gen-entity",
-        "./pollux gen-all"
-      ],
+      "dependencies": ["generator.pollux-cli"],
+      "entrypoints": ["./pollux gen-entity", "./pollux gen-all"],
       "files": [
         {
           "bytes": 2894,
@@ -401,13 +396,8 @@
           "sourcePath": "_templates/pollux/serverpage/server-page.ejs.t"
         }
       ],
-      "frameworkTargets": [
-        "start-ui-vite"
-      ],
-      "generatorSurfaces": [
-        "generated",
-        "generated-server"
-      ],
+      "frameworkTargets": ["start-ui-vite"],
+      "generatorSurfaces": ["generated", "generated-server"],
       "id": "templates.legacy-typescript",
       "kind": "template-tree",
       "mutationPolicy": "render",
@@ -420,20 +410,13 @@
         "_templates/pollux/partials",
         "_templates/pollux/serverpage"
       ],
-      "sourceRevision": "948d476fa1f51a00fab5af83e190ef020cd7e24a",
+      "sourceRevision": "3726e24b73aec56c3821d3d3eb0f9ea189bc4d34",
       "supportStatus": "supported",
-      "verification": [
-        "./pollux check",
-        "./pollux test --suite=unit"
-      ]
+      "verification": ["./pollux check", "./pollux test --suite=unit"]
     },
     {
-      "dependencies": [
-        "generator.pollux-cli"
-      ],
-      "entrypoints": [
-        "./pollux gen-backend --backend=go"
-      ],
+      "dependencies": ["generator.pollux-cli"],
+      "entrypoints": ["./pollux gen-backend --backend=go"],
       "files": [
         {
           "bytes": 6534,
@@ -695,9 +678,7 @@
         }
       ],
       "frameworkTargets": [],
-      "generatorSurfaces": [
-        "go-backend"
-      ],
+      "generatorSurfaces": ["go-backend"],
       "id": "templates.go-backend",
       "kind": "template-tree",
       "mutationPolicy": "render",
@@ -708,7 +689,7 @@
         "_templates/pollux/go-entity",
         "_templates/pollux/go-service"
       ],
-      "sourceRevision": "948d476fa1f51a00fab5af83e190ef020cd7e24a",
+      "sourceRevision": "3726e24b73aec56c3821d3d3eb0f9ea189bc4d34",
       "supportStatus": "supported",
       "verification": [
         "./pollux test --suite=go",
@@ -717,9 +698,7 @@
     },
     {
       "dependencies": [],
-      "entrypoints": [
-        "./pollux generate --workspace=<path> --entity=<name>"
-      ],
+      "entrypoints": ["./pollux generate --workspace=<path> --entity=<name>"],
       "files": [
         {
           "bytes": 8285,
@@ -794,36 +773,22 @@
           "sourcePath": "_templates/pollux-targets/shared/ui/states.tsx"
         }
       ],
-      "frameworkTargets": [
-        "nextjs",
-        "react-router",
-        "astro"
-      ],
-      "generatorSurfaces": [
-        "standalone"
-      ],
+      "frameworkTargets": ["nextjs", "react-router", "astro", "tanstack-start"],
+      "generatorSurfaces": ["standalone"],
       "id": "templates.standalone-shared",
       "kind": "template-tree",
       "mutationPolicy": "render",
       "ownership": "canonical-source",
       "packagePath": "./resources/templates/standalone-shared",
       "sha256": "69bcd9cb06e3e9d244b862bdf33d8aeca24052f649c39d2d077fc6ad5ed04376",
-      "sourcePaths": [
-        "_templates/pollux-targets/shared"
-      ],
-      "sourceRevision": "948d476fa1f51a00fab5af83e190ef020cd7e24a",
+      "sourcePaths": ["_templates/pollux-targets/shared"],
+      "sourceRevision": "3726e24b73aec56c3821d3d3eb0f9ea189bc4d34",
       "supportStatus": "experimental",
-      "verification": [
-        "./pollux test --suite=targets"
-      ]
+      "verification": ["./pollux test --suite=targets"]
     },
     {
-      "dependencies": [
-        "templates.standalone-shared"
-      ],
-      "entrypoints": [
-        "./pollux generate --target=nextjs --workspace=<path>"
-      ],
+      "dependencies": ["templates.standalone-shared"],
+      "entrypoints": ["./pollux generate --target=nextjs --workspace=<path>"],
       "files": [
         {
           "bytes": 11505,
@@ -880,31 +845,23 @@
           "sourcePath": "_templates/pollux-targets/nextjs/static/lib/pollux/server/env.ts"
         }
       ],
-      "frameworkTargets": [
-        "nextjs"
-      ],
-      "generatorSurfaces": [
-        "standalone"
-      ],
+      "frameworkTargets": ["nextjs"],
+      "generatorSurfaces": ["standalone"],
       "id": "templates.target.nextjs",
       "kind": "template-tree",
       "mutationPolicy": "render",
       "ownership": "canonical-source",
       "packagePath": "./resources/templates/target/nextjs",
       "sha256": "5dbb10ae43146b8d165628ab32d4496837e97c9fe9dc26cfaf767289f3373fb4",
-      "sourcePaths": [
-        "_templates/pollux-targets/nextjs"
-      ],
-      "sourceRevision": "948d476fa1f51a00fab5af83e190ef020cd7e24a",
+      "sourcePaths": ["_templates/pollux-targets/nextjs"],
+      "sourceRevision": "3726e24b73aec56c3821d3d3eb0f9ea189bc4d34",
       "supportStatus": "experimental",
       "verification": [
         "node scripts/pollux/test/workspace-matrix.mjs --target nextjs"
       ]
     },
     {
-      "dependencies": [
-        "templates.standalone-shared"
-      ],
+      "dependencies": ["templates.standalone-shared"],
       "entrypoints": [
         "./pollux generate --target=react-router --workspace=<path>"
       ],
@@ -952,31 +909,93 @@
           "sourcePath": "_templates/pollux-targets/react-router/workspace/use-pollux-mutation.ts"
         }
       ],
-      "frameworkTargets": [
-        "react-router"
-      ],
-      "generatorSurfaces": [
-        "standalone"
-      ],
+      "frameworkTargets": ["react-router"],
+      "generatorSurfaces": ["standalone"],
       "id": "templates.target.react-router",
       "kind": "template-tree",
       "mutationPolicy": "render",
       "ownership": "canonical-source",
       "packagePath": "./resources/templates/target/react-router",
       "sha256": "62260e30895c7f11222c8548e68ffc3ff01eb9012a00428953ee8157e126ee73",
-      "sourcePaths": [
-        "_templates/pollux-targets/react-router"
-      ],
-      "sourceRevision": "948d476fa1f51a00fab5af83e190ef020cd7e24a",
+      "sourcePaths": ["_templates/pollux-targets/react-router"],
+      "sourceRevision": "3726e24b73aec56c3821d3d3eb0f9ea189bc4d34",
       "supportStatus": "experimental",
       "verification": [
         "node scripts/pollux/test/workspace-matrix.mjs --target remix"
       ]
     },
     {
-      "dependencies": [
-        "templates.standalone-shared"
+      "dependencies": ["templates.standalone-shared"],
+      "entrypoints": [
+        "./pollux generate --target=tanstack-start --workspace=<path>"
       ],
+      "files": [
+        {
+          "bytes": 1762,
+          "path": "templates/target/tanstack-start/tanstack-start/README.md",
+          "sha256": "dd8fd1ef706ff58eeec839e9a89694f339f6b48ce63a05aff6c5f612c5d0bc80",
+          "sourcePath": "_templates/pollux-targets/tanstack-start/README.md"
+        },
+        {
+          "bytes": 11769,
+          "path": "templates/target/tanstack-start/tanstack-start/workspace/api-proxy.ts",
+          "sha256": "ea9acdfa775dcf0c569811f64f8897c4f02a6b97543afa760a32e63a93a63dfb",
+          "sourcePath": "_templates/pollux-targets/tanstack-start/workspace/api-proxy.ts"
+        },
+        {
+          "bytes": 1803,
+          "path": "templates/target/tanstack-start/tanstack-start/workspace/auth-stub.ts",
+          "sha256": "244145e53641e1376e0450ef040cfb4569d43f96fe37deee1947356148638e80",
+          "sourcePath": "_templates/pollux-targets/tanstack-start/workspace/auth-stub.ts"
+        },
+        {
+          "bytes": 1227,
+          "path": "templates/target/tanstack-start/tanstack-start/workspace/base-url.ts",
+          "sha256": "61433ae8e41a7fe8d3e92fd8d0e36f9cbf5c422f60ab978d088b935db5f29744",
+          "sourcePath": "_templates/pollux-targets/tanstack-start/workspace/base-url.ts"
+        },
+        {
+          "bytes": 3548,
+          "path": "templates/target/tanstack-start/tanstack-start/workspace/edit.tsx.tpl",
+          "sha256": "1108ea2bf16e09967257f841d48438b1eb8da4e59d76cad4e166c4fa45f9b6da",
+          "sourcePath": "_templates/pollux-targets/tanstack-start/workspace/edit.tsx.tpl"
+        },
+        {
+          "bytes": 7572,
+          "path": "templates/target/tanstack-start/tanstack-start/workspace/list.tsx.tpl",
+          "sha256": "4fe292c025b8c8b02a16894b78ed605b46b449b6162267e21af6ea636c8c5e39",
+          "sourcePath": "_templates/pollux-targets/tanstack-start/workspace/list.tsx.tpl"
+        },
+        {
+          "bytes": 3638,
+          "path": "templates/target/tanstack-start/tanstack-start/workspace/new.tsx.tpl",
+          "sha256": "0e6364d721d4c2e59d085108efcfe0bf00e53eb535c99ded426e2df2b75b1d2a",
+          "sourcePath": "_templates/pollux-targets/tanstack-start/workspace/new.tsx.tpl"
+        },
+        {
+          "bytes": 1394,
+          "path": "templates/target/tanstack-start/tanstack-start/workspace/use-pollux-mutation.ts",
+          "sha256": "0adb691f7c0ff037450884c350e24e86e545b04fd888fbb125ef45f7a7ec3f8d",
+          "sourcePath": "_templates/pollux-targets/tanstack-start/workspace/use-pollux-mutation.ts"
+        }
+      ],
+      "frameworkTargets": ["tanstack-start"],
+      "generatorSurfaces": ["standalone"],
+      "id": "templates.target.tanstack-start",
+      "kind": "template-tree",
+      "mutationPolicy": "render",
+      "ownership": "canonical-source",
+      "packagePath": "./resources/templates/target/tanstack-start",
+      "sha256": "72f9ab537d310b0fea092c97ab3816b2a31fff3756c05998f4967606d1896758",
+      "sourcePaths": ["_templates/pollux-targets/tanstack-start"],
+      "sourceRevision": "3726e24b73aec56c3821d3d3eb0f9ea189bc4d34",
+      "supportStatus": "experimental",
+      "verification": [
+        "node scripts/pollux/test/workspace-matrix.mjs --target tanstack-start"
+      ]
+    },
+    {
+      "dependencies": ["templates.standalone-shared"],
       "entrypoints": [
         "./pollux generate --target=astro-react --workspace=<path>"
       ],
@@ -1024,31 +1043,23 @@
           "sourcePath": "_templates/pollux-targets/astro-react/workspace/new.astro.tpl"
         }
       ],
-      "frameworkTargets": [
-        "astro"
-      ],
-      "generatorSurfaces": [
-        "standalone"
-      ],
+      "frameworkTargets": ["astro"],
+      "generatorSurfaces": ["standalone"],
       "id": "templates.target.astro-react",
       "kind": "template-tree",
       "mutationPolicy": "render",
       "ownership": "canonical-source",
       "packagePath": "./resources/templates/target/astro-react",
       "sha256": "0760489527e705a438b66af119af68ae8530aa0add85b64b53c5e0888b8d8a46",
-      "sourcePaths": [
-        "_templates/pollux-targets/astro-react"
-      ],
-      "sourceRevision": "948d476fa1f51a00fab5af83e190ef020cd7e24a",
+      "sourcePaths": ["_templates/pollux-targets/astro-react"],
+      "sourceRevision": "3726e24b73aec56c3821d3d3eb0f9ea189bc4d34",
       "supportStatus": "experimental",
       "verification": [
         "node scripts/pollux/test/workspace-matrix.mjs --target astro"
       ]
     },
     {
-      "dependencies": [
-        "design.tokens"
-      ],
+      "dependencies": ["design.tokens"],
       "entrypoints": [
         "src/routes/__root.tsx",
         "src/layout/manager/layout.tsx",
@@ -1128,12 +1139,8 @@
           "sourcePath": "src/layout/manager/page-layout.tsx"
         }
       ],
-      "frameworkTargets": [
-        "start-ui-vite"
-      ],
-      "generatorSurfaces": [
-        "manager"
-      ],
+      "frameworkTargets": ["start-ui-vite"],
+      "generatorSurfaces": ["manager"],
       "id": "layout.start-ui-vite",
       "kind": "layout-shell",
       "mutationPolicy": "read-only",
@@ -1146,17 +1153,12 @@
         "src/routes/__root.tsx",
         "src/styles/app.css"
       ],
-      "sourceRevision": "948d476fa1f51a00fab5af83e190ef020cd7e24a",
+      "sourceRevision": "3726e24b73aec56c3821d3d3eb0f9ea189bc4d34",
       "supportStatus": "supported",
-      "verification": [
-        "pnpm build",
-        "./pollux validate-skeletons"
-      ]
+      "verification": ["pnpm build", "./pollux validate-skeletons"]
     },
     {
-      "dependencies": [
-        "design.tokens"
-      ],
+      "dependencies": ["design.tokens"],
       "entrypoints": [
         "skeletons/nextjs/app/layout.tsx",
         "skeletons/nextjs/components/sidebar.tsx",
@@ -1206,12 +1208,8 @@
           "sourcePath": "skeletons/nextjs/app/tokens.css"
         }
       ],
-      "frameworkTargets": [
-        "nextjs"
-      ],
-      "generatorSurfaces": [
-        "standalone"
-      ],
+      "frameworkTargets": ["nextjs"],
+      "generatorSurfaces": ["standalone"],
       "id": "layout.nextjs",
       "kind": "layout-shell",
       "mutationPolicy": "copy",
@@ -1225,7 +1223,7 @@
         "skeletons/nextjs/components",
         "skeletons/nextjs/skeleton.json"
       ],
-      "sourceRevision": "948d476fa1f51a00fab5af83e190ef020cd7e24a",
+      "sourceRevision": "3726e24b73aec56c3821d3d3eb0f9ea189bc4d34",
       "supportStatus": "experimental",
       "verification": [
         "./pollux validate-skeletons",
@@ -1233,12 +1231,8 @@
       ]
     },
     {
-      "dependencies": [
-        "design.tokens"
-      ],
-      "entrypoints": [
-        "skeletons/remix/app/root.tsx"
-      ],
+      "dependencies": ["design.tokens"],
+      "entrypoints": ["skeletons/remix/app/root.tsx"],
       "files": [
         {
           "bytes": 54,
@@ -1271,12 +1265,8 @@
           "sourcePath": "skeletons/remix/skeleton.json"
         }
       ],
-      "frameworkTargets": [
-        "react-router"
-      ],
-      "generatorSurfaces": [
-        "standalone"
-      ],
+      "frameworkTargets": ["react-router"],
+      "generatorSurfaces": ["standalone"],
       "id": "layout.react-router",
       "kind": "layout-shell",
       "mutationPolicy": "copy",
@@ -1290,7 +1280,7 @@
         "skeletons/remix/app/routes.ts",
         "skeletons/remix/skeleton.json"
       ],
-      "sourceRevision": "948d476fa1f51a00fab5af83e190ef020cd7e24a",
+      "sourceRevision": "3726e24b73aec56c3821d3d3eb0f9ea189bc4d34",
       "supportStatus": "experimental",
       "verification": [
         "./pollux validate-skeletons",
@@ -1298,12 +1288,8 @@
       ]
     },
     {
-      "dependencies": [
-        "design.tokens"
-      ],
-      "entrypoints": [
-        "skeletons/astro/src/layouts/Layout.astro"
-      ],
+      "dependencies": ["design.tokens"],
+      "entrypoints": ["skeletons/astro/src/layouts/Layout.astro"],
       "files": [
         {
           "bytes": 5655,
@@ -1330,12 +1316,8 @@
           "sourcePath": "skeletons/astro/src/styles/tokens.css"
         }
       ],
-      "frameworkTargets": [
-        "astro"
-      ],
-      "generatorSurfaces": [
-        "standalone"
-      ],
+      "frameworkTargets": ["astro"],
+      "generatorSurfaces": ["standalone"],
       "id": "layout.astro",
       "kind": "layout-shell",
       "mutationPolicy": "copy",
@@ -1347,7 +1329,7 @@
         "skeletons/astro/src/layouts",
         "skeletons/astro/src/styles"
       ],
-      "sourceRevision": "948d476fa1f51a00fab5af83e190ef020cd7e24a",
+      "sourceRevision": "3726e24b73aec56c3821d3d3eb0f9ea189bc4d34",
       "supportStatus": "experimental",
       "verification": [
         "./pollux validate-skeletons",
@@ -1355,10 +1337,58 @@
       ]
     },
     {
-      "dependencies": [],
-      "entrypoints": [
-        "skeletons/_shared/design-tokens.css"
+      "dependencies": ["design.tokens"],
+      "entrypoints": ["skeletons/tanstack-start/src/routes/__root.tsx"],
+      "files": [
+        {
+          "bytes": 5892,
+          "path": "layouts/tanstack-start/__root.tsx",
+          "sha256": "f619b9765e11e5538b0ff51eb739487e6c8a58daffb04a7a902b5a555de8c4a0",
+          "sourcePath": "skeletons/tanstack-start/src/routes/__root.tsx"
+        },
+        {
+          "bytes": 128,
+          "path": "layouts/tanstack-start/app.css",
+          "sha256": "cdfa6b7d0d82556decfbe8233ff4ec3edc48e73c5dee291273f6a7f76eba99a5",
+          "sourcePath": "skeletons/tanstack-start/src/styles/app.css"
+        },
+        {
+          "bytes": 2159,
+          "path": "layouts/tanstack-start/index.tsx",
+          "sha256": "26108afd53992ac6add17e8bc75bb0ef1be6b997ab0b85e8447185fc32dfe2c4",
+          "sourcePath": "skeletons/tanstack-start/src/routes/index.tsx"
+        },
+        {
+          "bytes": 1507,
+          "path": "layouts/tanstack-start/skeleton.json",
+          "sha256": "c6109b082113b512eb585ad9581a712c84ee13bcc3a9dcfa08ecf6e1e452ae47",
+          "sourcePath": "skeletons/tanstack-start/skeleton.json"
+        }
       ],
+      "frameworkTargets": ["tanstack-start"],
+      "generatorSurfaces": ["standalone"],
+      "id": "layout.tanstack-start",
+      "kind": "layout-shell",
+      "mutationPolicy": "copy",
+      "ownership": "canonical-source",
+      "packagePath": "./resources/layouts/tanstack-start",
+      "sha256": "b349a6e34ec864544f01dec29be47607649e079941551eebf7e23940459b6ad3",
+      "sourcePaths": [
+        "skeletons/tanstack-start/skeleton.json",
+        "skeletons/tanstack-start/src/routes/__root.tsx",
+        "skeletons/tanstack-start/src/routes/index.tsx",
+        "skeletons/tanstack-start/src/styles/app.css"
+      ],
+      "sourceRevision": "3726e24b73aec56c3821d3d3eb0f9ea189bc4d34",
+      "supportStatus": "experimental",
+      "verification": [
+        "./pollux validate-skeletons",
+        "node scripts/pollux/test/workspace-matrix.mjs --target tanstack-start"
+      ]
+    },
+    {
+      "dependencies": [],
+      "entrypoints": ["skeletons/_shared/design-tokens.css"],
       "files": [
         {
           "bytes": 8618,
@@ -1371,37 +1401,30 @@
         "start-ui-vite",
         "nextjs",
         "react-router",
-        "astro"
+        "astro",
+        "tanstack-start"
       ],
-      "generatorSurfaces": [
-        "manager",
-        "standalone"
-      ],
+      "generatorSurfaces": ["manager", "standalone"],
       "id": "design.tokens",
       "kind": "design-system",
       "mutationPolicy": "read-only",
       "ownership": "canonical-source",
       "packagePath": "./resources/design-system/design-tokens.css",
       "sha256": "0d5754b5bcafc9b5ec8bbde157ef2d92bf3bfbdbd35c1a259c4080a53a06025a",
-      "sourcePaths": [
-        "skeletons/_shared/design-tokens.css"
-      ],
-      "sourceRevision": "948d476fa1f51a00fab5af83e190ef020cd7e24a",
+      "sourcePaths": ["skeletons/_shared/design-tokens.css"],
+      "sourceRevision": "3726e24b73aec56c3821d3d3eb0f9ea189bc4d34",
       "supportStatus": "supported",
-      "verification": [
-        "./pollux validate-skeletons"
-      ]
+      "verification": ["./pollux validate-skeletons"]
     },
     {
       "dependencies": [],
-      "entrypoints": [
-        "./pollux help"
-      ],
+      "entrypoints": ["./pollux help"],
       "frameworkTargets": [
         "start-ui-vite",
         "nextjs",
         "react-router",
-        "astro"
+        "astro",
+        "tanstack-start"
       ],
       "generatorSurfaces": [
         "manager",
@@ -1415,25 +1438,20 @@
       "mutationPolicy": "invoke",
       "ownership": "invoke-only",
       "packagePath": null,
-      "sha256": "fb5ecb14e10778bbbfaa941485fb0c616001f596a6d2209c5fa5b12b710e5737",
-      "sourcePaths": [
-        "pollux",
-        "scripts/pollux/cli.mjs"
-      ],
-      "sourceRevision": "948d476fa1f51a00fab5af83e190ef020cd7e24a",
+      "sha256": "4032d8ca56155f435c0d22499829bed7271a1b46295ee060570842701f7037ab",
+      "sourcePaths": ["pollux", "scripts/pollux/cli.mjs"],
+      "sourceRevision": "3726e24b73aec56c3821d3d3eb0f9ea189bc4d34",
       "supportStatus": "supported",
-      "verification": [
-        "./pollux test --suite=unit"
-      ]
+      "verification": ["./pollux test --suite=unit"]
     },
     {
       "dependencies": [],
       "entrypoints": [],
       "files": [
         {
-          "bytes": 18612,
+          "bytes": 18674,
           "path": "references/CLAUDE.md",
-          "sha256": "36825e23467cd456b0ec06305bef05c4e49b95f61b7af29bb95dd8160f4fab7e",
+          "sha256": "cdcc86d3533442c873dcde54df6beb6f7badd349a5ddc72360282d1d6f3ed45d",
           "sourcePath": "CLAUDE.md"
         }
       ],
@@ -1441,7 +1459,8 @@
         "start-ui-vite",
         "nextjs",
         "react-router",
-        "astro"
+        "astro",
+        "tanstack-start"
       ],
       "generatorSurfaces": [
         "manager",
@@ -1455,11 +1474,9 @@
       "mutationPolicy": "read-only",
       "ownership": "canonical-source",
       "packagePath": "./resources/references/CLAUDE.md",
-      "sha256": "703135a83d71b20c90e0f19788429c07d25b0e5eb8435547f9f5663873cae4ed",
-      "sourcePaths": [
-        "CLAUDE.md"
-      ],
-      "sourceRevision": "948d476fa1f51a00fab5af83e190ef020cd7e24a",
+      "sha256": "97ea87d00e61ce7becec1d880f8dae139cd88bd1704e4a23ffbf891706c82cd7",
+      "sourcePaths": ["CLAUDE.md"],
+      "sourceRevision": "3726e24b73aec56c3821d3d3eb0f9ea189bc4d34",
       "supportStatus": "supported",
       "verification": []
     },
@@ -1478,7 +1495,8 @@
         "start-ui-vite",
         "nextjs",
         "react-router",
-        "astro"
+        "astro",
+        "tanstack-start"
       ],
       "generatorSurfaces": [
         "manager",
@@ -1493,10 +1511,8 @@
       "ownership": "canonical-source",
       "packagePath": "./resources/references/POLLUX-GEN-KB.md",
       "sha256": "a8237698427a9a2692e95950c1856c964a8bb666386cda9c45213b68d7f1fd51",
-      "sourcePaths": [
-        "POLLUX-GEN-KB.md"
-      ],
-      "sourceRevision": "948d476fa1f51a00fab5af83e190ef020cd7e24a",
+      "sourcePaths": ["POLLUX-GEN-KB.md"],
+      "sourceRevision": "3726e24b73aec56c3821d3d3eb0f9ea189bc4d34",
       "supportStatus": "supported",
       "verification": []
     },
@@ -1511,24 +1527,16 @@
           "sourcePath": "_templates/README.md"
         }
       ],
-      "frameworkTargets": [
-        "start-ui-vite"
-      ],
-      "generatorSurfaces": [
-        "generated",
-        "generated-server",
-        "go-backend"
-      ],
+      "frameworkTargets": ["start-ui-vite"],
+      "generatorSurfaces": ["generated", "generated-server", "go-backend"],
       "id": "reference.templates-readme",
       "kind": "reference",
       "mutationPolicy": "read-only",
       "ownership": "canonical-source",
       "packagePath": "./resources/references/templates-README.md",
       "sha256": "dffb4a899a80bfdb45787ca63dfb370d9c27d85f708a7a91d8bad6af76794171",
-      "sourcePaths": [
-        "_templates/README.md"
-      ],
-      "sourceRevision": "948d476fa1f51a00fab5af83e190ef020cd7e24a",
+      "sourcePaths": ["_templates/README.md"],
+      "sourceRevision": "3726e24b73aec56c3821d3d3eb0f9ea189bc4d34",
       "supportStatus": "reference-only",
       "verification": []
     },
@@ -1537,41 +1545,30 @@
       "entrypoints": [],
       "files": [
         {
-          "bytes": 10208,
+          "bytes": 10600,
           "path": "references/skeletons/README.md",
-          "sha256": "10dd56116a32478d19735a6227f91180626dd1fcf0a5716837711ce14a2c2266",
+          "sha256": "f8c63727ac788ad13419a8cca00cfae078aac9acfbcee8097c5a04afead85552",
           "sourcePath": "skeletons/README.md"
         },
         {
-          "bytes": 638,
+          "bytes": 788,
           "path": "references/skeletons/registry.json",
-          "sha256": "41680e0df2e5fd9988c919ca0613b0fa81492aee68bbc954cd6ae4deab559e92",
+          "sha256": "b351360c64a6b02c3f084f877ae85d098037fb5751b693435fe73a2cb4a7c73e",
           "sourcePath": "skeletons/registry.json"
         }
       ],
-      "frameworkTargets": [
-        "nextjs",
-        "react-router",
-        "astro"
-      ],
-      "generatorSurfaces": [
-        "standalone"
-      ],
+      "frameworkTargets": ["nextjs", "react-router", "astro", "tanstack-start"],
+      "generatorSurfaces": ["standalone"],
       "id": "reference.skeletons-readme",
       "kind": "reference",
       "mutationPolicy": "read-only",
       "ownership": "canonical-source",
       "packagePath": "./resources/references/skeletons",
-      "sha256": "e4725330f77f36172cc1688497c8ba7b1ae76982eff5a88037ccf5161294a124",
-      "sourcePaths": [
-        "skeletons/README.md",
-        "skeletons/registry.json"
-      ],
-      "sourceRevision": "948d476fa1f51a00fab5af83e190ef020cd7e24a",
+      "sha256": "0270caa0fae695585465c39111a041589e43bab8b75499d82eb410614ddd013e",
+      "sourcePaths": ["skeletons/README.md", "skeletons/registry.json"],
+      "sourceRevision": "3726e24b73aec56c3821d3d3eb0f9ea189bc4d34",
       "supportStatus": "experimental",
-      "verification": [
-        "./pollux validate-skeletons"
-      ]
+      "verification": ["./pollux validate-skeletons"]
     },
     {
       "dependencies": [],
@@ -1596,9 +1593,9 @@
           "sourcePath": "docs/operations/pollux-runbook.md"
         },
         {
-          "bytes": 8505,
+          "bytes": 8553,
           "path": "references/operations/pollux-skeletons-runbook.md",
-          "sha256": "a7d59bc284ddd2e759c0138aaba8a30c0b17e9801149cd242575c3803179dca0",
+          "sha256": "5eb684b047947ae7c76cce1806b3b63ac0e8e5fd415aa8eef23147ea5e69f4a0",
           "sourcePath": "docs/operations/pollux-skeletons-runbook.md"
         }
       ],
@@ -1606,7 +1603,8 @@
         "start-ui-vite",
         "nextjs",
         "react-router",
-        "astro"
+        "astro",
+        "tanstack-start"
       ],
       "generatorSurfaces": [
         "manager",
@@ -1620,19 +1618,19 @@
       "mutationPolicy": "read-only",
       "ownership": "canonical-source",
       "packagePath": "./resources/references/operations",
-      "sha256": "e25df13bd5da453ab5c22a0100bbf5bdc44020367d4c92bcf6d839c09443fded",
+      "sha256": "ef73d54f942faf86e44c75bea1511a6e166f3260647dfd46a2a08265e3bbe2af",
       "sourcePaths": [
         "docs/operations/pollux-generated-crud.md",
         "docs/operations/pollux-go-backend.md",
         "docs/operations/pollux-runbook.md",
         "docs/operations/pollux-skeletons-runbook.md"
       ],
-      "sourceRevision": "948d476fa1f51a00fab5af83e190ef020cd7e24a",
+      "sourceRevision": "3726e24b73aec56c3821d3d3eb0f9ea189bc4d34",
       "supportStatus": "reference-only",
       "verification": []
     }
   ],
   "schemaVersion": 1,
-  "sourceRevision": "948d476fa1f51a00fab5af83e190ef020cd7e24a",
+  "sourceRevision": "3726e24b73aec56c3821d3d3eb0f9ea189bc4d34",
   "version": "0.1.0"
 }

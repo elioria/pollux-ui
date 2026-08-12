@@ -15,7 +15,7 @@ framework-specific.
 ## Preconditions
 
 - Explicit user request naming the target: `start-ui-vite`, `nextjs`,
-  `react-router` (remix skeleton), or `astro`.
+  `react-router` (remix skeleton), `astro`, or `tanstack-start`.
 - Run `pollux-inspect` first (or reproduce its read-only steps) so dirty
   paths, skeleton provenance, and support status are known.
 - Verify the layout resource exists in `resources/catalog.json` and its
@@ -30,6 +30,7 @@ framework-specific.
 | nextjs | `layout.nextjs` | `app/layout.tsx` |
 | react-router | `layout.react-router` | `app/root.tsx` |
 | astro | `layout.astro` | `src/layouts/Layout.astro` |
+| tanstack-start | `layout.tanstack-start` | `src/routes/__root.tsx` |
 
 `start-ui-vite` is the live reference repo: read it as the canonical shell,
 do not copy its framework integration into another target.

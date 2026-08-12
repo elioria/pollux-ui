@@ -151,7 +151,7 @@ const cases = {
     const targets = new Map(
       skeletons.skeletons.map((item) => [item.name, item])
     );
-    for (const name of ['nextjs', 'remix', 'astro']) {
+    for (const name of ['nextjs', 'remix', 'astro', 'tanstack-start']) {
       assert(
         targets.get(name)?.pollux === false,
         `${name} is not experimental`

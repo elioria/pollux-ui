@@ -119,19 +119,19 @@ Local smoke: `pnpm dlx wrangler dev --config .output/server/wrangler.json --port
 
 ### Multi-skeleton standalone targets (SPEC-001..007, experimental)
 
-Besides the two in-repo generators, `skeletons/` holds copyable app boilerplates (`nextjs`, `remix`, `astro`; `start-ui-vite` = this repo, reference-only) that Pollux can generate standalone CRUD frontends into over the external `/api/generated/v2` contract. All three standalone targets are **experimental** (`generatorSupport.pollux: false`) — promotion waits on the Go v2 backend + PKCE/BFF auth plus a green CI matrix. Support matrix + contracts: `skeletons/README.md`; ops: `docs/operations/pollux-skeletons-runbook.md`.
+Besides the two in-repo generators, `skeletons/` holds copyable app boilerplates (`nextjs`, `remix`, `astro`, `tanstack-start`; `start-ui-vite` = this repo, reference-only) that Pollux can generate standalone CRUD frontends into over the external `/api/generated/v2` contract. All four standalone targets are **experimental** (`generatorSupport.pollux: false`) — promotion waits on the Go v2 backend + PKCE/BFF auth plus a green CI matrix. Support matrix + contracts: `skeletons/README.md`; ops: `docs/operations/pollux-skeletons-runbook.md`.
 
 ```bash
 ./pollux new-workspace <skeleton> --dir=<path>       # staged + atomic copy, provenance in .pollux/workspace.json
 ./pollux plan|generate --workspace=<path> --entity=<e> [--all]   # journaled, all-or-nothing; version gates reject before writes
 ./pollux check-generated --workspace=<path>          # ownership drift + pending journals
-node scripts/pollux/test/workspace-matrix.mjs --target nextjs|remix|astro   # SPEC-007 full gate: create → generate rich-valid →
+node scripts/pollux/test/workspace-matrix.mjs --target nextjs|remix|astro|tanstack-start   # SPEC-007 full gate: create → generate rich-valid →
     # pnpm install --frozen-lockfile → typecheck/test/build (offline) → no-source-dependency scan → mock v2 API + app runtime smoke
 node scripts/pollux/test/no-source-dependency.mjs --workspace <path>        # generated workspace never imports this checkout
 node --test scripts/pollux/test/version-compat.unit.spec.mjs                # provenance/model/adapter mismatches fail pre-write
 ```
 
-Adapters live in `scripts/pollux/targets/{nextjs,react-router,astro-react}/` (templates: `_templates/pollux-targets/`), the normalized entity model in `scripts/pollux/model/`, golden fixtures in `test-fixtures/pollux/golden/<target>/`, the mock v2 API in `test-fixtures/pollux/api/mock-server.mjs` (`amostra` entity from `test-fixtures/pollux/entities/rich-valid.json`). CI (`code-quality.yml`): `pollux-unit` (node --test suites incl. contract + adapters), `pollux-matrix` (nextjs/remix/astro legs), `pollux-matrix-gate` (fails if any leg fails or is skipped).
+Adapters live in `scripts/pollux/targets/{nextjs,react-router,astro-react,tanstack-start}/` (templates: `_templates/pollux-targets/`), the normalized entity model in `scripts/pollux/model/`, golden fixtures in `test-fixtures/pollux/golden/<target>/`, the mock v2 API in `test-fixtures/pollux/api/mock-server.mjs` (`amostra` entity from `test-fixtures/pollux/entities/rich-valid.json`). CI (`code-quality.yml`): `pollux-unit` (node --test suites incl. contract + adapters), `pollux-matrix` (nextjs/remix/astro/tanstack-start legs), `pollux-matrix-gate` (fails if any leg fails or is skipped).
 
 Entity names are short codes (`act`, `aut`, `pesq`, `lechis`, ...). Route dirs under `src/routes/manager/` use a simple plural: append `s`, or `es` if the name already ends in `s`.
 

@@ -52,6 +52,7 @@ versions in the evidence.
 node scripts/pollux/test/workspace-matrix.mjs --target nextjs
 node scripts/pollux/test/workspace-matrix.mjs --target remix
 node scripts/pollux/test/workspace-matrix.mjs --target astro
+node scripts/pollux/test/workspace-matrix.mjs --target tanstack-start
 ```
 
 ## Steps

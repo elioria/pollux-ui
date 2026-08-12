@@ -150,7 +150,13 @@
         "frameworkTargets": {
           "type": "array",
           "items": {
-            "enum": ["start-ui-vite", "nextjs", "react-router", "astro"]
+            "enum": [
+              "start-ui-vite",
+              "nextjs",
+              "react-router",
+              "astro",
+              "tanstack-start"
+            ]
           }
         },
         "minSupportStatus": {

@@ -7,9 +7,9 @@ Companion docs: `skeletons/README.md` (contracts, support matrix),
 (legacy `/generated` pages inside this repo).
 
 Support status at the time of writing: `start-ui-vite` is the supported
-reference target; `nextjs`, `remix` (adapter `react-router`) and `astro`
-(adapter `astro-react`) are **experimental** (`generatorSupport.pollux:
-false`). Promotion is deferred until the Go v2 backend + PKCE/BFF auth land
+reference target; `nextjs`, `remix` (adapter `react-router`), `astro`
+(adapter `astro-react`) and `tanstack-start` are **experimental**
+(`generatorSupport.pollux: false`). Promotion is deferred until the Go v2 backend + PKCE/BFF auth land
 and the target's CI matrix leg is green — never edit a manifest's support
 flags by hand outside that change.
 
@@ -150,7 +150,7 @@ cache a generated workspace's `node_modules` or build output.
 ```bash
 # full per-target gate (empty temp dir -> create -> generate -> install ->
 # typecheck/test/build -> no-source-dependency -> mock-API runtime smoke)
-node scripts/pollux/test/workspace-matrix.mjs --target nextjs|remix|astro [--keep]
+node scripts/pollux/test/workspace-matrix.mjs --target nextjs|remix|astro|tanstack-start [--keep]
 
 # generated workspace has no dependency on this checkout (also run inside the matrix)
 node scripts/pollux/test/no-source-dependency.mjs --workspace <path>
@@ -168,7 +168,7 @@ node --test "scripts/pollux/skeletons/*.unit.spec.mjs" \
 ```
 
 CI jobs (`.github/workflows/code-quality.yml`): `pollux-unit`,
-`pollux-matrix` (legs nextjs/remix/astro, experimental targets),
+`pollux-matrix` (legs nextjs/remix/astro/tanstack-start, experimental targets),
 `pollux-matrix-gate` (fails if any leg fails or is skipped). Deferred until
 promotion: running the full shared API contract suite
 (`scripts/pollux/contract/contract.suite.mjs`) against the real Go v2

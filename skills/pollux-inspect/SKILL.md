@@ -1,6 +1,6 @@
 ---
 name: pollux-inspect
-description: Inspect Pollux generators, templates, layouts, skeletons, and support status before generation or layout work. Use when a user asks what Pollux can generate, whether a Next.js, React Router, or Astro target is production-ready or supported, which target or template applies, or what checks are required.
+description: Inspect Pollux generators, templates, layouts, skeletons, and support status before generation or layout work. Use when a user asks what Pollux can generate, whether a Next.js, React Router, Astro, or TanStack Start target is production-ready or supported, which target or template applies, or what checks are required.
 ---
 
 # pollux-inspect
@@ -35,7 +35,7 @@ output must come from a command, a manifest, or the packaged resource catalog.
      (`_templates/pollux/{page,serverpage,form-fields}`);
    - standalone Go backend (`_templates/pollux/{go-service,go-entity}`);
    - standalone framework targets (`_templates/pollux-targets/*` +
-     `skeletons/{nextjs,remix,astro}`).
+     `skeletons/{nextjs,remix,astro,tanstack-start}`).
 4. Resolve required resource IDs from `resources/catalog.json` in this plugin
    package. A capability is only executable when every required resource ID
    exists and `supportStatus` is not below the capability's
@@ -50,7 +50,7 @@ output must come from a command, a manifest, or the packaged resource catalog.
   `generatorSupport` and CI evidence do.
 - `start-ui-vite` is a reference skeleton (`status: reference`): it cannot be
   copied by `new-workspace`.
-- `nextjs`, `remix` (react-router), and `astro` targets are **experimental**
+- `nextjs`, `remix` (react-router), `astro`, and `tanstack-start` targets are **experimental**
   (`generatorSupport.pollux: false`). Say so explicitly.
 - Target names and skeleton aliases are not interchangeable without manifest
   evidence (`remix` skeleton ↔ `react-router` target adapter).

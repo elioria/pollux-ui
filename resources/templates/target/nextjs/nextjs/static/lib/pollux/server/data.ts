@@ -15,7 +15,7 @@ import { createEntityClient } from '@/lib/pollux/runtime/client';
 import { errorMessages } from '@/lib/pollux/runtime/errors-pt';
 import type { ListQueryState } from '@/lib/pollux/runtime/query';
 
-import { type PolluxServerEnv,polluxServerEnv } from './env';
+import { type PolluxServerEnv, polluxServerEnv } from './env';
 
 const unavailable = (): { ok: false; error: ApiErrorShape } => ({
   ok: false,

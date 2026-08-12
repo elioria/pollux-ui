@@ -16,10 +16,7 @@
         "./pollux check-generated --workspace=<path>"
       ],
       "description": "Read-only discovery of repositories, generator surfaces, skeleton provenance, targets, support status, and required resource IDs.",
-      "environment": [
-        "node >= 20",
-        "git"
-      ],
+      "environment": ["node >= 20", "git"],
       "failureCodes": [
         "WORKFLOW_PRECONDITION_FAILED",
         "CAPABILITY_UNSUPPORTED",
@@ -29,7 +26,8 @@
         "start-ui-vite",
         "nextjs",
         "react-router",
-        "astro"
+        "astro",
+        "tanstack-start"
       ],
       "generatorSurfaces": [
         "manager",
@@ -56,9 +54,7 @@
         "layout.start-ui-vite",
         "design.tokens"
       ],
-      "skills": [
-        "pollux-inspect"
-      ]
+      "skills": ["pollux-inspect"]
     },
     {
       "authority": {
@@ -72,10 +68,7 @@
         "./pollux new-workspace <skeleton> --dir=<path> [--name=<pkg>]"
       ],
       "description": "Create a fresh application workspace from a registered boilerplate skeleton through staged, atomic copy with provenance.",
-      "environment": [
-        "node >= 20",
-        "pnpm"
-      ],
+      "environment": ["node >= 20", "pnpm"],
       "failureCodes": [
         "SKELETON_UNKNOWN",
         "DESTINATION_NOT_EMPTY",
@@ -83,14 +76,8 @@
         "WORKFLOW_PRECONDITION_FAILED",
         "PATH_UNSAFE"
       ],
-      "frameworkTargets": [
-        "nextjs",
-        "react-router",
-        "astro"
-      ],
-      "generatorSurfaces": [
-        "standalone"
-      ],
+      "frameworkTargets": ["nextjs", "react-router", "astro", "tanstack-start"],
+      "generatorSurfaces": ["standalone"],
       "id": "pollux.workspace.create",
       "minSupportStatus": "experimental",
       "mode": "create",
@@ -108,11 +95,10 @@
         "layout.nextjs",
         "layout.react-router",
         "layout.astro",
+        "layout.tanstack-start",
         "design.tokens"
       ],
-      "skills": [
-        "pollux-create-workspace"
-      ]
+      "skills": ["pollux-create-workspace"]
     },
     {
       "authority": {
@@ -125,10 +111,7 @@
         "./pollux validate-skeletons"
       ],
       "description": "Apply or port a Pollux admin shell (sidebar, topbar, tokens, content canvas) into a supported framework target.",
-      "environment": [
-        "node >= 20",
-        "pnpm"
-      ],
+      "environment": ["node >= 20", "pnpm"],
       "failureCodes": [
         "TARGET_EXPERIMENTAL",
         "CAPABILITY_UNSUPPORTED",
@@ -140,12 +123,10 @@
         "start-ui-vite",
         "nextjs",
         "react-router",
-        "astro"
+        "astro",
+        "tanstack-start"
       ],
-      "generatorSurfaces": [
-        "manager",
-        "standalone"
-      ],
+      "generatorSurfaces": ["manager", "standalone"],
       "id": "pollux.layout.apply",
       "minSupportStatus": "experimental",
       "mode": "modify",
@@ -164,11 +145,10 @@
         "layout.nextjs",
         "layout.react-router",
         "layout.astro",
+        "layout.tanstack-start",
         "design.tokens"
       ],
-      "skills": [
-        "pollux-apply-layout"
-      ]
+      "skills": ["pollux-apply-layout"]
     },
     {
       "authority": {
@@ -187,11 +167,7 @@
         "./pollux generate --workspace=<path> --entity=<name> | --all"
       ],
       "description": "Regenerate legacy TypeScript pages, standalone Go backend, or standalone framework CRUD from json-files metadata through the canonical Pollux CLI.",
-      "environment": [
-        "node >= 20",
-        "pnpm",
-        "gohygen (go backend only)"
-      ],
+      "environment": ["node >= 20", "pnpm", "gohygen (go backend only)"],
       "failureCodes": [
         "PLAN_INVALID",
         "TARGET_UNSUPPORTED",
@@ -206,7 +182,8 @@
         "start-ui-vite",
         "nextjs",
         "react-router",
-        "astro"
+        "astro",
+        "tanstack-start"
       ],
       "generatorSurfaces": [
         "generated",
@@ -234,11 +211,10 @@
         "templates.standalone-shared",
         "templates.target.nextjs",
         "templates.target.react-router",
-        "templates.target.astro-react"
+        "templates.target.astro-react",
+        "templates.target.tanstack-start"
       ],
-      "skills": [
-        "pollux-generate-crud"
-      ]
+      "skills": ["pollux-generate-crud"]
     },
     {
       "authority": {
@@ -257,13 +233,11 @@
         "./pollux validate-skeletons",
         "node scripts/pollux/test/workspace-matrix.mjs --target nextjs",
         "node scripts/pollux/test/workspace-matrix.mjs --target remix",
-        "node scripts/pollux/test/workspace-matrix.mjs --target astro"
+        "node scripts/pollux/test/workspace-matrix.mjs --target astro",
+        "node scripts/pollux/test/workspace-matrix.mjs --target tanstack-start"
       ],
       "description": "Run plugin package validation, source-drift checks, generator drift gates, and target verification matrices matched to changed resources.",
-      "environment": [
-        "node >= 20",
-        "pnpm"
-      ],
+      "environment": ["node >= 20", "pnpm"],
       "failureCodes": [
         "PLUGIN_MANIFEST_INVALID",
         "RESOURCE_CATALOG_INVALID",
@@ -275,7 +249,8 @@
         "start-ui-vite",
         "nextjs",
         "react-router",
-        "astro"
+        "astro",
+        "tanstack-start"
       ],
       "generatorSurfaces": [
         "manager",
@@ -300,9 +275,7 @@
         "templates.standalone-shared",
         "design.tokens"
       ],
-      "skills": [
-        "pollux-verify"
-      ]
+      "skills": ["pollux-verify"]
     }
   ],
   "compatibility": {
@@ -330,12 +303,12 @@
   "schemaVersion": 1,
   "skills": [
     {
-      "description": "Inspect Pollux generators, templates, layouts, skeletons, and support status before generation or layout work. Use when a user asks what Pollux can generate, whether a Next.js, React Router, or Astro target is production-ready or supported, which target or template applies, or what checks are required.",
+      "description": "Inspect Pollux generators, templates, layouts, skeletons, and support status before generation or layout work. Use when a user asks what Pollux can generate, whether a Next.js, React Router, Astro, or TanStack Start target is production-ready or supported, which target or template applies, or what checks are required.",
       "id": "pollux-inspect",
       "path": "./skills/pollux-inspect/SKILL.md"
     },
     {
-      "description": "Create a new application workspace from a registered Pollux skeleton (Next.js, React Router/Remix, Astro). Use when a user asks to scaffold, bootstrap, or start a new Pollux app from a skeleton.",
+      "description": "Create a new application workspace from a registered Pollux skeleton (Next.js, React Router/Remix, Astro, TanStack Start). Use when a user asks to scaffold, bootstrap, or start a new Pollux app from a skeleton.",
       "id": "pollux-create-workspace",
       "path": "./skills/pollux-create-workspace/SKILL.md"
     },
@@ -345,7 +318,7 @@
       "path": "./skills/pollux-apply-layout/SKILL.md"
     },
     {
-      "description": "Generate or regenerate Pollux CRUD pages and backends from json-files entity metadata — legacy TypeScript /generated pages, the Go backend, or standalone Next.js/React Router/Astro targets. Use when entity metadata or templates change.",
+      "description": "Generate or regenerate Pollux CRUD pages and backends from json-files entity metadata — legacy TypeScript /generated pages, the Go backend, or standalone Next.js/React Router/Astro/TanStack Start targets. Use when entity metadata or templates change.",
       "id": "pollux-generate-crud",
       "path": "./skills/pollux-generate-crud/SKILL.md"
     },
@@ -356,10 +329,10 @@
     }
   ],
   "source": {
-    "builtAt": "2026-08-11T14:01:08.861Z",
-    "dirty": true,
+    "builtAt": "2026-08-12T08:21:55.497Z",
+    "dirty": false,
     "repository": "https://github.com/elioria/start-ui-web",
-    "revision": "948d476fa1f51a00fab5af83e190ef020cd7e24a"
+    "revision": "3726e24b73aec56c3821d3d3eb0f9ea189bc4d34"
   },
-  "version": "0.1.0"
+  "version": "0.2.0"
 }
