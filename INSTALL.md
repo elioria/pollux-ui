@@ -40,6 +40,7 @@ Restart the session (or open a new one). The six skills become available:
 | Skill | Purpose |
 | --- | --- |
 | `pollux-inspect` | Read-only discovery: entities, templates, skeletons, targets, doctor |
+| `pollux-author-entity` | Author validated entity metadata from a brief idea ("people", "products with price and stock") |
 | `pollux-create-workspace` | Scaffold a standalone app workspace from a skeleton (nextjs / remix / astro / **tanstack-start**) |
 | `pollux-generate-crud` | Journaled, all-or-nothing CRUD generation (in-repo pages, Go backend, standalone targets) |
 | `pollux-apply-layout` | Apply packaged layouts / design tokens to a target |
