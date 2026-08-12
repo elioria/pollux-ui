@@ -20,7 +20,7 @@
 // Usage (CLI): node test-fixtures/pollux/api/mock-server.mjs --port 4310
 
 import { createHash, randomUUID } from 'node:crypto';
-import { readFileSync } from 'node:fs';
+import { readdirSync, readFileSync } from 'node:fs';
 import http from 'node:http';
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
@@ -354,8 +354,68 @@ const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
  *   in_progress duplicates before SERVICE_UNAVAILABLE (default 250)
  * @param {number} [options.mutationDelayMs] artificial mutation latency —
  *   test knob to make the in_progress window observable (default 0)
+ * @param {string} [options.metadataDir] directory of additional entity
+ *   metadata files (dbtool envelope, e.g. a workspace's pollux-metadata/);
+ *   each valid file becomes a served entity with deterministic sample rows
  * @returns {Promise<{url: string, port: number, close: () => Promise<void>}>}
  */
+
+/** Deterministic sample rows for an extra (non-fixture) entity. */
+const buildSampleSeeds = (model, count = 5) => {
+  const pk = model.fields.find((f) => f.primaryKey);
+  const seeds = [];
+  for (let n = 1; n <= count; n += 1) {
+    const record = {};
+    let firstString = true;
+    for (const field of model.fields) {
+      if (field === pk) {
+        record[field.codeName] =
+          `00000000-0000-4000-8000-${String(n).padStart(12, '0')}`;
+        continue;
+      }
+      switch (field.scalarType) {
+        case 'string':
+        case 'varchar':
+        case 'text':
+          record[field.codeName] = firstString
+            ? `${field.label} ${n}`
+            : `Exemplo ${n}`;
+          firstString = false;
+          break;
+        case 'boolean':
+          record[field.codeName] = n % 2 === 1;
+          break;
+        case 'integer':
+          record[field.codeName] = n * 10;
+          break;
+        case 'float':
+          record[field.codeName] = n * 1.5;
+          break;
+        case 'numeric':
+          record[field.codeName] = `${n * 100}.50`;
+          break;
+        case 'date':
+          record[field.codeName] = `2026-01-0${n}`;
+          break;
+        case 'time':
+          record[field.codeName] = '09:00:00';
+          break;
+        case 'timestamp':
+          record[field.codeName] = `2026-01-0${n}T12:00:00Z`;
+          break;
+        case 'uuid':
+          record[field.codeName] =
+            `00000000-0000-4000-9000-${String(n).padStart(12, '0')}`;
+          break;
+        default:
+          record[field.codeName] = field.nullable ? null : `valor-${n}`;
+      }
+    }
+    seeds.push(record);
+  }
+  return seeds;
+};
+
 export async function start(options = {}) {
   const clock = options.clock ?? Date.now;
   const idFactory = options.idFactory ?? randomUUID;
@@ -364,24 +424,38 @@ export async function start(options = {}) {
   const idempotencyWaitMs = options.idempotencyWaitMs ?? 250;
   const mutationDelayMs = options.mutationDelayMs ?? 0;
 
-  const model = normalizeEntityModel(
-    JSON.parse(readFileSync(RICH_VALID, 'utf8'))
-  );
-  const entityId = model.entity.id;
-  const fieldByCode = new Map(model.fields.map((f) => [f.codeName, f]));
-  const pkField = model.fields.find((f) => f.primaryKey);
-  const searchableColumns = model.fields
-    .filter((f) => f.visibility.list && STRING_FAMILY.has(f.scalarType))
-    .map((f) => f.codeName);
-
-  /** @type {Map<string, {record: object, version: number, referenced: boolean}>} */
-  const rows = new Map();
-  for (const seed of SEED_ROWS) {
-    rows.set(seed.id, {
-      record: { ...seed },
-      version: 1,
-      referenced: seed.id === REFERENCED_ROW_ID,
-    });
+  // Entity roster: the rich-valid fixture (canonical contract surface) plus
+  // any valid metadata files from options.metadataDir (multi-entity mode for
+  // local development of authored entities).
+  const entityInputs = [
+    {
+      model: normalizeEntityModel(JSON.parse(readFileSync(RICH_VALID, 'utf8'))),
+      seedRows: SEED_ROWS,
+      referencedRowId: REFERENCED_ROW_ID,
+    },
+  ];
+  if (options.metadataDir) {
+    for (const file of readdirSync(options.metadataDir).sort()) {
+      if (!file.endsWith('.json')) continue;
+      let parsed;
+      try {
+        parsed = JSON.parse(
+          readFileSync(path.join(options.metadataDir, file), 'utf8')
+        );
+      } catch {
+        continue;
+      }
+      if (!parsed?.data?.attributes) continue;
+      const model = normalizeEntityModel(parsed);
+      if (entityInputs.some((e) => e.model.entity.id === model.entity.id)) {
+        continue;
+      }
+      entityInputs.push({
+        model,
+        seedRows: buildSampleSeeds(model),
+        referencedRowId: null,
+      });
+    }
   }
 
   /** @type {Map<string, {state: string, bodyHash: string, status?: number, body?: string, replayHeaders?: object, expiresAt?: number, promise: Promise<void>, resolve: () => void}>} */
@@ -398,206 +472,247 @@ export async function start(options = {}) {
     return `mock-${requestCounter.toString(36)}-${clock().toString(36)}`;
   };
 
-  const writable = (operation) =>
-    model.fields.filter((f) =>
-      operation === 'create'
-        ? f.mutability === 'createOnly' || f.mutability === 'createAndUpdate'
-        : f.mutability === 'updateOnly' || f.mutability === 'createAndUpdate'
-    );
+  // Per-entity closure: rows, validation, list + mutation semantics. One
+  // store per served entity; the idempotency store stays global (its scope
+  // key embeds the canonical path, which carries the entity id).
+  const makeStore = ({ model, seedRows, referencedRowId }) => {
+    const entityId = model.entity.id;
+    const fieldByCode = new Map(model.fields.map((f) => [f.codeName, f]));
+    const pkField = model.fields.find((f) => f.primaryKey);
+    const searchableColumns = model.fields
+      .filter((f) => f.visibility.list && STRING_FAMILY.has(f.scalarType))
+      .map((f) => f.codeName);
 
-  const validateMutationBody = (body, operation) => {
-    if (typeof body !== 'object' || body === null || Array.isArray(body)) {
-      throw new ApiError('VALIDATION_FAILED');
-    }
-    const allowed = new Map(writable(operation).map((f) => [f.codeName, f]));
-    const fieldErrors = {};
-    for (const key of Object.keys(body)) {
-      if (!allowed.has(key)) fieldErrors[key] = ['unknown_field'];
-    }
-    for (const [code, field] of allowed) {
-      const provided = Object.hasOwn(body, code);
-      const value = provided ? body[code] : undefined;
-      const required = model.validation.some(
-        (v) =>
-          v.field === code &&
-          v.rules.some((r) => r.rule === 'required' && r.on.includes(operation))
-      );
-      if (!provided) {
-        if (operation === 'create' && required) {
-          fieldErrors[code] = ['required'];
-        }
-        continue;
-      }
-      if (value === null && required) {
-        fieldErrors[code] = ['required'];
-        continue;
-      }
-      const err = valueError(field, value);
-      if (err) fieldErrors[code] = [err];
-    }
-    if (Object.keys(fieldErrors).length > 0) {
-      throw new ApiError('VALIDATION_FAILED', fieldErrors);
-    }
-  };
-
-  const applyDefaults = (record) => {
-    for (const field of model.fields) {
-      if (record[field.codeName] !== undefined) continue;
-      const { kind, value } = field.defaultBehavior;
-      if (kind === 'literal') {
-        record[field.codeName] =
-          field.scalarType === 'boolean'
-            ? value === 'true'
-            : field.scalarType === 'integer' || field.scalarType === 'float'
-              ? Number(value)
-              : value;
-      } else {
-        record[field.codeName] = null;
-      }
-    }
-  };
-
-  const listHandler = (query, capabilities) => {
-    const knownKeys = new Set(['page', 'pageSize', 'sort', 'q']);
-    const filters = [];
-    const fieldErrors = {};
-    for (const [rawKey, rawValue] of query.entries()) {
-      if (knownKeys.has(rawKey)) continue;
-      const match = rawKey.match(/^f_([A-Za-z0-9]+?)(?:__([a-z]+))?$/);
-      const codeName = match?.[1];
-      const field = codeName ? fieldByCode.get(codeName) : undefined;
-      if (!match || !field || !model.list.filterableFields.includes(codeName)) {
-        fieldErrors[rawKey] = ['unknown_parameter'];
-        continue;
-      }
-      const operator =
-        match[2] ?? (STRING_FAMILY.has(field.scalarType) ? 'contains' : 'eq');
-      const allowedOps = model.list.filterOperators[codeName] ?? [];
-      if (!allowedOps.includes(operator)) {
-        fieldErrors[rawKey] = ['unknown_operator'];
-        continue;
-      }
-      filters.push({ field, operator, value: rawValue });
-    }
-
-    const pageRaw = query.get('page') ?? '1';
-    const page = Number(pageRaw);
-    if (!Number.isInteger(page) || page < 1) {
-      fieldErrors.page = ['invalid_page'];
-    }
-    const pageSizeRaw = query.get('pageSize');
-    const pageSize =
-      pageSizeRaw === null ? model.list.defaultPageSize : Number(pageSizeRaw);
-    if (!Number.isInteger(pageSize) || pageSize < 1 || pageSize > 500) {
-      fieldErrors.pageSize = ['invalid_page_size'];
-    }
-
-    let sort = model.list.defaultSort.map((s) => ({
-      id: s.field,
-      desc: s.direction === 'desc',
-    }));
-    const sortRaw = query.get('sort');
-    if (sortRaw !== null) {
-      let parsed;
-      try {
-        parsed = JSON.parse(sortRaw);
-      } catch {
-        parsed = null;
-      }
-      if (
-        !Array.isArray(parsed) ||
-        parsed.some(
-          (s) =>
-            typeof s !== 'object' ||
-            s === null ||
-            typeof s.id !== 'string' ||
-            typeof s.desc !== 'boolean' ||
-            !model.list.sortableFields.includes(s.id)
-        )
-      ) {
-        fieldErrors.sort = ['invalid_sort'];
-      } else if (parsed.length > 0) {
-        sort = parsed;
-      }
-    }
-
-    if (Object.keys(fieldErrors).length > 0) {
-      throw new ApiError('VALIDATION_FAILED', fieldErrors);
-    }
-
-    const q = query.get('q');
-    let selected = [...rows.values()].map((entry) => entry.record);
-    if (q) {
-      const needle = q.toLowerCase();
-      selected = selected.filter((record) =>
-        searchableColumns.some(
-          (col) =>
-            record[col] !== null &&
-            String(record[col]).toLowerCase().includes(needle)
-        )
-      );
-    }
-    for (const { field, operator, value } of filters) {
-      selected = selected.filter((record) =>
-        filterMatch(record[field.codeName], operator, value, field.scalarType)
-      );
-    }
-    selected.sort((a, b) => {
-      for (const { id, desc } of sort) {
-        const field = fieldByCode.get(id);
-        const cmp = compareValues(a[id], b[id], field?.scalarType ?? 'string');
-        if (cmp !== 0) return desc ? -cmp : cmp;
-      }
-      // Stable, deterministic tiebreak on the primary key.
-      return compareValues(a[pkField.codeName], b[pkField.codeName], 'uuid');
-    });
-
-    const totalRows = selected.length;
-    const startIndex = (page - 1) * pageSize;
-    return {
-      status: 200,
-      payload: {
-        rows: selected.slice(startIndex, startIndex + pageSize),
-        totalRows,
-        page,
-        pageSize,
-        capabilities,
-      },
-    };
-  };
-
-  const runMutation = async (operation, id, body, ifMatch) => {
-    if (mutationDelayMs > 0) await sleep(mutationDelayMs);
-    if (operation === 'create') {
-      validateMutationBody(body ?? {}, 'create');
-      const record = { ...body };
-      record[pkField.codeName] = idFactory();
-      applyDefaults(record);
-      rows.set(record[pkField.codeName], {
-        record,
+    /** @type {Map<string, {record: object, version: number, referenced: boolean}>} */
+    const rows = new Map();
+    for (const seed of seedRows) {
+      rows.set(seed[pkField.codeName], {
+        record: { ...seed },
         version: 1,
-        referenced: false,
+        referenced: seed[pkField.codeName] === referencedRowId,
       });
-      return { status: 201, payload: record, version: 1 };
     }
-    const entry = rows.get(id);
-    if (!entry) throw new ApiError('NOT_FOUND');
-    if (operation === 'update') {
-      if (ifMatch !== undefined && ifMatch !== String(entry.version)) {
-        throw new ApiError('STALE_WRITE');
+
+    const writable = (operation) =>
+      model.fields.filter((f) =>
+        operation === 'create'
+          ? f.mutability === 'createOnly' || f.mutability === 'createAndUpdate'
+          : f.mutability === 'updateOnly' || f.mutability === 'createAndUpdate'
+      );
+
+    const validateMutationBody = (body, operation) => {
+      if (typeof body !== 'object' || body === null || Array.isArray(body)) {
+        throw new ApiError('VALIDATION_FAILED');
       }
-      validateMutationBody(body ?? {}, 'update');
-      Object.assign(entry.record, body ?? {});
-      entry.version += 1;
-      return { status: 200, payload: entry.record, version: entry.version };
-    }
-    // delete
-    if (entry.referenced) throw new ApiError('REFERENCE_CONFLICT');
-    rows.delete(id);
-    return { status: 200, payload: { id, deleted: true } };
+      const allowed = new Map(writable(operation).map((f) => [f.codeName, f]));
+      const fieldErrors = {};
+      for (const key of Object.keys(body)) {
+        if (!allowed.has(key)) fieldErrors[key] = ['unknown_field'];
+      }
+      for (const [code, field] of allowed) {
+        const provided = Object.hasOwn(body, code);
+        const value = provided ? body[code] : undefined;
+        const required = model.validation.some(
+          (v) =>
+            v.field === code &&
+            v.rules.some(
+              (r) => r.rule === 'required' && r.on.includes(operation)
+            )
+        );
+        if (!provided) {
+          if (operation === 'create' && required) {
+            fieldErrors[code] = ['required'];
+          }
+          continue;
+        }
+        if (value === null && required) {
+          fieldErrors[code] = ['required'];
+          continue;
+        }
+        const err = valueError(field, value);
+        if (err) fieldErrors[code] = [err];
+      }
+      if (Object.keys(fieldErrors).length > 0) {
+        throw new ApiError('VALIDATION_FAILED', fieldErrors);
+      }
+    };
+
+    const applyDefaults = (record) => {
+      for (const field of model.fields) {
+        if (record[field.codeName] !== undefined) continue;
+        const { kind, value } = field.defaultBehavior;
+        if (kind === 'literal') {
+          record[field.codeName] =
+            field.scalarType === 'boolean'
+              ? value === 'true'
+              : field.scalarType === 'integer' || field.scalarType === 'float'
+                ? Number(value)
+                : value;
+        } else {
+          record[field.codeName] = null;
+        }
+      }
+    };
+
+    const listHandler = (query, capabilities) => {
+      const knownKeys = new Set(['page', 'pageSize', 'sort', 'q']);
+      const filters = [];
+      const fieldErrors = {};
+      for (const [rawKey, rawValue] of query.entries()) {
+        if (knownKeys.has(rawKey)) continue;
+        const match = rawKey.match(/^f_([A-Za-z0-9]+?)(?:__([a-z]+))?$/);
+        const codeName = match?.[1];
+        const field = codeName ? fieldByCode.get(codeName) : undefined;
+        if (
+          !match ||
+          !field ||
+          !model.list.filterableFields.includes(codeName)
+        ) {
+          fieldErrors[rawKey] = ['unknown_parameter'];
+          continue;
+        }
+        const operator =
+          match[2] ?? (STRING_FAMILY.has(field.scalarType) ? 'contains' : 'eq');
+        const allowedOps = model.list.filterOperators[codeName] ?? [];
+        if (!allowedOps.includes(operator)) {
+          fieldErrors[rawKey] = ['unknown_operator'];
+          continue;
+        }
+        filters.push({ field, operator, value: rawValue });
+      }
+
+      const pageRaw = query.get('page') ?? '1';
+      const page = Number(pageRaw);
+      if (!Number.isInteger(page) || page < 1) {
+        fieldErrors.page = ['invalid_page'];
+      }
+      const pageSizeRaw = query.get('pageSize');
+      const pageSize =
+        pageSizeRaw === null ? model.list.defaultPageSize : Number(pageSizeRaw);
+      if (!Number.isInteger(pageSize) || pageSize < 1 || pageSize > 500) {
+        fieldErrors.pageSize = ['invalid_page_size'];
+      }
+
+      let sort = model.list.defaultSort.map((s) => ({
+        id: s.field,
+        desc: s.direction === 'desc',
+      }));
+      const sortRaw = query.get('sort');
+      if (sortRaw !== null) {
+        let parsed;
+        try {
+          parsed = JSON.parse(sortRaw);
+        } catch {
+          parsed = null;
+        }
+        if (
+          !Array.isArray(parsed) ||
+          parsed.some(
+            (s) =>
+              typeof s !== 'object' ||
+              s === null ||
+              typeof s.id !== 'string' ||
+              typeof s.desc !== 'boolean' ||
+              !model.list.sortableFields.includes(s.id)
+          )
+        ) {
+          fieldErrors.sort = ['invalid_sort'];
+        } else if (parsed.length > 0) {
+          sort = parsed;
+        }
+      }
+
+      if (Object.keys(fieldErrors).length > 0) {
+        throw new ApiError('VALIDATION_FAILED', fieldErrors);
+      }
+
+      const q = query.get('q');
+      let selected = [...rows.values()].map((entry) => entry.record);
+      if (q) {
+        const needle = q.toLowerCase();
+        selected = selected.filter((record) =>
+          searchableColumns.some(
+            (col) =>
+              record[col] !== null &&
+              String(record[col]).toLowerCase().includes(needle)
+          )
+        );
+      }
+      for (const { field, operator, value } of filters) {
+        selected = selected.filter((record) =>
+          filterMatch(record[field.codeName], operator, value, field.scalarType)
+        );
+      }
+      selected.sort((a, b) => {
+        for (const { id, desc } of sort) {
+          const field = fieldByCode.get(id);
+          const cmp = compareValues(
+            a[id],
+            b[id],
+            field?.scalarType ?? 'string'
+          );
+          if (cmp !== 0) return desc ? -cmp : cmp;
+        }
+        // Stable, deterministic tiebreak on the primary key.
+        return compareValues(a[pkField.codeName], b[pkField.codeName], 'uuid');
+      });
+
+      const totalRows = selected.length;
+      const startIndex = (page - 1) * pageSize;
+      return {
+        status: 200,
+        payload: {
+          rows: selected.slice(startIndex, startIndex + pageSize),
+          totalRows,
+          page,
+          pageSize,
+          capabilities,
+        },
+      };
+    };
+
+    const runMutation = async (operation, id, body, ifMatch) => {
+      if (mutationDelayMs > 0) await sleep(mutationDelayMs);
+      if (operation === 'create') {
+        validateMutationBody(body ?? {}, 'create');
+        const record = { ...body };
+        record[pkField.codeName] = idFactory();
+        applyDefaults(record);
+        rows.set(record[pkField.codeName], {
+          record,
+          version: 1,
+          referenced: false,
+        });
+        return { status: 201, payload: record, version: 1 };
+      }
+      const entry = rows.get(id);
+      if (!entry) throw new ApiError('NOT_FOUND');
+      if (operation === 'update') {
+        if (ifMatch !== undefined && ifMatch !== String(entry.version)) {
+          throw new ApiError('STALE_WRITE');
+        }
+        validateMutationBody(body ?? {}, 'update');
+        Object.assign(entry.record, body ?? {});
+        entry.version += 1;
+        return { status: 200, payload: entry.record, version: entry.version };
+      }
+      // delete
+      if (entry.referenced) throw new ApiError('REFERENCE_CONFLICT');
+      rows.delete(id);
+      return { status: 200, payload: { id, deleted: true } };
+    };
+
+    return { entityId, rows, listHandler, runMutation };
   };
 
-  const handleIdempotent = async (req, operation, id, body) => {
+  const stores = new Map(
+    entityInputs.map((input) => {
+      const store = makeStore(input);
+      return [store.entityId, store];
+    })
+  );
+
+  const handleIdempotent = async (store, req, operation, id, body) => {
     const key = req.headers['idempotency-key'];
     if (typeof key !== 'string' || key.length === 0 || key.length > 200) {
       throw new ApiError('VALIDATION_FAILED', {
@@ -608,8 +723,8 @@ export async function start(options = {}) {
     const actorId = `actor-${token}`;
     const clientId = `client-${token}`;
     const canonicalPath = id
-      ? `${BASE_PATH}/${entityId}/${id}`
-      : `${BASE_PATH}/${entityId}`;
+      ? `${BASE_PATH}/${store.entityId}/${id}`
+      : `${BASE_PATH}/${store.entityId}`;
     const scope = [actorId, clientId, req.method, canonicalPath, key].join(' ');
     const bodyHash = hashBody(body);
     const now = clock();
@@ -654,7 +769,7 @@ export async function start(options = {}) {
     };
     idempotencyStore.set(scope, record);
     try {
-      const result = await runMutation(
+      const result = await store.runMutation(
         operation,
         id,
         body,
@@ -740,7 +855,8 @@ export async function start(options = {}) {
         token !== null ? capabilityByToken[token] : undefined;
       if (!capabilities) throw new ApiError('UNAUTHENTICATED');
 
-      if (segments[3] !== entityId) throw new ApiError('NOT_FOUND');
+      const store = stores.get(segments[3]);
+      if (!store) throw new ApiError('NOT_FOUND');
       const tail = segments[4];
 
       const requireCapability = (operation) => {
@@ -774,13 +890,15 @@ export async function start(options = {}) {
       }
       if (req.method === 'GET' && tail === undefined) {
         requireCapability('list');
-        const result = listHandler(url.searchParams, { ...capabilities });
+        const result = store.listHandler(url.searchParams, {
+          ...capabilities,
+        });
         send(result.status, result.payload);
         return;
       }
       if (req.method === 'GET') {
         requireCapability('read');
-        const entry = rows.get(tail);
+        const entry = store.rows.get(tail);
         if (!entry) throw new ApiError('NOT_FOUND');
         send(200, entry.record, { ETag: String(entry.version) });
         return;
@@ -799,7 +917,7 @@ export async function start(options = {}) {
       }
       requireCapability(operation);
       const body = parseBody();
-      const outcome = await handleIdempotent(req, operation, tail, body);
+      const outcome = await handleIdempotent(store, req, operation, tail, body);
       res.statusCode = outcome.status;
       for (const [name, value] of Object.entries(outcome.headers ?? {})) {
         res.setHeader(name, value);
@@ -818,6 +936,7 @@ export async function start(options = {}) {
   return {
     url: `http://127.0.0.1:${port}`,
     port,
+    entities: [...stores.keys()],
     close: () =>
       new Promise((resolve, reject) => {
         server.close((error) => (error ? reject(error) : resolve()));
@@ -834,10 +953,14 @@ const isMain =
 if (isMain) {
   const portFlag = process.argv.indexOf('--port');
   const port = portFlag !== -1 ? Number(process.argv[portFlag + 1]) : 4310;
-  start({ port }).then(
+  const dirInline = process.argv.find((a) => a.startsWith('--metadata-dir='));
+  const metadataDir = dirInline
+    ? dirInline.slice('--metadata-dir='.length)
+    : undefined;
+  start({ port, metadataDir }).then(
     (server) => {
       console.log(
-        `pollux mock API v${CONTRACT_VERSION} listening on ${server.url}${BASE_PATH}/amostra`
+        `pollux mock API v${CONTRACT_VERSION} listening on ${server.url}${BASE_PATH}/{${server.entities.join(',')}}`
       );
       console.log(
         'tokens: token-admin | token-readonly | token-none (Authorization: Bearer <token>)'

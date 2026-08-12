@@ -6,14 +6,14 @@
   },
   "metadata": {
     "description": "Pollux UI generator plugin marketplace — templates, layouts, design tokens, and verified generator workflows for Codex and Claude.",
-    "version": "0.4.1"
+    "version": "0.4.2"
   },
   "plugins": [
     {
       "name": "pollux-ui",
       "source": "./",
       "description": "Use Pollux templates and layouts through safe, verified generator workflows.",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "author": {
         "name": "elioria",
         "url": "https://github.com/elioria"
